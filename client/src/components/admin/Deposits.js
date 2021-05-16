@@ -33,7 +33,7 @@ export default function Deposits({amounts}) {
   const deposits= amount2.length>0&&amount.reduce( (ac,e)=>ac+e.price,0)
 
 
-  const event = new Date('Mayo 14, 2021 11:50:00');
+  const event = new Date();
   const date = event.toString()
 
   const classes = useStyles();
