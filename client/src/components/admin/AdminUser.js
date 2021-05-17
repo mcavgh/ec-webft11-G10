@@ -11,7 +11,7 @@ export const AdminUser = () => {
             access: "Admin"
         }
 
-        axios.post("http://localhost:3001/users/register/",product).then((res) => { console.log(res)}).catch(err => { console.log(err) })
+        axios.post("/users/register/",product).then((res) => { console.log(res)}).catch(err => { console.log(err) })
    
     }
     
