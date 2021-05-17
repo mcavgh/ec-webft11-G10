@@ -1,9 +1,9 @@
 import app from "../../firebase";
-import React,{useEffect} from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useDispatch } from 'react-redux'
 import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
-import { Drawer, CssBaseline, AppBar, Toolbar, Badge, List, Button, Divider, IconButton, ListItem, ListItemText, } from '@material-ui/core';
+import { Menu, MenuItem, Drawer, CssBaseline, AppBar, Toolbar, Badge, List, Button, Divider, IconButton, ListItem, ListItemText, } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -11,27 +11,28 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { useStyles } from './styles'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { SearchBar } from './searchBar/SearchBar';
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { searchProductSuccess } from '../../store/product/product.actions';
 import { getQuantity } from '../../store/cart/cart.actions';
-
+import { AuthContext } from '../AuthContext';
 export default function PersistentDrawerLeft() {
+    const history = useHistory()
 
-    const  cart = useSelector(state => state.cart.cartItems)
-    const  cartQuantity = useSelector(state => state.cart.cartQuantity)
-
+    const cart = useSelector(state => state.cart.cartItems)
+    const cartQuantity = useSelector(state => state.cart.cartQuantity)
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const dispatch = useDispatch()
-  
+
     useEffect(() => {
         dispatch(getQuantity())
-      }, [])
-    
+    }, [])
+    const { currentUser } = useContext(AuthContext)
+
 
 
     const handleDrawerOpen = () => {
@@ -42,9 +43,27 @@ export default function PersistentDrawerLeft() {
         setOpen(false);
     };
 
-   
+    //USER BUTTON
+    const [auth, setAuth] = React.useState(true);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const dropdown = Boolean(anchorEl);
 
-    return (
+    const handleChange = (event) => {
+        setAuth(event.target.checked);
+    };
+
+    const handleMenu = (event) => {
+        if (currentUser) {
+
+            setAnchorEl(event.currentTarget);
+        } else {
+            history.push("/login")
+        }
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    }; return (
         <div className={classes.root}>
             <CssBaseline />
             <AppBar
@@ -63,8 +82,8 @@ export default function PersistentDrawerLeft() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Button  variant="h6" color='inherit' to="/" component={Link}>
-                        FastFoodBest! 
+                    <Button variant="h6" color='inherit' to="/" component={Link}>
+                        FastFoodBest!
                     </Button>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
@@ -72,15 +91,7 @@ export default function PersistentDrawerLeft() {
                         </div>
                         <SearchBar />
                     </div>
-                    <Button
-                        onClick={() => app.auth().signOut()
-                            .then(res => console.log("deslogueado", res))
 
-                        }
-                        color="inherit"
-
-
-                    >logout</Button>
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
                         <IconButton to="/cart" component={Link}
@@ -93,14 +104,44 @@ export default function PersistentDrawerLeft() {
                         </IconButton>
                     </div>
                     <div className={classes.sectionDesktop}>
-                        <IconButton color="inherit"
-                            to="/login" component={Link}
-                        >
-                            <Badge color="secondary">
-                                <AccountCircleIcon fontSize="large" />
-                            </Badge>
-                        </IconButton>
-                        
+                        <>
+                            <IconButton
+                                aria-label="account of current user"
+                                aria-controls="menu-appbar"
+                                aria-haspopup="true"
+                                onClick={handleMenu}
+                                color="inherit"
+                            >
+                                <AccountCircleIcon
+                                    fontSize="large"
+                                />
+                            </IconButton>
+
+                            <Menu
+                                id="menu-appbar"
+                                anchorEl={anchorEl}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={dropdown}
+                                onClose={handleClose}
+                            >
+
+                                <>
+                                    <MenuItem onClick={handleClose}>Perfil</MenuItem>
+                                    <MenuItem onClick={() => app.auth().signOut()
+                                        .then(res => handleClose)
+                                    }>Log out</MenuItem>
+                                </>
+
+                            </Menu>
+                        </>
                     </div>
                 </Toolbar>
             </AppBar>
