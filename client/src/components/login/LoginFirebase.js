@@ -28,7 +28,6 @@ const Login = () => {
       .auth()
       .signInWithPopup(googleAuthProvider)
       .then(({ user }) => {
-        console.log(user)
         history.push("/");
 
       })
