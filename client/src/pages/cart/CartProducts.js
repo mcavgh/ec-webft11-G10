@@ -4,21 +4,21 @@ import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from "react-redux";
 import AppBar from "../../components/appBar/AppBar"
 import defaultImg from "../../components/Product/productCard/ProductCard"
-import { addToCart, removeFromCart, getTotal } from '../../store/cart/cart.actions';
+import { addToCart, removeFromCart, getTotal, restToCart } from '../../store/cart/cart.actions';
 import { useStyles } from './styleCart';
 import { postOrders } from '../../store/order/order.action';
 import IconButton from '@material-ui/core/IconButton';
+import RemoveShoppingCartOutlinedIcon from '@material-ui/icons/RemoveShoppingCartOutlined';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 export default function Cart() {
   const classes = useStyles();
-  const history = useHistory();
   const dispatch = useDispatch()
   const cart = useSelector(state => state.cart.cartItems)
   const total = useSelector(state => state.cart.total)
   const cartQuantity = useSelector(state => state.cart.cartQuantity)
   useEffect(() => {
     dispatch(getTotal())
-  }, [])
+  }, [dispatch])
 
   const handlerClick = () => {
     dispatch(postOrders({
@@ -65,7 +65,13 @@ export default function Cart() {
               <IconButton onClick={() => dispatch(addToCart(product))}
                 color="primary" aria-label="add to shopping cart">
                 <AddShoppingCartIcon fontSize="large" />
+              </IconButton>
+              <Typography display="inline" component="h3" variant="h4">
                 {product.count}
+              </Typography>
+              <IconButton onClick={() => dispatch(restToCart(product))}
+                color="primary" aria-label="asdf">
+                < RemoveShoppingCartOutlinedIcon fontSize="large" />
               </IconButton>
               <Typography component="h3" variant="h6">
                 ({product.stock} disponibles)
