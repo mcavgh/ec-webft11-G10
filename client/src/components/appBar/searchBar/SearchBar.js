@@ -28,7 +28,7 @@ export const SearchBar = () => {
     return (
         <>
             <form onSubmit={(e) => handleSubmit(e)}>
-                <InputBase placeholder="Search…" classes={{ root: classes.inputRoot, input: classes.inputInput, }} inputProps={{ 'aria-label': 'search' }} type="text" id="title" value={title} onChange={(e) => handleChange(e)}
+                <InputBase  classes={{ root: classes.inputRoot, input: classes.inputInput, }} inputProps={{ 'aria-label': 'search' }} type="text" id="title" value={title} onChange={(e) => handleChange(e)}
                 />
             </form>
         </>
