@@ -48,11 +48,11 @@ export default function Orders() {
 
             (orders.map((row) => (
               <TableRow key={row.userId}>
-                <TableCell>{row.userId}</TableCell>
-                <TableCell>{row.user.name}</TableCell>
+               <TableCell>{row.userId}</TableCell>
+                <TableCell>{}</TableCell>
                 <TableCell>{row.state}</TableCell>
                 <TableCell>{row.updatedAt}</TableCell>
-                <TableCell>{row.paymentMethod}</TableCell>
+                <TableCell>{}</TableCell>
                 <TableCell>{row.quantity}</TableCell>
                 <TableCell align="right">{row.price}</TableCell>
                 <Button variant="contained" color="primary" to={`/ViewOrder/${row.userId}`} component={Link}>
