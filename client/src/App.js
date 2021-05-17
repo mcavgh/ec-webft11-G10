@@ -18,7 +18,7 @@ import PageEditCategory from './pages/adminCategory/PageEditCategory'
 import Checkout from './pages/checkOut/Checkout'
 import dotenv from "dotenv";
 import axios from 'axios';
-
+import { AdminUser } from './components/admin/AdminUser';
 
 dotenv.config()
 axios.defaults.baseURL=process.env.REACT_APP_API || "http://localhost:3001"
@@ -29,6 +29,8 @@ function App() {
       <AuthProvider>
 
         <ThemeProvider theme={theme}>
+        <Route exact path='/crearUsuario' component={AdminUser} />
+
           <Route exact path='/cart' component={CartProducts} />
           <Route exact path='/logIn' component={LogIn} />
           <Route exact path='/' component={Home} />

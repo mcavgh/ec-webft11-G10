@@ -68,7 +68,7 @@ export default function PersistentDrawerLeft() {
                         <MenuIcon />
                     </IconButton>
                     <Button onClick={()=>{refreshSearch()}} variant="h6" color='inherit' to="/" component={Link}>
-                        FastFoodBest! or whatever
+                        FastFoodBest!
                     </Button>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>

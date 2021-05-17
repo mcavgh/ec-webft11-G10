@@ -21,8 +21,8 @@ export default function Catalog() {
             <Grid container spacing={2} className={classes.container}>
                 {((searchResults.length === 0) ?
                     (<h1>no hay resultados</h1>) : (searchResults.map(food => {
-                        return <Grid item xs={12} sm={4} md={3}>
-                            <ProductCard stock={food.stock} id={food.id} img={food.img} name={food.name} description={food.description} price={food.price}
+                        return <Grid item xs={12} sm={4} md={3} key={food.id}>
+                            <ProductCard key={food.id} stock={food.stock} id={food.id} img={food.img} name={food.name} description={food.description} price={food.price}
                             /> </Grid>
                     }))
                 )}

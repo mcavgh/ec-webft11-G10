@@ -1,6 +1,5 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
-const serverUrl = "http://localhost:3001/";
 
 
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";

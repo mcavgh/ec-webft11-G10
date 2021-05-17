@@ -16,7 +16,7 @@ export default function Product() {
     
     useEffect( () => {
         dispatch(getOneProduct(id))
-    },[dispatch])
+    },[dispatch,id])
     const oneProduct = useSelector(state => state.productReducer.oneProduct)
     const { img, name, description, price, stock } = oneProduct
 
