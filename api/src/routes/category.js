@@ -2,15 +2,7 @@ const server = require('express').Router();
 const category = require('../controllers/category');
 const { searchProductsByCategoryName } = require('../controllers/product');
 
-var p = new Promise(resolve => resolve(true))
-const categories = ["helado", "hamburguesas", "pizza", "bebidas", "frutas", "cereales", "carnes", "verduras"];
 
-categories.forEach((categories) => (
-    p = p.then(() => (
-            category.preload(categories)
-        ).catch((err) => console.log(err))
-    ))
-)
 // TRAE TODAS LAS CATEGORIAS |
 //----------------------------
 server.get('/get', (req, res, next) => {
