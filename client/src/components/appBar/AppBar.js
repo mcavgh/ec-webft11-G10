@@ -42,11 +42,7 @@ export default function PersistentDrawerLeft() {
         setOpen(false);
     };
 
-    const refreshSearch=()=>{
-        axios.get(`http://localhost:3001/products/`).then(result => {
-            dispatch(searchProductSuccess(result.data))
-        })
-    }
+   
 
     return (
         <div className={classes.root}>
@@ -67,8 +63,8 @@ export default function PersistentDrawerLeft() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Button onClick={()=>{refreshSearch()}} variant="h6" color='inherit' to="/" component={Link}>
-                        FastFoodBest! or whatever
+                    <Button  variant="h6" color='inherit' to="/" component={Link}>
+                        FastFoodBest! 
                     </Button>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
