@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Card, CardContent, Typography, Grid, Button, CardMedia } from '@material-ui/core/';
-import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from "react-redux";
 import AppBar from "../../components/appBar/AppBar"
 import defaultImg from "../../components/Product/productCard/ProductCard"
@@ -10,12 +9,15 @@ import { postOrders } from '../../store/order/order.action';
 import IconButton from '@material-ui/core/IconButton';
 import RemoveShoppingCartOutlinedIcon from '@material-ui/icons/RemoveShoppingCartOutlined';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import { Link, useHistory } from 'react-router-dom'
+
 export default function Cart() {
   const classes = useStyles();
   const dispatch = useDispatch()
   const cart = useSelector(state => state.cart.cartItems)
   const total = useSelector(state => state.cart.total)
   const cartQuantity = useSelector(state => state.cart.cartQuantity)
+
   useEffect(() => {
     dispatch(getTotal())
   }, [dispatch])
@@ -36,15 +38,14 @@ export default function Cart() {
           return <Card
             className={classes.root}
           >
-            <Grid xs={1}/>
+            <Grid xs={1} />
             <Grid xs={2} >
               <CardMedia
                 component="img"
                 alt="Food"
                 image={product.img === "no tiene" ? defaultImg : product.img}
-                title="Contemplative Reptile" 
+                title="Contemplative Reptile"
                 className={classes.photo}
-
               />
             </Grid>
             <Grid xs={4} className={classes.details}>
@@ -56,7 +57,6 @@ export default function Cart() {
                 <Typography variant="subtitle1" color="textSecondary">
                   {product.description}
                 </Typography>
-
               </CardContent>
             </Grid>
             <Grid className={classes.input} xs={2}>
@@ -88,10 +88,6 @@ export default function Cart() {
             </Grid>
           </Card>
         })
-
-
-
-
       ) : ("")
       }
       {cart && cart.length > 0 ? (
@@ -108,7 +104,6 @@ export default function Cart() {
           </Typography>
           </Grid>
           <Grid xs={2}
-
           >
             <Typography component="h5" variant="h5"
             >
@@ -119,11 +114,7 @@ export default function Cart() {
             >
               ${total}
             </Typography>
-            <Button
-              onClick={handlerClick}
-
-              style={{ marginTop: 16 }}
-              color="primary" variant="contained"
+            <Button onClick={handlerClick} style={{ marginTop: 16 }} color="primary" variant="contained" to="/PageCheckout" component={Link}
             >Checkout</Button>
           </Grid>
         </Card>
