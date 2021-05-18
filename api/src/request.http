@@ -8,5 +8,5 @@
 #     "password":"1234"
   
 # }
-GET http://localhost:3001/orders/10
+GET http://localhost:3001/orders/2
 

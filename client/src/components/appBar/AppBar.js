@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import clsx from 'clsx';
 import axios from "axios";
 import { useTheme } from '@material-ui/core/styles';
-import { Menu, MenuItem, Drawer, CssBaseline, AppBar, Toolbar, Badge, List, Button, Divider, IconButton, ListItem, ListItemText, } from '@material-ui/core';
+import { Menu,Avatar , MenuItem, Drawer, CssBaseline, AppBar, Toolbar, Badge, List, Button, Divider, IconButton, ListItem, ListItemText, } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -108,9 +108,10 @@ export default function PersistentDrawerLeft() {
                             onClick={handleMenu}
                             color="inherit"
                         >
-                            <AccountCircleIcon
+                          {currentUser?(      <Avatar alt="Remy Sharp" src={currentUser.photoURL} />
+ ):(  <AccountCircleIcon
                                 fontSize="large"
-                            />
+                            />)}
                         </IconButton>
                         <Menu
                             id="menu-appbar"
