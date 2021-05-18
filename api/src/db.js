@@ -2,9 +2,6 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const mercadopago = require ('mercadopago');
-
-mercadopago.configure({access_token:'TEST-8704277294641088-051822-f004e153bc3fc18dbced2d4af9298ff8-146468735'});
 
 const { DB_USER, DB_PASSWORD, DB_HOST,DB_NAME } = process.env;
 let sequelize =
