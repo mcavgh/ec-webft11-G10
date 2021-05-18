@@ -1,7 +1,5 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
-
-
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const GET_ORDER_BY_ID = "GET_ORDER_BY_ID";
 export const PUT_ORDER_BY_ID = "PUT_ORDER_BY_ID";
@@ -12,12 +10,10 @@ export const GET_PRODUCTS_OF_USER = "GET_PRODUCTS_OF_USER";
 export const DELETE_CART = "DELETE_CART"
 export const POST_ORDERS = "POST_ORDERS"
 
-
 export const postOrders = (data) => {
   return (dispatch, getState) => {
     console.log(data)
     axios.post(`/orders/ols`, data).then((res) => {
-
       dispatch({ type: POST_ORDERS, payload: res.data });
       const cartItems = getState().cart.cartItems.slice();
       cartItems.forEach(product => {
@@ -25,9 +21,12 @@ export const postOrders = (data) => {
       });
       Swal.fire(
         'Muy bien!',
-        'Los productos han sido agregados correctamente !',
+        'Completa los datos para terminar la compra',
         'success'
       )
+
+   
+
     }).catch(err => console.log(err))
   };
 };
