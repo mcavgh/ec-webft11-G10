@@ -3,7 +3,12 @@ import s from "./ViewOrder.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { getUsersById } from "../../store/user/user.action";
-import { cleanCart, getOrderByUserId, putOrderById } from "../../store/order/order.action";
+import {
+    cleanCart,
+    getOrderByUserId,
+    putOrderById,
+    getOrderById
+} from '../../store/order/order.action';
 import Swal from "sweetalert2";
 
 export default function ViewOrder() {
@@ -20,9 +25,9 @@ export default function ViewOrder() {
   
 
   useEffect(() => {
-    dispatch(getUsersById(id))
-    dispatch(getOrderByUserId(id))
-  }, [dispatch, id])
+    dispatch(getOrderById(id))
+    //dispatch(getUsersById(orderUserId.user.id))
+  }, [])
   
 
 
@@ -69,15 +74,15 @@ export default function ViewOrder() {
     })
   };
 
-  if (!orderUserId) {
-    return (
-      <div className={s.viewOrder}>
-        <div className={s.content}>
-          <h3>Cargando datos...</h3>
-        </div>
-      </div>
-    );
-  }
+  // if (!orderUserId) {
+  //   return (
+  //     <div className={s.viewOrder}>
+  //       <div className={s.content}>
+  //         <h3>Cargando datos...</h3>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className={s.viewOrder}>

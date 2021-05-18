@@ -47,6 +47,14 @@ export const getAllOrders = () => {
   };
 };
 
+export const getOrderById = (id) => {
+  return function (dispatch) {
+    axios.get(`/orders/${id}`).then(order => {
+      dispatch({ type: GET_ORDER_BY_ID, payload: order.data[0] })
+    })
+    .catch(err=>console.log(err))
+  }
+}
 export const getOrderByUserId = (id) => {
   return function (dispatch) {
     axios.get(`/orders/userid/${id}`).then(payload => {
