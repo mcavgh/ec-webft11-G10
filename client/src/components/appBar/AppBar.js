@@ -90,7 +90,7 @@ export default function PersistentDrawerLeft() {
                         <SearchBar />
                     </div>
                     <div className={classes.grow} />
-                    <div className={classes.sectionDesktop}>
+                    <div >
                         <IconButton to="/cart" component={Link}
                             aria-label="" color="inherit">
 
@@ -100,7 +100,7 @@ export default function PersistentDrawerLeft() {
 
                         </IconButton>
                     </div>
-                    <div className={classes.sectionDesktop}>
+                    <div >
                         <IconButton
                             aria-label="account of current user"
                             aria-controls="menu-appbar"

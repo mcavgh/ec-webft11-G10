@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import Title from './Title';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
@@ -47,10 +47,10 @@ export default function Orders() {
           {orders && orders[0] ?
 
             (orders.map((row) => (
-              <TableRow key={row.userId}>
-
-                <TableCell>{row.userId}</TableCell>
-                <TableCell></TableCell>
+              <TableRow key={row.id}>
+                {console.log(row)}
+                <TableCell>{row.id}</TableCell>
+                <TableCell>{row.user.name} {row.user.surname} </TableCell>
                 <TableCell>{row.state}</TableCell>
                 <TableCell>{row.updatedAt}</TableCell>
                 <TableCell></TableCell>

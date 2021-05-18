@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { postOrders } from '../order/order.action';
 
 export const GET_CART = "GET_CART";
 export const GET_USER_BYID = "GET_USER_BYID"
@@ -12,11 +13,11 @@ export const CREATE_USER = "CREATE_USER";
 
 
 
-export const postUser = (displayName,email) => {
+export const postUser = (displayName, email) => {
     return (dispatch, getState) => {
         console.log("entra")
-        const nameArray=displayName.split(" ")
-        axios.post(`/users/register`, {name:nameArray[0],surname:nameArray[1],email,password:"1234"}).then((res) => {
+        const nameArray = displayName.split(" ")
+        axios.post(`/users/register`, { name: nameArray[0], surname: nameArray[1], email, password: "1234" }).then((res) => {
             console.log(res)
             dispatch({ type: POST_USER, payload: res });
 
@@ -24,6 +25,20 @@ export const postUser = (displayName,email) => {
 
     }
 }
+export const getUsersByEmail = (email) => {
+    return function (dispatch, getState) {
+        const price = getState().cart.total;
+        const quantity = getState().cart.cartQuantity;
+        axios.get(`/users/email/${email}`).then((user) => {
+            dispatch(postOrders({
+                userId: user.data.id,
+                price,
+                quantity
+            }))
+            dispatch({ type: GET_USER_BYID, payload: user });
+        });
+    };
+};
 
 export const getUsersById = (id) => {
     return function (dispatch) {
