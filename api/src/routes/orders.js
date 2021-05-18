@@ -38,7 +38,7 @@ server.get("/userid/:id", (req, res) => {
 //-------------------------
 server.get("/", (req, res) => {
 
-  Order.findOne({ include: [{ model: Product }, { model: User }] })
+  Order.findAll({ include: [{ model: Product }, { model: User }] })
     .then((order) => {
       res.send(order);
     })

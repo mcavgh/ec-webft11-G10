@@ -159,7 +159,7 @@ export default function ViewOrder() {
             <tr className={s.total}>
               <td></td>
               <td>Total:</td>
-              <td>{sumTotal()}</td>
+              <td>{orderUserId.price}</td>
             </tr>
           </tbody>
         </table>
