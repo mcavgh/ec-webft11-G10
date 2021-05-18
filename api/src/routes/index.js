@@ -12,5 +12,6 @@ router.use("/category", require("./category"));
 router.use("/users", require("./user"));
 router.use("/orders", require("./orders"));
 router.use('/cart', require('./cart.js'));
+router.use('/review', require('./review.js'));
 
 module.exports = router;
