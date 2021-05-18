@@ -18,7 +18,6 @@ export const getQuantity = () => {
         payload: 0
       })
     }
-
   }
 }
 export const getTotal = () => {

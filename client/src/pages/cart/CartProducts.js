@@ -36,15 +36,14 @@ export default function Cart() {
           return <Card
             className={classes.root}
           >
-            <Grid xs={1}/>
+            <Grid xs={1} />
             <Grid xs={2} >
               <CardMedia
                 component="img"
                 alt="Food"
                 image={product.img === "no tiene" ? defaultImg : product.img}
-                title="Contemplative Reptile" 
+                title="Contemplative Reptile"
                 className={classes.photo}
-
               />
             </Grid>
             <Grid xs={4} className={classes.details}>
@@ -56,7 +55,6 @@ export default function Cart() {
                 <Typography variant="subtitle1" color="textSecondary">
                   {product.description}
                 </Typography>
-
               </CardContent>
             </Grid>
             <Grid className={classes.input} xs={2}>
@@ -88,10 +86,6 @@ export default function Cart() {
             </Grid>
           </Card>
         })
-
-
-
-
       ) : ("")
       }
       {cart && cart.length > 0 ? (
@@ -108,7 +102,6 @@ export default function Cart() {
           </Typography>
           </Grid>
           <Grid xs={2}
-
           >
             <Typography component="h5" variant="h5"
             >
@@ -119,11 +112,7 @@ export default function Cart() {
             >
               ${total}
             </Typography>
-            <Button
-              onClick={handlerClick}
-
-              style={{ marginTop: 16 }}
-              color="primary" variant="contained"
+            <Button onClick={handlerClick} style={{ marginTop: 16 }} color="primary" variant="contained" to="/PageCheckoutOrders" component={Link}
             >Checkout</Button>
           </Grid>
         </Card>
