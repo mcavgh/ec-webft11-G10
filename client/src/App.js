@@ -39,7 +39,7 @@ function App() {
           <Route exact path='/' component={Home} />
           <PrivateRoute path='/editProduct/:id' component={PageEditProduct} />
           <PrivateRoute path='/adminProduct' component={PageAdminProduct} />
-          <PrivateRoute path='/app/createProduct' component={PageAddProduct} />
+          <PrivateRoute path='/createProduct' component={PageAddProduct} />
           <PrivateRoute path='/creaCategories' component={PageAddCategory} />
           <PrivateRoute path='/adminCategories' component={PageAdminCategories} />
           <PrivateRoute path='/creaCategories' component={PageAddCategory} />
