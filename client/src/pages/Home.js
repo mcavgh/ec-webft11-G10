@@ -3,12 +3,13 @@ import AppBar from '../components/appBar/AppBar'
 import Catalog from '../components/Product/catalog/Catalog';
 import CategoryCatalog from '../components/category/CatalogCategory'
 
-export const Home = () => {
+
+export const Home = (props) => {
     return (
         <div>
             <AppBar />
             <div>
-                <CategoryCatalog /> 
+                <CategoryCatalog />
                 <Catalog />
             </div>
         </div>
