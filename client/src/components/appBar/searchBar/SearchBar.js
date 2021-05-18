@@ -4,8 +4,7 @@ import { useStyles } from '../styles'
 import { useDispatch } from 'react-redux'
 import { searchProducts, getProducts } from '../../../store/product/product.actions';
 
-export const SearchBar = () => {    
-    
+export const SearchBar = () => {        
     const classes = useStyles();
     const dispatch = useDispatch()
     const [title, setTitle] = useState("")

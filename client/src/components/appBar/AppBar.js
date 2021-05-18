@@ -2,6 +2,7 @@ import app from "../../firebase";
 import React, { useEffect, useContext } from 'react';
 import { useDispatch } from 'react-redux'
 import clsx from 'clsx';
+import axios from "axios";
 import { useTheme } from '@material-ui/core/styles';
 import { Menu, MenuItem, Drawer, CssBaseline, AppBar, Toolbar, Badge, List, Button, Divider, IconButton, ListItem, ListItemText, } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -14,11 +15,11 @@ import { useStyles } from './styles'
 import { Link, useHistory } from 'react-router-dom';
 import { SearchBar } from './searchBar/SearchBar';
 import { useSelector } from "react-redux";
+import { searchProductSuccess } from '../../store/product/product.actions';
 import { getQuantity } from '../../store/cart/cart.actions';
 import { AuthContext } from '../AuthContext';
 export default function PersistentDrawerLeft() {
     const history = useHistory()
-
     const cartQuantity = useSelector(state => state.cart.cartQuantity)
     const classes = useStyles();
     const theme = useTheme();
@@ -29,30 +30,27 @@ export default function PersistentDrawerLeft() {
         dispatch(getQuantity())
     }, [])
     const { currentUser } = useContext(AuthContext)
-
-
-
     const handleDrawerOpen = () => {
         setOpen(true);
     };
-
     const handleDrawerClose = () => {
         setOpen(false);
     };
 
     // const history=useHistory()
-   
-
-
     //USER BUTTON
     const [auth, setAuth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const dropdown = Boolean(anchorEl);
 
+    const refreshSearch=()=>{
+        axios.get(`http://localhost:3001/products/`).then(result => {
+            dispatch(searchProductSuccess(result.data))
+        })
+    }
     const handleChange = (event) => {
         setAuth(event.target.checked);
     };
-
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
         console.log(currentUser)
@@ -60,8 +58,7 @@ export default function PersistentDrawerLeft() {
             history.push("/login")
         }
         
-    };
-    
+    };    
     const handleClose = () => {
         setAnchorEl(null);
     }; return (
@@ -83,8 +80,8 @@ export default function PersistentDrawerLeft() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Button variant="h6" color='inherit' to="/" component={Link}>
-                        FastFoodBest!
+                    <Button onClick={refreshSearch} variant="h6" color='inherit' to="/" component={Link}>
+                        eatx
                     </Button>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
@@ -92,7 +89,6 @@ export default function PersistentDrawerLeft() {
                         </div>
                         <SearchBar />
                     </div>
-
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
                         <IconButton to="/cart" component={Link}
@@ -116,7 +112,6 @@ export default function PersistentDrawerLeft() {
                                 fontSize="large"
                             />
                         </IconButton>
-
                         <Menu
                             id="menu-appbar"
                             anchorEl={anchorEl}
@@ -132,7 +127,6 @@ export default function PersistentDrawerLeft() {
                             open={dropdown}
                             onClose={handleClose}
                         >
-
                             <div>
                                 <MenuItem onClick={handleClose}>Perfil</MenuItem>
                                 <MenuItem onClick={() => app.auth().signOut()
@@ -140,7 +134,6 @@ export default function PersistentDrawerLeft() {
 
                                 }>Log out</MenuItem>
                             </div>
-
                         </Menu>
                     </div>
                 </Toolbar>
@@ -178,7 +171,6 @@ export default function PersistentDrawerLeft() {
                     </ListItem>
                 </List>
                 <Divider />
-
             </Drawer>
             <main
                 className={clsx(classes.content, {
