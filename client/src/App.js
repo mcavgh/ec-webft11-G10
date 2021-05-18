@@ -19,7 +19,6 @@ import dotenv from "dotenv";
 import axios from 'axios';
 import { AdminUser } from './components/admin/AdminUser';
 import   PrivateRoute  from "./components/login/PrivateRoute";
-// import { LandingPage } from './rutas.protegidas/Landing.Page'
 import { AuthProvider } from "./components/AuthContext";
 import PageLogIn from './pages/landingPage/LandingPage';
 
@@ -35,7 +34,7 @@ function App() {
         <ThemeProvider theme={theme}>
         <Switch>
           <Route exact path='/crearUsuario' component={AdminUser} />
-          <PrivateRoute exact path='/cart' component={CartProducts} />
+          <Route exact path='/cart' component={CartProducts} />
           <Route exact path='/logIn' component={PageLogIn} />
           <Route exact path='/' component={Home} />
           <PrivateRoute path='/editProduct/:id' component={PageEditProduct} />
@@ -49,7 +48,6 @@ function App() {
           <PrivateRoute path='/ViewOrder/:id' component={ViewOrder} />
           <Route path='/product/:id' component={Product} />
           <PrivateRoute path='/checkout' component={Checkout} />
-          {/* <Route exact path="/" component={LandingPage} /> */}
           <Route path="*" component={() => "404 NOT FOUND"} />
           </Switch>
         </ThemeProvider>
