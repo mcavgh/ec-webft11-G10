@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Card, CardContent, Typography, Grid, Button, CardMedia } from '@material-ui/core/';
-import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from "react-redux";
 import AppBar from "../../components/appBar/AppBar"
 import defaultImg from "../../components/Product/productCard/ProductCard"
@@ -10,12 +9,15 @@ import { postOrders } from '../../store/order/order.action';
 import IconButton from '@material-ui/core/IconButton';
 import RemoveShoppingCartOutlinedIcon from '@material-ui/icons/RemoveShoppingCartOutlined';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import { Link, useHistory } from 'react-router-dom'
+
 export default function Cart() {
   const classes = useStyles();
   const dispatch = useDispatch()
   const cart = useSelector(state => state.cart.cartItems)
   const total = useSelector(state => state.cart.total)
   const cartQuantity = useSelector(state => state.cart.cartQuantity)
+
   useEffect(() => {
     dispatch(getTotal())
   }, [dispatch])
@@ -112,7 +114,7 @@ export default function Cart() {
             >
               ${total}
             </Typography>
-            <Button onClick={handlerClick} style={{ marginTop: 16 }} color="primary" variant="contained" to="/PageCheckoutOrders" component={Link}
+            <Button onClick={handlerClick} style={{ marginTop: 16 }} color="primary" variant="contained" to="/PageCheckout" component={Link}
             >Checkout</Button>
           </Grid>
         </Card>

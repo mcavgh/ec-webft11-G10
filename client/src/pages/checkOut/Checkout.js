@@ -19,7 +19,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        eatx
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -79,7 +79,8 @@ function getStepContent(step) {
   }
 }
 
-export default function Checkout() {
+export function Checkout() {
+  
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
