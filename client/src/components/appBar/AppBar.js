@@ -11,12 +11,13 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { useStyles } from './styles'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { SearchBar } from './searchBar/SearchBar';
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { searchProductSuccess } from '../../store/product/product.actions';
 import { getQuantity } from '../../store/cart/cart.actions';
+import LogIn from "../login/LogIn";
 
 export default function PersistentDrawerLeft() {
 
@@ -41,7 +42,7 @@ export default function PersistentDrawerLeft() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-
+    const history=useHistory()
    
 
     return (
@@ -74,7 +75,7 @@ export default function PersistentDrawerLeft() {
                     </div>
                     <Button
                         onClick={() => app.auth().signOut()
-                            .then(res => console.log("deslogueado", res))
+                            .then(history.push("/"))
 
                         }
                         color="inherit"
@@ -94,10 +95,13 @@ export default function PersistentDrawerLeft() {
                     </div>
                     <div className={classes.sectionDesktop}>
                         <IconButton color="inherit"
-                            to="/login" component={Link}
+                            to="/logIn" component={Link} 
                         >
                             <Badge color="secondary">
+                                
                                 <AccountCircleIcon fontSize="large" />
+                                
+                                
                             </Badge>
                         </IconButton>
                         
