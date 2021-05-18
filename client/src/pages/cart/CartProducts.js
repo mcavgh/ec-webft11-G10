@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useContext } from 'react';
 import { Card, CardContent, Typography, Grid, Button, CardMedia } from '@material-ui/core/';
 import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from "react-redux";
@@ -7,25 +7,34 @@ import defaultImg from "../../components/Product/productCard/ProductCard"
 import { addToCart, removeFromCart, getTotal, restToCart } from '../../store/cart/cart.actions';
 import { useStyles } from './styleCart';
 import { postOrders } from '../../store/order/order.action';
+import { AuthContext } from '../../components/AuthContext';
+import { getUsersByEmail } from '../../store/user/user.action';
 import IconButton from '@material-ui/core/IconButton';
 import RemoveShoppingCartOutlinedIcon from '@material-ui/icons/RemoveShoppingCartOutlined';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+
 export default function Cart() {
+  
   const classes = useStyles();
   const dispatch = useDispatch()
   const cart = useSelector(state => state.cart.cartItems)
   const total = useSelector(state => state.cart.total)
   const cartQuantity = useSelector(state => state.cart.cartQuantity)
+
+  const { currentUser } = useContext(AuthContext)
+
   useEffect(() => {
     dispatch(getTotal())
   }, [dispatch])
 
   const handlerClick = () => {
-    dispatch(postOrders({
-      userId: 1,
-      price: total,
-      quantity: cartQuantity
-    }))
+    try {
+      
+    } catch (error) {
+      
+    }
+    dispatch(getUsersByEmail(currentUser.email))
+   
   }
 
   return (

@@ -15,10 +15,10 @@ export const POST_ORDERS = "POST_ORDERS"
 
 export const postOrders = (data) => {
   return (dispatch, getState) => {
+    console.log(data)
     axios.post(`/orders/ols`, data).then((res) => {
 
       dispatch({ type: POST_ORDERS, payload: res.data });
-      console.log("respuesta", res)
       const cartItems = getState().cart.cartItems.slice();
       cartItems.forEach(product => {
         dispatch(addProducttoOrder(res.data.id, product.id))
@@ -27,7 +27,7 @@ export const postOrders = (data) => {
         'Muy bien!',
         'Los productos han sido agregados correctamente !',
         'success'
-    )
+      )
     }).catch(err => console.log(err))
   };
 };
@@ -39,56 +39,55 @@ export const addProducttoOrder = (orderId, productId) => {
   }
 }
 
-  export const getAllOrders = () => {
-    return (dispatch) => {
-      axios.get(`/orders/`).then((res) => {
-        if (res.status === 200) {
-          return dispatch({ type: GET_ALL_ORDERS, payload: res.data });
-        }
-      });
-    };
-  };
+export const getAllOrders = () => {
+  return (dispatch) => {
+    axios.get(`/orders/`).then((res) => {
+      return dispatch({ type: GET_ALL_ORDERS, payload: res.data });
 
-  export const getOrderByUserId = (id) => {
-    return function (dispatch) {
-      axios.get(`/orders/userid/${id}`).then(payload => {
-        dispatch({ type: GET_ORDER_BY_USER_ID, payload: payload.data[0] })
-      })
-    }
+    });
+  };
+};
+
+export const getOrderByUserId = (id) => {
+  return function (dispatch) {
+    axios.get(`/orders/userid/${id}`).then(payload => {
+      dispatch({ type: GET_ORDER_BY_USER_ID, payload: payload.data[0] })
+    })
   }
+}
 
 
-  export const putOrderById = (id, data) => {
-    return function (dispatch) {
-      axios.put(`/orders/${id}/modifica`, data)
-        .then((payload) => {
-          console.log(payload)
-          dispatch({ type: PUT_ORDER_BY_ID, payload: payload.data });
-          //dispatch(getOrderByUserId(userId))
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'tu orden se a modificado',
-            showConfirmButton: false,
-            timer: 1500
-          })
-        }).catch((err) => console.log(err))
-    };
-  };
-
-
-  export const cleanCart = (id) => {
-    return function (dispatch) {
-      axios.delete(`/cart/${id}/cart`).then((payload) => {
-        dispatch({ type: DELETE_CART, payload: payload });
+export const putOrderById = (id, data) => {
+  return function (dispatch) {
+    axios.put(`/orders/${id}/modifica`, data)
+      .then((payload) => {
+        console.log(payload)
+        dispatch({ type: PUT_ORDER_BY_ID, payload: payload.data });
+        //dispatch(getOrderByUserId(userId))
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'tu orden se cancelado',
+          title: 'tu orden se a modificado',
           showConfirmButton: false,
           timer: 1500
         })
       }).catch((err) => console.log(err))
-    };
   };
+};
+
+
+export const cleanCart = (id) => {
+  return function (dispatch) {
+    axios.delete(`/cart/${id}/cart`).then((payload) => {
+      dispatch({ type: DELETE_CART, payload: payload });
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'tu orden se cancelado',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }).catch((err) => console.log(err))
+  };
+};
 

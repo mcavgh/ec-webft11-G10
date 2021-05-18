@@ -1,10 +1,13 @@
-POST http://localhost:3001/orders/ols
+GET http://localhost:3001/users/email/martinzaratustra@gmail.com
 
-Content-Type: application/json
 
-{
-"price":5,
-"quantity":23,
-"state":"carrito",
-"userId":1
-}
+# POST http://localhost:3001/users/
+
+# Content-Type: application/json
+
+# {
+# "price":5,
+# "quantity":23,
+# "state":"carrito",
+# "userId":1
+# }
