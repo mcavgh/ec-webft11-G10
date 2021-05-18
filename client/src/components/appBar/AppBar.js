@@ -43,6 +43,10 @@ export default function PersistentDrawerLeft() {
         setOpen(false);
     };
 
+    // const history=useHistory()
+   
+
+
     //USER BUTTON
     const [auth, setAuth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -60,6 +64,7 @@ export default function PersistentDrawerLeft() {
             history.push("/login")
         }
     };
+
 
     const handleClose = () => {
         setAnchorEl(null);
