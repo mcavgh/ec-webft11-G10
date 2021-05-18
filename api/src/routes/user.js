@@ -29,7 +29,7 @@ server.get("/:id", (req, res) => {
           .then((user) => {
             res.send(user); 
           })
-          .catch((err) => res.send("El email debe ser unico"));
+          .catch((err) => res.send(err));
   });
   
   module.exports = server;

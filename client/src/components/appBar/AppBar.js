@@ -14,14 +14,11 @@ import { useStyles } from './styles'
 import { Link, useHistory } from 'react-router-dom';
 import { SearchBar } from './searchBar/SearchBar';
 import { useSelector } from "react-redux";
-import axios from "axios";
-import { searchProductSuccess } from '../../store/product/product.actions';
 import { getQuantity } from '../../store/cart/cart.actions';
 import { AuthContext } from '../AuthContext';
 export default function PersistentDrawerLeft() {
     const history = useHistory()
 
-    const cart = useSelector(state => state.cart.cartItems)
     const cartQuantity = useSelector(state => state.cart.cartQuantity)
     const classes = useStyles();
     const theme = useTheme();
@@ -53,14 +50,14 @@ export default function PersistentDrawerLeft() {
     };
 
     const handleMenu = (event) => {
-        if (currentUser) {
-
-            setAnchorEl(event.currentTarget);
-        } else {
+        setAnchorEl(event.currentTarget);
+        console.log(currentUser)
+        if (!currentUser) {
             history.push("/login")
         }
+        
     };
-
+    
     const handleClose = () => {
         setAnchorEl(null);
     }; return (
@@ -104,44 +101,43 @@ export default function PersistentDrawerLeft() {
                         </IconButton>
                     </div>
                     <div className={classes.sectionDesktop}>
-                        <>
-                            <IconButton
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleMenu}
-                                color="inherit"
-                            >
-                                <AccountCircleIcon
-                                    fontSize="large"
-                                />
-                            </IconButton>
+                        <IconButton
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleMenu}
+                            color="inherit"
+                        >
+                            <AccountCircleIcon
+                                fontSize="large"
+                            />
+                        </IconButton>
 
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={dropdown}
-                                onClose={handleClose}
-                            >
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={dropdown}
+                            onClose={handleClose}
+                        >
 
-                                <>
-                                    <MenuItem onClick={handleClose}>Perfil</MenuItem>
-                                    <MenuItem onClick={() => app.auth().signOut()
-                                        .then(res => handleClose)
-                                    }>Log out</MenuItem>
-                                </>
+                            <div>
+                                <MenuItem onClick={handleClose}>Perfil</MenuItem>
+                                <MenuItem onClick={() => app.auth().signOut()
+                                    .then(res => handleClose())
 
-                            </Menu>
-                        </>
+                                }>Log out</MenuItem>
+                            </div>
+
+                        </Menu>
                     </div>
                 </Toolbar>
             </AppBar>
