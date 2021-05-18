@@ -71,7 +71,7 @@ const {
   User,
   //Cart,
   Order,
-  // Review,
+  Review,
 } = sequelize.models;
 
 // PRODUCTS Category
@@ -83,9 +83,17 @@ Category.belongsToMany(Product, { through: 'Products_Categories' });
 // Order.belongsToMany(Product, { through: 'Products_Cart'});
 
 
-// PRODUCTS COMMENTS
-// Product.hasMany(Review, { foreignKey: "productId" });
-// Review.belongsTo(Product);
+// PRODUCTS REVIEWS
+
+Product.hasMany(Review);
+Review.belongsTo(Product);
+
+// USERS REVIEWS
+
+User.hasMany(Review);
+Review.belongsTo(User);
+
+// PRODUCTS ORDERS
 
 Product.belongsToMany(Order, { through: "Order_line"});
 Order.belongsToMany(Product, { through: "Order_line" });
