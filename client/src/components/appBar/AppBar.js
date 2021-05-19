@@ -44,7 +44,7 @@ export default function PersistentDrawerLeft() {
     const dropdown = Boolean(anchorEl);
 
     const refreshSearch = () => {
-        axios.get(`http://localhost:3001/products/`).then(result => {
+        axios.get(`/products/`).then(result => {
             dispatch(searchProductSuccess(result.data))
         })
     }
