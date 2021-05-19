@@ -1,9 +1,20 @@
 import {
-  SET_PRODUCT_IMG, POST_PRODUCTS_SUCCESS, POST_PRODUCTS_FAILURE, SEARCH_PRODUCT_FAILURE, SEARCH_PRODUCT_REQUEST, SEARCH_PRODUCT_SUCCESS, GET_PRODUCTS, GET_ONE_PRODUCT, DELETE_PRODUCT_BY_ID, PUT_PRODUCT_BY_ID
-} from './product.actions';
+  SET_PRODUCT_IMG,
+  POST_PRODUCTS_SUCCESS,
+  POST_PRODUCTS_FAILURE,
+  SEARCH_PRODUCT_FAILURE,
+  SEARCH_PRODUCT_REQUEST,
+  SEARCH_PRODUCT_SUCCESS,
+  GET_PRODUCTS,
+  GET_ONE_PRODUCT,
+  DELETE_PRODUCT_BY_ID,
+  PUT_PRODUCT_BY_ID,
+} from "./product.actions";
 import {
-  SEARCH_PRODUCT_REQUEST_CATEGORIES, SEARCH_PRODUCT_SUCCESS_CATEGORIES, SEARCH_PRODUCT_FAILURE_CATEGORIES
-} from '../category/category.actions'
+  SEARCH_PRODUCT_REQUEST_CATEGORIES,
+  SEARCH_PRODUCT_SUCCESS_CATEGORIES,
+  SEARCH_PRODUCT_FAILURE_CATEGORIES,
+} from "../category/category.actions";
 
 const initialState = {
   products: [],
@@ -12,57 +23,56 @@ const initialState = {
   productImg: "no tiene",
   Error: "",
   Loading: "",
-  searchResults: []
+  searchResults: [],
 };
 
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case PUT_PRODUCT_BY_ID:
-    return { ...state }
+      return { ...state };
     case DELETE_PRODUCT_BY_ID:
       return {
-        ...state
-      }
+        ...state,
+      };
     case SEARCH_PRODUCT_REQUEST:
       return {
         ...state,
-        Loading: true
-      }
+        Loading: true,
+      };
     case SEARCH_PRODUCT_SUCCESS:
       return {
         ...state,
         Loading: false,
-        searchResults: action.payload
-      }
+        searchResults: action.payload,
+      };
     case SEARCH_PRODUCT_FAILURE:
       return {
         ...state,
-        Error: 'error 404',
-        Loading: false
-      }
+        Error: "error 404",
+        Loading: false,
+      };
     case SET_PRODUCT_IMG:
       return {
         ...state,
-        productImg: action.payload
-
-      }
+        productImg: action.payload,
+      };
     case SEARCH_PRODUCT_REQUEST_CATEGORIES:
       return {
         ...state,
-        Loading: true
-      }
+        Loading: true,
+      };
     case SEARCH_PRODUCT_SUCCESS_CATEGORIES:
       return {
         ...state,
         Loading: false,
-        searchResults: action.payload
-      }
+        searchResults: action.payload,
+      };
     case SEARCH_PRODUCT_FAILURE_CATEGORIES:
       return {
         ...state,
-        Error: 'error 404',
-        Loading: false
-      }
+        Error: "error 404",
+        Loading: false,
+      };
     case POST_PRODUCTS_SUCCESS:
       return {
         ...state,
@@ -86,7 +96,6 @@ const productReducer = (state = initialState, action) => {
     default:
       return state;
   }
-}
-
+};
 
 export default productReducer;

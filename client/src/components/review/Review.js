@@ -1,16 +1,53 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Divider, Avatar, Grid, Paper } from "@material-ui/core";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { useStyles } from "./styles";
+import { getProductReviews } from "../../store/review/review.actions";
 
 const imgLink =
   "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260";
 
 const Review = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProductReviews(1));
+  }, []);
+  const productReviews = useSelector(
+    (state) => state.reviewReducer.productReviews
+  );
+  console.log(productReviews.reviews);
+
   return (
     <div style={{ padding: 15 }} className={classes.reviews}>
       <h1>Opiniones</h1>
       <Paper style={{ padding: "40px 20px" }}>
+        {productReviews.reviews
+          ? productReviews.reviews.map((review) => {
+              return (
+                <>
+                  <Grid container wrap="nowrap" spacing={2}>
+                    <Grid item>
+                      <Avatar alt="Remy Sharp" src={imgLink} />
+                    </Grid>
+                    <Grid justifyContent="left" item xs zeroMinWidth>
+                      <h3 style={{ margin: 0, textAlign: "left" }}>
+                        {`${review.user.name} ${review.user.surname}`}
+                      </h3>
+                      <h4>{review.title}</h4>
+                      <p style={{ textAlign: "left" }}>{review.reviewText}</p>
+                      <p style={{ textAlign: "left", color: "gray" }}>
+                        posted 1 minute ago
+                      </p>
+                    </Grid>
+                  </Grid>
+                  <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
+                </>
+              );
+            })
+          : null}
+
         <Grid container wrap="nowrap" spacing={2}>
           <Grid item>
             <Avatar alt="Remy Sharp" src={imgLink} />
