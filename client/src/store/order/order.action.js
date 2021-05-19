@@ -66,14 +66,14 @@ export const putOrderById = (id, data) => {
       .then((payload) => {
         console.log(payload)
         dispatch({ type: PUT_ORDER_BY_ID, payload: payload.data });
-        //dispatch(getOrderByUserId(userId))
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'tu orden se a modificado',
-          showConfirmButton: false,
-          timer: 1500
-        })
+        dispatch(getOrderById(id))
+        // Swal.fire({
+        //   position: 'center',
+        //   icon: 'success',
+        //   title: 'tu orden se a modificado',
+        //   showConfirmButton: false,
+        //   timer: 1500
+        // })
       }).catch((err) => console.log(err))
   };
 };
@@ -82,13 +82,13 @@ export const cleanCart = (id) => {
   return function (dispatch) {
     axios.delete(`/cart/${id}/cart`).then((payload) => {
       dispatch({ type: DELETE_CART, payload: payload });
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'tu orden se cancelado',
-        showConfirmButton: false,
-        timer: 1500
-      })
+      // Swal.fire({
+      //   position: 'center',
+      //   icon: 'success',
+      //   title: 'tu orden se cancelado',
+      //   showConfirmButton: false,
+      //   timer: 1500
+      // })
     }).catch((err) => console.log(err))
   };
 };

@@ -33,18 +33,42 @@ server.get('/:id', (req, res, next) => {
 
 // ELIMINAR PRODUCTOS AL CARRITO |
 //--------------------------------
-server.delete("/:id/cart/", (req, res, next) => {
-  var id = req.params.id;
-  Order.findOne({
-    where: { userId: id, state: "carrito" },
-  })
-    .then((order) => {
-      order.setProducts([]);
-      res.send({ message: "Se limpio el carrito" });
-    })
-    .catch((error) => next(error));
-});
+// server.delete("/:id/cart/", (req, res, next) => {
+//   var id = req.params.id;
+//   Order.findOne({
+//     where: { userId: id, state: "carrito" },
+//   })
+//     .then((order) => {
+//       order.setProducts([]);
+//       res.send({ message: "Se limpio el carrito" });
+//     })
+//     .catch((error) => next(error));
+// });
 
+
+
+
+server.delete('/:id/cart/', (req, res) => {
+	// console.log(req.params.id);
+	const { id } = req.params;
+
+	Order.findOne({ where: { id } })
+		.then((order) => {
+			// console.log('THEN DEL DELETE ORDER');
+			order.destroy();
+			return res.status(200).json({
+				message: 'Orden eliminada!!',
+				data: order,
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+			return res.status(400).json({
+				message: 'Error al eliminar Orden',
+				data: err,
+			});
+		});
+});
 // VER ITEMS DEL USUARIO |
 //------------------------
 server.get("/:id/orders", (req, res) => {
