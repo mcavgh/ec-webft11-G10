@@ -93,3 +93,10 @@ export const cleanCart = (id) => {
   };
 };
 
+export const orderToMp = (products, id) => {
+  return function (dispatch) {
+    axios.post(`mercadopago/${id}`, products).then((res) => {
+    }).catch(err => { console.log(err) })
+  }
+}
+

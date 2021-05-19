@@ -1,6 +1,7 @@
 const server = require("express").Router();
 const orders = require('../controllers/orders');
 const { Order, Product, User } = require("../db");
+
 server.post("/ols", (req, res) => {
   const { price, quantity, state, userId, address, paymentMethod } = req.body
   Order.create({

@@ -9,6 +9,7 @@ export const PUT_USER = "PUT_USER";
 export const DELETE_USER = "DELETE_USER";
 export const SELECT_USER = "SELECT_USER";
 export const CREATE_USER = "CREATE_USER";
+export const GET_ID_BYEMAIL = "GET_ID_BYEMAIL";
 
 export const postUser = (displayName, email) => {
     return (dispatch, getState) => {
@@ -31,6 +32,13 @@ export const getUsersByEmail = (email) => {
                 quantity
             }))
             dispatch({ type: GET_USER_BYID, payload: user });
+        });
+    };
+};
+export const getUsersByEmailId = (email) => {
+    return function (dispatch) {
+        axios.get(`/users/email/${email}`).then((userId) => {
+            dispatch({ type: GET_ID_BYEMAIL, payload: userId.data });            
         });
     };
 };
