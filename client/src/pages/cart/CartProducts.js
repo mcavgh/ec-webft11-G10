@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import RemoveShoppingCartOutlinedIcon from '@material-ui/icons/RemoveShoppingCartOutlined';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { Link, useHistory } from 'react-router-dom'
+import Swal from 'sweetalert2' 
 
 export default function Cart() {
   
@@ -30,10 +31,10 @@ export default function Cart() {
   const handlerClick = () => {
     try {
       
+      dispatch(getUsersByEmail(currentUser.email))
     } catch (error) {
-      
+      Swal("Debe estar logueado")
     }
-    dispatch(getUsersByEmail(currentUser.email))
    
   }
 
