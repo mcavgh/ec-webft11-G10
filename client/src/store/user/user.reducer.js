@@ -1,9 +1,9 @@
-import { GET_USER_BYID, POST_USER, DELETE_USER, PUT_USER, GET_USERS } from './user.action';
+import { GET_USER_BYID,GET_ID_BYEMAIL, POST_USER, DELETE_USER, PUT_USER, GET_USERS } from './user.action';
 
 const initialState = {
   users: [],
   user: undefined,
-
+  userId: {},
 };
 
 const userReducer = (state = initialState, action) => {
@@ -14,6 +14,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload,
+      };
+    case GET_ID_BYEMAIL:
+      return {
+        ...state,
+        userId: action.payload,
       };
     case POST_USER:
     case DELETE_USER:

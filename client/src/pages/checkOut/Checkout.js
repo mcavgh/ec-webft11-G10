@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {useStyles} from './stylesCheckout'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -11,9 +11,13 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import AddressForm from '../../components/checkOut/AddressForm';
 import Review from '../../components/checkOut/Review';
+import {useDispatch, useSelector} from "react-redux"
 import { Link, useHistory } from 'react-router-dom'
+import {orderToMp} from '../../store/order/order.action'
+import { AuthContext } from '../../components/AuthContext';
+import {getUsersByEmailId} from '../../store/user/user.action'
 
-const steps = ['Review your order'];
+const steps = ['Controla tu orden'];
 
 function getStepContent(step) {
   switch (step) {
@@ -25,15 +29,16 @@ function getStepContent(step) {
 }
 
 export function Checkout() {
+  const dispatch = useDispatch()
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const cart = useSelector(state => state.cart.cartItems)
+  const userId = useSelector(state => state.userReducer.userId.id)  
+  const { currentUser } = useContext(AuthContext)
 
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
-  };
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
-  };
+  useEffect(()=>{    
+    console.log(userId)
+  },[])
 
   return (
     <React.Fragment>
@@ -61,11 +66,10 @@ export function Checkout() {
             {activeStep === steps.length ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
+                  Gracias por tu compra!.
                 </Typography>
                 <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order confirmation, and will
-                  send you an update when your order has shipped.
+                  Tu pedido esta en camino!
                 </Typography>
               </React.Fragment>
             ) : (
@@ -73,17 +77,13 @@ export function Checkout() {
                 {getStepContent(activeStep)}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
-                    <Button onClick={handleBack} className={classes.button}>
-                      Back
+                    <Button className={classes.button}>
+                      Volver
                     </Button>
                   )}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
+                  <Button onClick={dispatch(orderToMp(cart))} variant="contained" color="primary" className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                    {activeStep === steps.length - 1 ? 'Terminar Compra' : 'Next'}
                   </Button>
                 </div>
               </React.Fragment>

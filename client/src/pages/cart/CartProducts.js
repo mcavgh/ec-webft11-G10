@@ -7,7 +7,7 @@ import defaultImg from "../../components/Product/productCard/ProductCard";
 import { addToCart, removeFromCart, getTotal, restToCart } from '../../store/cart/cart.actions';
 import { useStyles } from './styleCart';
 import { AuthContext } from '../../components/AuthContext';
-import { getUsersByEmail } from '../../store/user/user.action';
+import { getUsersByEmail,getUsersByEmailId } from '../../store/user/user.action';
 import IconButton from '@material-ui/core/IconButton';
 import RemoveShoppingCartOutlinedIcon from '@material-ui/icons/RemoveShoppingCartOutlined';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
@@ -28,7 +28,7 @@ export default function Cart() {
   }, [dispatch])
 
   const handlerClick = () => {
-    try {dispatch(getUsersByEmail(currentUser.email))}
+    try {dispatch(getUsersByEmail(currentUser.email),dispatch(getUsersByEmailId(currentUser.email)))}
     catch (error) {Swal.fire({ icon: 'error', title: 'Oops...', text:'Something went wrong!', })}
   }
   return (
