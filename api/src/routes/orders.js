@@ -2,7 +2,7 @@ const server = require("express").Router();
 const orders = require('../controllers/orders');
 const { Order, Product, User } = require("../db");
 
-
+//ENCUENTRA O CREA UNA ORDEN EN ESTADO "CARRITO" PARA EL USUARIO
 server.post("/cart/:userId", async (req, res) => {
   const { userId } = req.params;
   try {
@@ -13,10 +13,6 @@ server.post("/cart/:userId", async (req, res) => {
         state: 'carrito'
       }
     })
-  
-    if(created){
-      // dispatch(addProducttoOrder(.id, product.id))
-    }
 
     res.json(order)
 
