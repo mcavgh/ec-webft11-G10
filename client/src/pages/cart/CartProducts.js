@@ -13,7 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import RemoveShoppingCartOutlinedIcon from '@material-ui/icons/RemoveShoppingCartOutlined';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { Link, useHistory } from 'react-router-dom'
-import Swal from 'sweetalert2' 
+// import Swal from 'sweetalert2' 
 
 export default function Cart() {
 

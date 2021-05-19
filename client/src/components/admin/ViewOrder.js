@@ -53,7 +53,7 @@ export default function ViewOrder() {
     };
     dispatch(putOrderById(parseInt(orderUserId.id), data));
     setEdit(false)
-    history.push("/PageCheckoutOrders")
+    // history.push(`/ViewOrder/${id}`)
 
   };
 
@@ -64,25 +64,25 @@ export default function ViewOrder() {
   };
 
   const onClean = function () {
-    dispatch(cleanCart(orderUserId.id));
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: 'la orden se a actualizado!',
-      showConfirmButton: false,
-      timer: 1500
-    })
+    dispatch(cleanCart(id));
+    // Swal.fire({
+    //   position: 'top-end',
+    //   icon: 'success',
+    //   title: 'la orden se a actualizado!',
+    //   showConfirmButton: false,
+    //   timer: 1500
+    // })
   };
 
-  // if (!orderUserId) {
-  //   return (
-  //     <div className={s.viewOrder}>
-  //       <div className={s.content}>
-  //         <h3>Cargando datos...</h3>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  if (!orderUserId) {
+    return (
+      <div className={s.viewOrder}>
+        <div className={s.content}>
+          <h3>Cargando datos...</h3>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={s.viewOrder}>
@@ -181,11 +181,11 @@ export default function ViewOrder() {
             </button>
           </div>
           <div>
-            {/* {orderUserId.state === "carrito" && orderUserId.products.length > 0 && (
+            {orderUserId.state === "carrito" && orderUserId.products.length > 0 && (
               <button onClick={onClean} className={[s.btn].join(" ")}>
                 Vaciar orden
               </button>
-            )} */}
+            )}
           </div>
           <div>
             <button
