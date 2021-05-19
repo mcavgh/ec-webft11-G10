@@ -50,7 +50,7 @@ export default function Orders() {
               <TableRow key={row.id}>
                 {console.log(row)}
                 <TableCell>{row.id}</TableCell>
-                <TableCell>{row.user.name} {row.user.surname} </TableCell>
+                <TableCell>{row.name} {row.surname} </TableCell>
                 <TableCell>{row.state}</TableCell>
                 <TableCell>{row.updatedAt}</TableCell>
                 <TableCell></TableCell>
