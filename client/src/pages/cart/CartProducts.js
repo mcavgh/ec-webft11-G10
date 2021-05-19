@@ -28,12 +28,8 @@ export default function Cart() {
   }, [dispatch])
 
   const handlerClick = () => {
-
-    try {
-      dispatch(getUsersByEmail(currentUser.email))
-        }  catch (error) {
-      Swal.fire({icon: 'error', title: 'Oops...', text: 'Something went wrong!',})
-    }
+    try {dispatch(getUsersByEmail(currentUser.email))}
+    catch (error) {Swal.fire({ icon: 'error', title: 'Oops...', text:'Something went wrong!', })}
   }
   return (
     <div className={classes.container}>

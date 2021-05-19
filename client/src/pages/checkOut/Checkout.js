@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useStyles} from './stylesCheckout'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -12,14 +12,13 @@ import Typography from '@material-ui/core/Typography';
 import AddressForm from '../../components/checkOut/AddressForm';
 import Review from '../../components/checkOut/Review';
 import { Link, useHistory } from 'react-router-dom'
+import { useSelector, useDispatch } from "react-redux";
 
-const steps = ['Shipping address', 'Review your order'];
+const steps = ['Review your order'];
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <AddressForm />;
-    case 1:
       return <Review />;
     default:
       throw new Error('Unknown step');
@@ -29,6 +28,13 @@ function getStepContent(step) {
 export function Checkout() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+
+  const cart = useSelector(state => state.cart.cartItems)
+  const total = useSelector(state => state.cart.total)
+
+  useEffect(()=>{
+    console.log('cart', cart, 'total', total)
+  },[])
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
