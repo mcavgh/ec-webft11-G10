@@ -4,7 +4,7 @@ import app, { facebookAuthProvider, googleAuthProvider } from "../../firebase/in
 import { AuthContext } from "../AuthContext";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { postUser } from '../../store/user/user.action';
+import { postUser, getUsersByEmailId } from '../../store/user/user.action';
 import LogIn from './LogIn';
 
 const Login = () => {
@@ -25,24 +25,25 @@ const Login = () => {
     }
   }
 
-
-
+  
+  
   const handleFaceAuth = () => {
     app
-      .auth()
-      .signInWithPopup(googleAuthProvider)
-      .then(({ user }) => {
-        const{displayName,email}=user
-        dispatch(postUser(displayName,email))
-
-        history.push("/");
-
-      })
-      .catch((e) => {
+    .auth()
+    .signInWithPopup(googleAuthProvider)
+    .then(({ user }) => {
+      const{displayName,email}=user
+      //dispatch(postUser(displayName,email))
+      dispatch(getUsersByEmailId(email))
+      
+      history.push("/");
+      
+    })
+    .catch((e) => {
         alert(e);
       });
-  };
-
+    };
+    
   const { currentUser } = useContext(AuthContext);
 
   if (currentUser) {

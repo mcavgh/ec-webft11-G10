@@ -1,4 +1,4 @@
-GET http://localhost:3001/users/email/martinzaratustra@gmail.com
+POST http://localhost:3001/orders/cart/1
 
 
 # POST http://localhost:3001/users/

@@ -10,23 +10,38 @@ export const GET_PRODUCTS_OF_USER = "GET_PRODUCTS_OF_USER";
 export const DELETE_CART = "DELETE_CART"
 export const POST_ORDERS = "POST_ORDERS"
 
-export const postOrders = (data) => {
+export const findOrCreateOrders = (userId) => {
+  return (dispatch) => {
+    axios.post(`/orders/cart/${userId}`).then((res) => {//findOrCreate
+      dispatch(updateOrder(res.data.id))
+    })
+  }
+}
+export const updateOrder = (orderId) => {
   return (dispatch, getState) => {
-    console.log(data)
-    axios.post(`/orders/ols`, data).then((res) => {
-      dispatch({ type: POST_ORDERS, payload: res.data });
-      const cartItems = getState().cart.cartItems.slice();
+    const cartQuantity = getState().cart.cartQuantity;
+    const total = getState().cart.total;
+    const cartItems = getState().cart.cartItems.slice();
+    const newOrder = {
+      price: total,
+      quantity: cartQuantity
+    }
+    axios.put(`/orders/${orderId}/modifica`, newOrder).then((resp) => {//findOrCreate
+      console.log(resp.data)
       cartItems.forEach(product => {
-        dispatch(addProducttoOrder(res.data.id, product.id))
+        dispatch(addProducttoOrder(resp.data.id, product.id))
       });
       Swal.fire(
         'Muy bien!',
         'Completa los datos para terminar la compra',
         'success'
       )
-    }).catch(err => console.log(err))
-  };
-};
+    })
+      .catch(err => console.log(err))
+  }
+}
+
+
 
 export const addProducttoOrder = (orderId, productId) => {
   return (dispatch, getState) => {
@@ -49,7 +64,7 @@ export const getOrderById = (id) => {
     axios.get(`/orders/${id}`).then(order => {
       dispatch({ type: GET_ORDER_BY_ID, payload: order.data[0] })
     })
-    .catch(err=>console.log(err))
+      .catch(err => console.log(err))
   }
 }
 export const getOrderByUserId = (id) => {

@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 import { searchProductSuccess } from '../../store/product/product.actions';
 import { getQuantity } from '../../store/cart/cart.actions';
 import { AuthContext } from '../AuthContext';
+import { getUsersByEmailId } from '../../store/user/user.action';
 export default function PersistentDrawerLeft() {
     const history = useHistory()
     const cartQuantity = useSelector(state => state.cart.cartQuantity)
@@ -26,10 +27,16 @@ export default function PersistentDrawerLeft() {
     const [open, setOpen] = React.useState(false);
     const dispatch = useDispatch()
 
+    const { currentUser } = useContext(AuthContext)
+    
     useEffect(() => {
+        if(currentUser){
+            
+            dispatch(getUsersByEmailId(currentUser.email))
+            //dispatch(getProductInCart)
+        }
         dispatch(getQuantity())
     }, [])
-    const { currentUser } = useContext(AuthContext)
     const handleDrawerOpen = () => {
         setOpen(true);
     };

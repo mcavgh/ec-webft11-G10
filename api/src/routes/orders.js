@@ -2,6 +2,30 @@ const server = require("express").Router();
 const orders = require('../controllers/orders');
 const { Order, Product, User } = require("../db");
 
+
+server.post("/cart/:userId", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const [order, created] = await Order.findOrCreate({
+      raw: true,
+      where: { userId: userId, state: "carrito" },
+      defaults: {
+        state: 'carrito'
+      }
+    })
+  
+    if(created){
+      // dispatch(addProducttoOrder(.id, product.id))
+    }
+
+    res.json(order)
+
+  } catch (error) {
+    console.err(error)
+  }
+})
+
+
 server.post("/ols", (req, res) => {
   const { price, quantity, state, userId, address, paymentMethod } = req.body
   Order.create({
@@ -119,28 +143,28 @@ server.get('/user/:id', (req, res) => {
 
 
 server.put('/:id/modifica', (req, res) => {
-	//  console.log(req.params.id)
-	//  console.log(req.body)
-	const { id } = req.params;
+  //  console.log(req.params.id)
+  //  console.log(req.body)
+  const { id } = req.params;
   const { price, quantity, state, address } = req.body;
-	return Order.findOne({ where: { id: id }, include: { model: Product } })
-		.then((order) => {
-			order.state =state;
-			order.address = address;
-			order.quantity = quantity;
-			order.price =price;
-			order.save();
-			return res.status(200).json({
-				message: `La Orden se a modificado`,
-				data: order,
-			});
-		})
-		.catch((err) => {
-			return res.status(400).json({
-				message: 'Error en el proceso de la orden',
-				data: err,
-			});
-		});
+  return Order.findOne({ where: { id: id }, include: { model: Product } })
+    .then((order) => {
+      order.state = state;
+      order.address = address;
+      order.quantity = quantity;
+      order.price = price;
+      order.save();
+      return res.status(200).json({
+        message: `La Orden se a modificado`,
+        data: order,
+      });
+    })
+    .catch((err) => {
+      return res.status(400).json({
+        message: 'Error en el proceso de la orden',
+        data: err,
+      });
+    });
 });
 
 
