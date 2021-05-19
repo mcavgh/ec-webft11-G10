@@ -9,7 +9,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   root: {
-    position: 'fixed',
+    position: 'relative',
     display: 'contents',
   },
   gridList: {
