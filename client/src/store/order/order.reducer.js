@@ -5,28 +5,22 @@ var initialState = {
   ordersUser: "",
 };
 
-
-
 const orderReducer = (state = initialState, action) => {
   switch (action.type) {
-
     case POST_ORDERS:
       return {
         ...state,
         orders:[]
-    
       }
     case DELETE_CART:
       return {
         ...state,
         ordersUser: action.payload,
       };
-
     case GET_ALL_ORDERS:
       return {
         ...state,
         orders: action.payload,
-
       };
     case GET_PRODUCTS_OF_USER:
     case GET_ORDER_BY_ID:
