@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect} from 'react';
 import {useStyles} from './stylesCheckout'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -14,8 +14,6 @@ import Review from '../../components/checkOut/Review';
 import {useDispatch, useSelector} from "react-redux"
 import { Link, useHistory } from 'react-router-dom'
 import {orderToMp} from '../../store/order/order.action'
-import { AuthContext } from '../../components/AuthContext';
-import {getUsersByEmailId} from '../../store/user/user.action'
 
 const steps = ['Controla tu orden'];
 
@@ -34,11 +32,6 @@ export function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
   const cart = useSelector(state => state.cart.cartItems)
   const userId = useSelector(state => state.userReducer.userId.id)  
-  const { currentUser } = useContext(AuthContext)
-
-  useEffect(()=>{    
-    console.log(userId)
-  },[])
 
   return (
     <React.Fragment>
@@ -81,7 +74,7 @@ export function Checkout() {
                       Volver
                     </Button>
                   )}
-                  <Button onClick={dispatch(orderToMp(cart))} variant="contained" color="primary" className={classes.button}
+                  <Button onClick={()=>dispatch(orderToMp(cart,userId))} variant="contained" color="primary" className={classes.button}
                   >
                     {activeStep === steps.length - 1 ? 'Terminar Compra' : 'Next'}
                   </Button>
