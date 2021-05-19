@@ -48,7 +48,6 @@ export default function Orders() {
 
             (orders.map((row) => (
               <TableRow key={row.id}>
-                {console.log(row)}
                 <TableCell>{row.id}</TableCell>
                 <TableCell>{row.user.name} {row.user.surname} </TableCell>
                 <TableCell>{row.state}</TableCell>

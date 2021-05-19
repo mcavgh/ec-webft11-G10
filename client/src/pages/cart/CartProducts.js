@@ -1,37 +1,25 @@
 import React, { useEffect, useContext } from "react";
-import {
-  Card,
-  CardContent,
-  Typography,
-  Grid,
-  Button,
-  CardMedia,
+import { Card,  CardContent,  Typography,  Grid,  Button,  CardMedia
 } from "@material-ui/core/";
+import {Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import AppBar from "../../components/appBar/AppBar";
 import defaultImg from "../../components/Product/productCard/ProductCard";
-import {
-  addToCart,
-  removeFromCart,
-  getTotal,
-  restToCart,
-} from "../../store/cart/cart.actions";
-import { useStyles } from "./styleCart";
-import { postOrders } from "../../store/order/order.action";
-import { AuthContext } from "../../components/AuthContext";
-import { getUsersByEmail } from "../../store/user/user.action";
-import IconButton from "@material-ui/core/IconButton";
-import RemoveShoppingCartOutlinedIcon from "@material-ui/icons/RemoveShoppingCartOutlined";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import { Link, useHistory } from "react-router-dom";
-import Swal from "sweetalert2";
-
+import { addToCart, removeFromCart, getTotal, restToCart } from '../../store/cart/cart.actions';
+import { useStyles } from './styleCart';
+import { AuthContext } from '../../components/AuthContext';
+import { postOrderByEmail,getUsersByEmailId } from '../../store/user/user.action';
+import IconButton from '@material-ui/core/IconButton';
+import RemoveShoppingCartOutlinedIcon from '@material-ui/icons/RemoveShoppingCartOutlined';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import Swal from 'sweetalert2';
+import { findOrCreateOrders } from '../../store/order/order.action';
 export default function Cart() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cartItems);
   const total = useSelector((state) => state.cart.total);
-  const cartQuantity = useSelector((state) => state.cart.cartQuantity);
+  const userId = useSelector((state) => state.userReducer.userId.id);
 
   const { currentUser } = useContext(AuthContext);
 
@@ -40,16 +28,9 @@ export default function Cart() {
   }, [dispatch]);
 
   const handlerClick = () => {
-    try {
-      dispatch(getUsersByEmail(currentUser.email));
-    } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong!",
-      });
-    }
-  };
+    try {dispatch(findOrCreateOrders(userId))}
+    catch (error) {Swal.fire({ icon: 'error', title: 'Oops...', text:'Something went wrong!', })}
+  }
   return (
     <div className={classes.container}>
       <AppBar />
