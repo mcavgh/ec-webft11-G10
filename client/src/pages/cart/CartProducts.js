@@ -44,12 +44,7 @@ export default function Cart() {
           >
             <Grid xs={1} />
             <Grid xs={2} >
-              <CardMedia
-                component="img"
-                alt="Food"
-                image={product.img === "no tiene" ? defaultImg : product.img}
-                title="Contemplative Reptile"
-                className={classes.photo}
+              <CardMedia component="img" alt="Food" image={product.img === "no tiene" ? defaultImg : product.img} title="Contemplative Reptile" className={classes.photo}
               />
             </Grid>
             <Grid xs={4} className={classes.details}>
