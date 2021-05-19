@@ -24,9 +24,6 @@ export const postOrders = (data) => {
         'Completa los datos para terminar la compra',
         'success'
       )
-
-   
-
     }).catch(err => console.log(err))
   };
 };
@@ -43,7 +40,6 @@ export const getAllOrders = () => {
     axios.get(`/orders/`).then((res) => {
       console.log(res)
       return dispatch({ type: GET_ALL_ORDERS, payload: res.data });
-
     });
   };
 };
@@ -64,7 +60,6 @@ export const getOrderByUserId = (id) => {
   }
 }
 
-
 export const putOrderById = (id, data) => {
   return function (dispatch) {
     axios.put(`/orders/${id}/modifica`, data)
@@ -82,7 +77,6 @@ export const putOrderById = (id, data) => {
       }).catch((err) => console.log(err))
   };
 };
-
 
 export const cleanCart = (id) => {
   return function (dispatch) {

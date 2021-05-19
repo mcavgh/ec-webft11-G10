@@ -1,5 +1,6 @@
-import React, { useEffect,useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Card, CardContent, Typography, Grid, Button, CardMedia } from '@material-ui/core/';
+import Swal from 'sweetalert2'
 import { useSelector, useDispatch } from "react-redux";
 import AppBar from "../../components/appBar/AppBar"
 import defaultImg from "../../components/Product/productCard/ProductCard"
@@ -15,7 +16,7 @@ import { Link, useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2' 
 
 export default function Cart() {
-  
+
   const classes = useStyles();
   const dispatch = useDispatch()
   const cart = useSelector(state => state.cart.cartItems)
@@ -29,15 +30,13 @@ export default function Cart() {
   }, [dispatch])
 
   const handlerClick = () => {
-    try {
-      
-      dispatch(getUsersByEmail(currentUser.email))
-    } catch (error) {
-      Swal("Debe estar logueado")
-    }
-   
-  }
 
+    try {
+      dispatch(getUsersByEmail(currentUser.email))
+        }  catch (error) {
+      Swal.fire({icon: 'error', title: 'Oops...', text: 'Something went wrong!',})
+    }
+  }
   return (
     <div className={classes.container}>
       <AppBar />
@@ -48,12 +47,7 @@ export default function Cart() {
           >
             <Grid xs={1} />
             <Grid xs={2} >
-              <CardMedia
-                component="img"
-                alt="Food"
-                image={product.img === "no tiene" ? defaultImg : product.img}
-                title="Contemplative Reptile"
-                className={classes.photo}
+              <CardMedia component="img" alt="Food" image={product.img === "no tiene" ? defaultImg : product.img} title="Contemplative Reptile" className={classes.photo}
               />
             </Grid>
             <Grid xs={4} className={classes.details}>

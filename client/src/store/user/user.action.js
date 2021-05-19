@@ -10,9 +10,6 @@ export const DELETE_USER = "DELETE_USER";
 export const SELECT_USER = "SELECT_USER";
 export const CREATE_USER = "CREATE_USER";
 
-
-
-
 export const postUser = (displayName, email) => {
     return (dispatch, getState) => {
         console.log("entra")
@@ -20,9 +17,7 @@ export const postUser = (displayName, email) => {
         axios.post(`/users/register`, { name: nameArray[0], surname: nameArray[1], email, password: "1234" }).then((res) => {
             console.log(res)
             dispatch({ type: POST_USER, payload: res });
-
         })
-
     }
 }
 export const getUsersByEmail = (email) => {

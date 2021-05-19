@@ -2,7 +2,6 @@ const server = require('express').Router();
 const category = require('../controllers/category');
 const { searchProductsByCategoryName } = require('../controllers/product');
 
-
 // TRAE TODAS LAS CATEGORIAS |
 //----------------------------
 server.get('/get', (req, res, next) => {
