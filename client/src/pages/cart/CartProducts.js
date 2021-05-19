@@ -1,12 +1,7 @@
 import React, { useEffect, useContext } from "react";
-import {
-  Card,
-  CardContent,
-  Typography,
-  Grid,
-  Button,
-  CardMedia,
+import { Card,  CardContent,  Typography,  Grid,  Button,  CardMedia
 } from "@material-ui/core/";
+import {Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import AppBar from "../../components/appBar/AppBar";
 import defaultImg from "../../components/Product/productCard/ProductCard";
@@ -24,7 +19,7 @@ export default function Cart() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cartItems);
   const total = useSelector((state) => state.cart.total);
-  const cartQuantity = useSelector((state) => state.cart.cartQuantity);
+  const userId = useSelector((state) => state.userReducer.userId.id);
 
   const { currentUser } = useContext(AuthContext);
 
@@ -33,7 +28,7 @@ export default function Cart() {
   }, [dispatch]);
 
   const handlerClick = () => {
-    try {dispatch(findOrCreateOrders(1),dispatch(getUsersByEmailId(currentUser.email)))}
+    try {dispatch(findOrCreateOrders(userId))}
     catch (error) {Swal.fire({ icon: 'error', title: 'Oops...', text:'Something went wrong!', })}
   }
   return (

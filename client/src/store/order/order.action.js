@@ -53,7 +53,6 @@ export const addProducttoOrder = (orderId, productId) => {
 export const getAllOrders = () => {
   return (dispatch) => {
     axios.get(`/orders/`).then((res) => {
-      console.log(res)
       return dispatch({ type: GET_ALL_ORDERS, payload: res.data });
     });
   };
