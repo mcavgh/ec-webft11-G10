@@ -56,7 +56,7 @@ export default function Orders() {
                 <TableCell></TableCell>
                 <TableCell>{row.quantity}</TableCell>
                 <TableCell align="right">{row.price}</TableCell>
-                <Button variant="contained" color="primary" to={`/ViewOrder/${row.userId}`} component={Link}>
+                <Button variant="contained" color="primary" to={`/ViewOrder/${row.id}`} component={Link}>
                   Link
               </Button>
               </TableRow>
