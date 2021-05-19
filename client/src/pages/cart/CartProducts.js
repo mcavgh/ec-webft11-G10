@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Card, CardContent, Typography, Grid, Button, CardMedia } from '@material-ui/core/';
 import AppBar from "../../components/appBar/AppBar";
 import defaultImg from "../../components/Product/productCard/ProductCard";

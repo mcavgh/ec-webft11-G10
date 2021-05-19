@@ -89,31 +89,58 @@ server.get('/user/:id', (req, res) => {
 
 // MODIFICA UNA ORDEN POR ID |
 //----------------------------
-server.put("/:id/modifica", (req, res) => {
+// server.put("/:id/modifica", (req, res) => {
 
-  const { id } = req.params;
+//   const { id } = req.params;
+//   const { price, quantity, state, address } = req.body;
+
+//   Order.update(
+//     {
+//       price: price,
+//       quantity: quantity,
+//       state: state,
+//       address: address
+//     },
+//     {
+//       where: { id: id },
+//     }
+//   )
+//     .then((update) =>
+//       res.send(
+//         update[0] ? update[0] : "la orden no existe"
+//       )
+//     )
+//     .catch((err) => console.log(err)
+
+
+//     );
+// });
+
+
+server.put('/:id/modifica', (req, res) => {
+	//  console.log(req.params.id)
+	//  console.log(req.body)
+	const { id } = req.params;
   const { price, quantity, state, address } = req.body;
-
-  Order.update(
-    {
-      price: price,
-      quantity: quantity,
-      state: state,
-      address: address
-    },
-    {
-      where: { id: id },
-    }
-  )
-    .then((update) =>
-      res.send(
-        update[0] ? update[0] : "la orden no existe"
-      )
-    )
-    .catch((err) => console.log(err)
-
-
-    );
+	return Order.findOne({ where: { id: id }, include: { model: Product } })
+		.then((order) => {
+			order.state =state;
+			order.address = address;
+			order.quantity = quantity;
+			order.price =price;
+			order.save();
+			return res.status(200).json({
+				message: `La Orden se a modificado`,
+				data: order,
+			});
+		})
+		.catch((err) => {
+			return res.status(400).json({
+				message: 'Error en el proceso de la orden',
+				data: err,
+			});
+		});
 });
+
 
 module.exports = server;
