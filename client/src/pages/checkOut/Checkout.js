@@ -12,7 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import AddressForm from '../../components/checkOut/AddressForm';
 import Review from '../../components/checkOut/Review';
 import { Link, useHistory } from 'react-router-dom'
-import { useSelector, useDispatch } from "react-redux";
 
 const steps = ['Review your order'];
 
@@ -28,13 +27,6 @@ function getStepContent(step) {
 export function Checkout() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-
-  const cart = useSelector(state => state.cart.cartItems)
-  const total = useSelector(state => state.cart.total)
-
-  useEffect(()=>{
-    console.log('cart', cart, 'total', total)
-  },[])
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
