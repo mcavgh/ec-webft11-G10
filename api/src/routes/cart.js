@@ -4,10 +4,10 @@ const { Order, Product, User } = require("../db");
 
 // ASOCIAR  PRODUCTOS A ORDENES |
 //--------------------------------
-server.post("/:idProducto/order/:idOrder", async (req, res) => {
-  let { idProducto, idOrder } = req.params;
-
-  return addProducttoOrder(idProducto, idOrder).then((data) => {
+server.post("/:idProducto/order/:idOrder/quantity/:quantity", async (req, res) => {
+  let { idProducto, idOrder, quantity } = req.params;
+  quantity = parseInt(quantity)
+  return addProducttoOrder(idProducto, idOrder, quantity).then((data) => {
     return res.status(201).send("Producto added!");
   }).catch(error => {
     return res.status(400).send({ data: error });
@@ -49,25 +49,25 @@ server.get('/:id', (req, res, next) => {
 
 
 server.delete('/:id/cart/', (req, res) => {
-	// console.log(req.params.id);
-	const { id } = req.params;
+  // console.log(req.params.id);
+  const { id } = req.params;
 
-	Order.findOne({ where: { id } })
-		.then((order) => {
-			// console.log('THEN DEL DELETE ORDER');
-			order.destroy();
-			return res.status(200).json({
-				message: 'Orden eliminada!!',
-				data: order,
-			});
-		})
-		.catch((err) => {
-			console.log(err);
-			return res.status(400).json({
-				message: 'Error al eliminar Orden',
-				data: err,
-			});
-		});
+  Order.findOne({ where: { id } })
+    .then((order) => {
+      // console.log('THEN DEL DELETE ORDER');
+      order.destroy();
+      return res.status(200).json({
+        message: 'Orden eliminada!!',
+        data: order,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({
+        message: 'Error al eliminar Orden',
+        data: err,
+      });
+    });
 });
 // VER ITEMS DEL USUARIO |
 //------------------------

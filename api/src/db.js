@@ -1,7 +1,8 @@
 require('dotenv').config();
-const { Sequelize } = require('sequelize');
+const { Sequelize,DataTypes } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
+
 
 const { DB_USER, DB_PASSWORD, DB_HOST,DB_NAME } = process.env;
 let sequelize =
@@ -69,7 +70,6 @@ const {
   Product,
   Category,
   User,
-  //Cart,
   Order,
   Review,
 } = sequelize.models;
@@ -94,9 +94,15 @@ User.hasMany(Review);
 Review.belongsTo(User);
 
 // PRODUCTS ORDERS
+const Order_line= sequelize.define('order_line', {
+  quantity: {
+    type: DataTypes.INTEGER,
+    defaultValue:1,
 
-Product.belongsToMany(Order, { through: "Order_line"});
-Order.belongsToMany(Product, { through: "Order_line" });
+  },
+});
+Product.belongsToMany(Order, { through: Order_line});
+Order.belongsToMany(Product, { through: Order_line });
 
 // Order.hasMany(Product, { foreignKey: "productId" });
 // Product.belongsTo(Order);

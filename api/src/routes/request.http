@@ -1,4 +1,4 @@
-POST http://localhost:3001/orders/cart/1
+POST http://localhost:3001/cart/5/order/1/quantity/8
 
 
 # POST http://localhost:3001/users/

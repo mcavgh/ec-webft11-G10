@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Field } from 'react-final-form';
 import { TextField } from 'final-form-material-ui';
 import { Paper, Grid, Button, CssBaseline } from '@material-ui/core';
+import GoogleButton from 'react-google-button'
 
 const onSubmit = async values => {
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -86,14 +87,14 @@ function LogIn({ faceAuth,auth }) {
                                     >
                                         LogIn
                                     </Button> */}
-                            <Button
+                            <GoogleButton
                             item
                             xs={12}
                             
                             variant="contained"
                             color="secondary"
                                 onClick={handleClickFaceAuth}
-                            >Log in</Button>
+                            >Log in</GoogleButton>
                                 </Grid>
                                 
                             </Grid>
