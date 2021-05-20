@@ -24,7 +24,6 @@ export const getTotal = () => {
   return function (dispatch, getState) {
     const cartItems = getState().cart.cartItems.slice();
     if (cartItems) {
-      console.log(cartItems)
       let total = 0
       cartItems.forEach(prod => {
         let price = parseInt(prod.price)

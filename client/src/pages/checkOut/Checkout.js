@@ -31,8 +31,8 @@ export function Checkout() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const cart = useSelector(state => state.cart.cartItems)
-  const userId = useSelector(state => state.userReducer.userId.id)  
-
+  const userId = useSelector(state => state.userReducer.userId.id)
+  
   return (
     <React.Fragment>
       <CssBaseline />

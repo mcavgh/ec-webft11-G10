@@ -31,7 +31,6 @@ export default function PersistentDrawerLeft() {
     
     useEffect(() => {
         if(currentUser){
-            
             dispatch(getUsersByEmailId(currentUser.email))
             //dispatch(getProductInCart)
         }
