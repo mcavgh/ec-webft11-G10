@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { postUser, getUsersByEmailId } from '../../store/user/user.action';
 import LogIn from './LogIn';
+import axios from "axios";
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -25,25 +26,30 @@ const Login = () => {
     }
   }
 
-  
-  
+
+
   const handleFaceAuth = () => {
     app
-    .auth()
-    .signInWithPopup(googleAuthProvider)
-    .then(({ user }) => {
-      const{displayName,email}=user
-      //dispatch(postUser(displayName,email))
-      dispatch(getUsersByEmailId(email))
-      
-      history.push("/");
-      
-    })
-    .catch((e) => {
+      .auth()
+      .signInWithPopup(googleAuthProvider)
+      .then(({ user }) => {
+        const { displayName, email } = user
+        axios.get(`/users/email/${email}`).then((user) => {
+          if (user.data === "el usuario no existe") {
+            dispatch(postUser(displayName, email))
+          } else {
+            dispatch({ type: "GET_ID_BYEMAIL", payload: user.data });
+
+          }
+        })
+        history.push("/");
+
+      })
+      .catch((e) => {
         alert(e);
       });
-    };
-    
+  };
+
   const { currentUser } = useContext(AuthContext);
 
   if (currentUser) {

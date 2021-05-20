@@ -15,16 +15,17 @@ export const postUser = (displayName, email) => {
         console.log("entra")
         const nameArray = displayName.split(" ")
         axios.post(`/users/register`, { name: nameArray[0], surname: nameArray[1], email, password: "1234" }).then((res) => {
-            console.log(res)
-            dispatch({ type: POST_USER, payload: res });
+          
+            dispatch({ type: GET_ID_BYEMAIL, payload: res.data });
         })
     }
 }
 
 export const getUsersByEmailId = (email) => {
     return function (dispatch) {
-        axios.get(`/users/email/${email}`).then((userId) => {
-            dispatch({ type: GET_ID_BYEMAIL, payload: userId.data });            
+        axios.get(`/users/email/${email}`).then((user) => {
+         
+            dispatch({ type: GET_ID_BYEMAIL, payload: user.data });            
         });
     };
 };
