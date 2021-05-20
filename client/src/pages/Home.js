@@ -3,6 +3,7 @@ import AppBar from '../components/appBar/AppBar'
 import Catalog from '../components/Product/catalog/Catalog';
 import CategoryCatalog from '../components/category/CatalogCategory'
 import Banner from '../components/banner/BannerImage';
+import Footer from '../components/footer/Footer';
 
 
 export const Home = (props) => {
@@ -13,6 +14,9 @@ export const Home = (props) => {
             <div>
                 <CategoryCatalog />
                 <Catalog />
+            </div>
+            <div>
+                <Footer/>
             </div>
         </div>
     )
