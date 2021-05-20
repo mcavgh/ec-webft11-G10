@@ -26,11 +26,14 @@ export const updateOrder = (orderId) => {
       price: total,
       quantity: cartQuantity
     }
-    axios.put(`/orders/${orderId}/modifica`, newOrder).then((resp) => {//findOrCreate
-      console.log(resp.data)
-      cartItems.forEach(product => {
-        dispatch(addProducttoOrder(resp.data.id, product.id))
+    axios.put(`/orders/${orderId}/modifica`, newOrder).then(async (resp) => {//findOrCreate
+      console.log(resp.data.data.id)
+      await cartItems.forEach(product => {
+        axios.post(`/cart/${product.id}/order/${resp.data.data.id}/quantity/${product.count}`).then(res => {
+          console.log(res)
+        })
       });
+    }).then(resp => {
       Swal.fire(
         'Muy bien!',
         'Completa los datos para terminar la compra',

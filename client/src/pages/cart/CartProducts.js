@@ -8,7 +8,6 @@ import defaultImg from "../../components/Product/productCard/ProductCard";
 import { addToCart, removeFromCart, getTotal, restToCart } from '../../store/cart/cart.actions';
 import { useStyles } from './styleCart';
 import { AuthContext } from '../../components/AuthContext';
-import { postOrderByEmail,getUsersByEmailId } from '../../store/user/user.action';
 import IconButton from '@material-ui/core/IconButton';
 import RemoveShoppingCartOutlinedIcon from '@material-ui/icons/RemoveShoppingCartOutlined';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
