@@ -27,10 +27,8 @@ export const updateOrder = (orderId) => {
       quantity: cartQuantity
     }
     axios.put(`/orders/${orderId}/modifica`, newOrder).then(async (resp) => {//findOrCreate
-      console.log(resp.data.data.id)
       await cartItems.forEach(product => {
         axios.post(`/cart/${product.id}/order/${resp.data.data.id}/quantity/${product.count}`).then(res => {
-          console.log(res)
         })
       });
     }).then(resp => {
@@ -112,7 +110,8 @@ export const cleanCart = (id) => {
 
 export const orderToMp = (products, id) => {
   return function (dispatch) {
-    axios.post(`mercadopago/${id}`, products).then((res) => {
+    return axios.post(`mercadopago/${id}`, {products}).then((res) => {
+      console.log(res.data.init_point)
     }).catch(err => { console.log(err) })
   }
 }

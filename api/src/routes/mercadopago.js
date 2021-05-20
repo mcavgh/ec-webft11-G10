@@ -8,7 +8,7 @@ server.post('/:userId', (req, res) => {
     const itemsToMP = products.map(item => {
         return {
             title: item.name,
-            unit_price: Number(item.price - (item.price * (item.discount / 100))),
+            unit_price: Number(item.price),
             quantity: Number(item.count)
         };
     });

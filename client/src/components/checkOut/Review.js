@@ -11,10 +11,6 @@ export default function Review() {
   const cart = useSelector(state => state.cart.cartItems)
   const total = useSelector(state => state.cart.total)
 
-  useEffect(()=>{
-    console.log('cart', cart, 'total', total)
-  },[])
-
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
