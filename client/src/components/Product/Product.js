@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
@@ -9,24 +9,45 @@ import {
   Box,
   Paper,
 } from "@material-ui/core/";
+import Rating from "@material-ui/lab/Rating";
 import { useStyles } from "./styles";
 import AppBar from "../appBar/AppBar";
 import defaultImg from "./default.png";
 import { getOneProduct } from "../../store/product/product.actions";
 import { addToCart } from "../../store/cart/cart.actions";
+import { getUsersByEmailId } from "../../store/user/user.action";
+import { getProductReviews } from "../../store/review/review.actions";
 import Review from "../review/Review";
+import { AuthContext } from "../AuthContext";
 
 export default function Product() {
+  const [ratingAvg, setRatingAvg] = useState(0);
   const classes = useStyles();
   const dispatch = useDispatch();
   const { id } = useParams();
   const product = useSelector((state) => state.productReducer?.oneProduct);
-
+  const { currentUser } = useContext(AuthContext);
   useEffect(() => {
-    dispatch(getOneProduct(id));
+    dispatch(getUsersByEmailId(currentUser.email));
+    dispatch(getProductReviews(id));
   }, [dispatch]);
-  const oneProduct = useSelector((state) => state.productReducer.oneProduct);
-  const { img, name, description, price, stock } = oneProduct;
+  const loggedUser = useSelector((state) => state.userReducer.userId);
+  const productReviews = useSelector(
+    (state) => state.reviewReducer.productReviews
+  );
+  const { img, name, description, price, stock } = productReviews;
+  useEffect(() => {
+    if (productReviews.reviews !== undefined) {
+      const ratingArray = [];
+      productReviews.reviews.forEach((review) => {
+        ratingArray.push(parseInt(review.rating));
+      });
+      let sum = ratingArray.reduce(
+        (previous, current) => (current += previous)
+      );
+      setRatingAvg(sum / ratingArray.length);
+    }
+  }, [dispatch]);
 
   return (
     <>
@@ -49,8 +70,24 @@ export default function Product() {
                   <Typography variant="h4">{name}</Typography>
                   <Divider />
                   <Typography variant="subtitle1">{description}</Typography>
-                  <Typography variant="h5">${price}</Typography>
-                  <Typography variant="h6">{stock}</Typography>
+                  <Typography variant="h5">Price: ${price}</Typography>
+                  <Typography variant="h6">Stock: {stock}</Typography>
+                  <Typography variant="h6">
+                    Rating:{" "}
+                    <Rating name="read-only" value={ratingAvg} readOnly />
+                    <p
+                      style={{
+                        textAlign: "left",
+                        color: "gray",
+                        fontSize: "16px",
+                      }}
+                    >
+                      Puntuación basada en{" "}
+                      {productReviews.reviews !== undefined &&
+                        productReviews.reviews.length}{" "}
+                      opninion/es
+                    </p>
+                  </Typography>
                 </Box>
                 <Button
                   variant="contained"
@@ -66,7 +103,11 @@ export default function Product() {
         </Paper>
       )}
       <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
-      <Review />
+      <Review
+        productId={id}
+        loggedUser={loggedUser}
+        productReviews={productReviews}
+      />
     </>
   );
 }

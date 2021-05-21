@@ -2,7 +2,6 @@ const { Cart, Product, Image, Review, User, Order } = require("../db.js");
 
 const addReview = (req, res, next) => {
   Review.create({
-    title: req.body.title,
     reviewText: req.body.reviewText,
     rating: req.body.rating,
     productId: req.body.productId,
