@@ -9,6 +9,8 @@ export const AMOUNT_DEPOSITS = "AMOUNT_DEPOSITS";
 export const GET_PRODUCTS_OF_USER = "GET_PRODUCTS_OF_USER";
 export const DELETE_CART = "DELETE_CART"
 export const POST_ORDERS = "POST_ORDERS"
+export const GET_FILTER_ORDERS = "GET_FILTER_ORDERS"
+
 
 export const findOrCreateOrders = (userId) => {
   return (dispatch) => {
@@ -55,6 +57,16 @@ export const getAllOrders = () => {
   return (dispatch) => {
     axios.get(`/orders/`).then((res) => {
       return dispatch({ type: GET_ALL_ORDERS, payload: res.data });
+    });
+  };
+};
+
+export const FilterOrders = (estado) => {
+  return (dispatch) => {
+    axios.get(`/orders/`).then((res) => {
+       dispatch({ type: GET_FILTER_ORDERS, payload: estado ? res.data.filter(e=>e.state===`${estado}`) : res.data });
+      //  console.log("======================>",res.data.filter(e=>e.state===`${estado}`))
+       
     });
   };
 };
