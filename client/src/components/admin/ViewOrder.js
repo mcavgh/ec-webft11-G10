@@ -91,11 +91,11 @@ export default function ViewOrder() {
         <div className={[s.info, s.topShadow].join(" ")}>
           <p>
             <span>Email: </span>
-            {user && user.email}
+            {orderUserId.user &&orderUserId.user.email}
           </p>
           <p>
             <span>Rol: </span>
-            {user && user.access}
+            {orderUserId.user &&orderUserId.user.access}
           </p>
         </div>
         <div className={[s.info, s.botShadow].join(" ")}>

@@ -33,7 +33,7 @@ export default function Deposits({amounts}) {
   const deposits= amount2.length>0&&amount.reduce( (ac,e)=>ac+e.price,0)
 
 
-  const event = new Date();
+  const event = new Date().toLocaleDateString();
   const date = event.toString()
 
   const classes = useStyles();
@@ -45,7 +45,8 @@ export default function Deposits({amounts}) {
       ${deposits}
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext} >
-        {date}
+        <br/>
+        `Fecha: {date}`
       </Typography>
     </React.Fragment>
   );
