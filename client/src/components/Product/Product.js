@@ -13,7 +13,6 @@ import Rating from "@material-ui/lab/Rating";
 import { useStyles } from "./styles";
 import AppBar from "../appBar/AppBar";
 import defaultImg from "./default.png";
-import { getOneProduct } from "../../store/product/product.actions";
 import { addToCart } from "../../store/cart/cart.actions";
 import { getUsersByEmailId } from "../../store/user/user.action";
 import { getProductReviews } from "../../store/review/review.actions";
@@ -21,33 +20,44 @@ import Review from "../review/Review";
 import { AuthContext } from "../AuthContext";
 
 export default function Product() {
-  const [ratingAvg, setRatingAvg] = useState(0);
+  const [ratingAvg, setRatingAvg] = useState(null);
   const classes = useStyles();
   const dispatch = useDispatch();
   const { id } = useParams();
   const product = useSelector((state) => state.productReducer?.oneProduct);
   const { currentUser } = useContext(AuthContext);
+
   useEffect(() => {
-    dispatch(getUsersByEmailId(currentUser.email));
+    if (currentUser) dispatch(getUsersByEmailId(currentUser.email));
     dispatch(getProductReviews(id));
   }, [dispatch]);
+
   const loggedUser = useSelector((state) => state.userReducer.userId);
   const productReviews = useSelector(
     (state) => state.reviewReducer.productReviews
   );
   const { img, name, description, price, stock } = productReviews;
+
+  const dispatchUpdater = () => {
+    dispatch(getProductReviews(id));
+  };
+
   useEffect(() => {
     if (productReviews.reviews !== undefined) {
       const ratingArray = [];
       productReviews.reviews.forEach((review) => {
         ratingArray.push(parseInt(review.rating));
       });
-      let sum = ratingArray.reduce(
-        (previous, current) => (current += previous)
-      );
-      setRatingAvg(sum / ratingArray.length);
+      if (ratingArray.length > 0) {
+        let sum = ratingArray.reduce(
+          (previous, current) => (current += previous)
+        );
+        setRatingAvg(sum / ratingArray.length);
+      } else {
+        setRatingAvg(0);
+      }
     }
-  }, [dispatch]);
+  }, [productReviews.reviews]);
 
   return (
     <>
@@ -107,6 +117,8 @@ export default function Product() {
         productId={id}
         loggedUser={loggedUser}
         productReviews={productReviews}
+        dispatchUpdater={dispatchUpdater}
+        currentUser={currentUser}
       />
     </>
   );
