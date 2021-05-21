@@ -1,10 +1,15 @@
-import { GET_QUANTITY, GET_TOTAL, ADD_TO_CART, REMOVE_FROM_CART } from "./cart.actions";
+import { GET_PRODUCTS_IN_CART,GET_QUANTITY, GET_TOTAL, ADD_TO_CART, REMOVE_FROM_CART } from "./cart.actions";
 
 export const cartReducer = (
   state = { cartItems: JSON.parse(localStorage.getItem("cartItems") || "[]") },
   action
 ) => {
   switch (action.type) {
+    case GET_PRODUCTS_IN_CART:
+      return {
+        ...state,
+        cartItems: action.payload
+      };
     case GET_QUANTITY:
       return {
         ...state,

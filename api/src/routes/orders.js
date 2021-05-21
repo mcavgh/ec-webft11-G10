@@ -43,15 +43,20 @@ server.post("/ols", (req, res) => {
 server.get("/userid/:id", (req, res) => {
   //Muestra todos los items del carrito
   const { id } = req.params;
-  console.log("iufhgsdhf", id)
-  Order.findAll({
+  Product.findAll({
+    raw:true,
     include: {
-      model: Product,
+      model: Order,
+      where: { userId: parseInt(id),state:"carrito" },
     },
-    where: { userId: parseInt(id) },
-  }) //busca todos los items
+  }) 
     .then((items) => {
-      res.send(items);
+      let newItemsArray=[]
+      items.forEach(item => {
+        const{id,name,description,price,stock,img,createdAt}=item
+        newItemsArray.push({id,name,description,price,stock,img,createdAt,count:item["orders.order_line.quantity"]})
+      });
+      res.send(newItemsArray);
     })
     .catch((err) => res.send(err));
 });
