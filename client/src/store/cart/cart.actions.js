@@ -1,7 +1,26 @@
+import axios from "axios"
+
 export const ADD_TO_CART = "ADD_TO_CART"
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART"
 export const GET_TOTAL = "GET_TOTAL"
 export const GET_QUANTITY = "GET_QUANTITY"
+export const GET_PRODUCTS_IN_CART = "GET_PRODUCTS_IN_CART"
+
+export const getProductsInCart = (userId) => (dispatch, getState) => {
+  if (!userId) return
+  return axios.get(`/orders/userid/${userId}`).then(orders => {
+
+    dispatch({
+      type: GET_PRODUCTS_IN_CART,
+      payload: orders.data
+    })
+    localStorage.setItem("cartItems",JSON.stringify(orders.data))
+    dispatch(getQuantity())
+  })
+
+
+    .catch(err => console.log(err))
+}
 
 export const getQuantity = () => {
   return function (dispatch, getState) {
