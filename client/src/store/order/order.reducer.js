@@ -1,8 +1,9 @@
-import { POST_ORDERS, DELETE_CART, GET_ALL_ORDERS, GET_PRODUCTS_OF_USER, GET_ORDER_BY_ID, PUT_ORDER_BY_ID, GET_ORDER_BY_USER_ID } from './order.action';
+import { GET_FILTER_ORDERS, POST_ORDERS, DELETE_CART, GET_ALL_ORDERS, GET_PRODUCTS_OF_USER, GET_ORDER_BY_ID, PUT_ORDER_BY_ID, GET_ORDER_BY_USER_ID } from './order.action';
 
 var initialState = {
   orders: [],
   ordersUser: "",
+  filterorders:[]
 };
 
 const orderReducer = (state = initialState, action) => {
@@ -17,7 +18,13 @@ const orderReducer = (state = initialState, action) => {
         ...state,
         ordersUser: action.payload,
       };
+    // case GET_FILTER_ORDERS:
+    //   return {
+    //     ...state,
+    //     filterorders: action.payload,
+    //   };
     case GET_ALL_ORDERS:
+    case GET_FILTER_ORDERS:
       return {
         ...state,
         orders: action.payload,

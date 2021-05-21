@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import s from "./ViewOrder.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { getUsersById } from "../../store/user/user.action";
 import {
     cleanCart,
-    getOrderByUserId,
     putOrderById,
     getOrderById
 } from '../../store/order/order.action';
-import Swal from "sweetalert2";
+
 
 export default function ViewOrder() {
   const history=useHistory()
@@ -26,7 +24,6 @@ export default function ViewOrder() {
 
   useEffect(() => {
     dispatch(getOrderById(id))
-    //dispatch(getUsersById(orderUserId.user.id))
   }, [])
   
 
@@ -65,13 +62,7 @@ export default function ViewOrder() {
 
   const onClean = function () {
     dispatch(cleanCart(id));
-    // Swal.fire({
-    //   position: 'top-end',
-    //   icon: 'success',
-    //   title: 'la orden se a actualizado!',
-    //   showConfirmButton: false,
-    //   timer: 1500
-    // })
+
   };
 
   if (!orderUserId) {

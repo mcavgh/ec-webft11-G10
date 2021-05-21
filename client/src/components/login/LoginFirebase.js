@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { postUser, getUsersByEmailId } from "../../store/user/user.action";
 import LogIn from "./LogIn";
 import axios from "axios";
+import { getProductsInCart } from '../../store/cart/cart.actions';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ const Login = () => {
             dispatch(postUser(displayName, email, photoURL));
           } else {
             dispatch({ type: "GET_ID_BYEMAIL", payload: user.data });
+            dispatch(getProductsInCart(user.data.id))
           }
         });
         history.push("/");

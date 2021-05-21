@@ -8,6 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import BarChart from './Chart';
+import FilterOrder from './FilterOrder';
 
 
 
@@ -121,6 +122,7 @@ export default function Dashboard() {
             {/* Recent Orders */}
             <Grid item xs={12}>
               <Paper >
+                <FilterOrder/>
                 <Orders className={classes.paper} />
               </Paper>
             </Grid>

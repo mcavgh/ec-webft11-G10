@@ -1,7 +1,41 @@
+import axios from "axios"
+
 export const ADD_TO_CART = "ADD_TO_CART"
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART"
 export const GET_TOTAL = "GET_TOTAL"
 export const GET_QUANTITY = "GET_QUANTITY"
+export const GET_PRODUCTS_IN_CART = "GET_PRODUCTS_IN_CART"
+
+export const getProductsInCart = (userId) => (dispatch, getState) => {
+  if (!userId) return
+  let cartItems = JSON.parse(localStorage.getItem("cartItems"))
+
+  if (cartItems?.length > 0) {//si hay items en local storage
+
+    return axios.post(`/orders/cart/${userId}`).then(order => {
+
+      cartItems.forEach(element => {
+        axios.post(`/${element.id}/order/${order.id}/quantity/${element.count}`).then(prod => {
+        })
+      });
+    })
+
+  } else {
+    //si no hay items me traigo los item de la db
+    return axios.get(`/orders/userid/${userId}`).then(orders => {
+
+      dispatch({
+        type: GET_PRODUCTS_IN_CART,
+        payload: orders.data
+      })
+      localStorage.setItem("cartItems", JSON.stringify(orders.data))
+      dispatch(getQuantity())
+    })
+      .catch(err => console.log(err))
+  }
+
+
+}
 
 export const getQuantity = () => {
   return function (dispatch, getState) {

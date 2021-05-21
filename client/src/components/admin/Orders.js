@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import Title from './Title';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from "react-redux";
-import { getAllOrders } from "../../store/order/order.action";
+import { useSelector } from "react-redux";
 import Button from '@material-ui/core/Button';
 
 
@@ -18,13 +17,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Orders() {
   const classes = useStyles();
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-
-    dispatch(getAllOrders())
-
-  }, [dispatch])
 
   const orders = useSelector((state) => state.orderReducer?.orders);
 
