@@ -4,7 +4,12 @@ import { TextField, Button, Grid, Paper } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import { createProductReviews } from "../../store/review/review.actions";
 
-const ReviewForm = ({ productId, loggedUserId }) => {
+const ReviewForm = ({
+  productId,
+  loggedUserId,
+  updateReviewList,
+  dispatchUpdater,
+}) => {
   const [postReview, setPostReview] = useState({
     reviewText: "",
     rating: 0,
@@ -13,10 +18,13 @@ const ReviewForm = ({ productId, loggedUserId }) => {
   });
   const dispatch = useDispatch();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     dispatch(createProductReviews(postReview));
+    setPostReview({ ...postReview, rating: 0 });
     event.target.reset();
+    await dispatchUpdater();
+    await updateReviewList();
   };
 
   return (
