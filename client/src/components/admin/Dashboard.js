@@ -123,8 +123,6 @@ export default function Dashboard() {
             <Grid item xs={12}>
               <Paper >
                 <FilterOrder/>
-              </Paper>
-              <Paper >
                 <Orders className={classes.paper} />
               </Paper>
             </Grid>
