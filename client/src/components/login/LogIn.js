@@ -1,100 +1,156 @@
-import React from 'react';
-import { Form, Field } from 'react-final-form';
-import { TextField } from 'final-form-material-ui';
-import { Paper, Grid, Button, CssBaseline } from '@material-ui/core';
+import React,{useState} from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import {Link} from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 import GoogleButton from 'react-google-button'
 
-const onSubmit = async values => {
-    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-    await sleep(300);
-    window.alert(JSON.stringify(values, 0, 2));
-};
-
-const validate = values => {
-    const errors = {};
-    if (!values.firstName) {
-        errors.firstName = 'Required';
-    }
-    if (!values.lastName) {
-        errors.lastName = 'Required';
-    }
-    if (!values.email) {
-        errors.email = 'Required';
-    }
-    return errors;
-};
-
-function LogIn({ faceAuth,auth }) {
-    const handleClickFaceAuth=()=>{
-        
-        faceAuth()
-    }
-    const handleClickAuth=()=>{
-        
-        auth()
-    }
+function Copyright() {
     return (
-        <div style={{ padding: 16, margin: 'auto', maxWidth: 350 }}>
-            <CssBaseline />
-            <Form
-                onSubmit={onSubmit}
-                initialValues={{}}
-                validate={validate}
-                render={({ handleSubmit, submitting, pristine, values, loginCommon, auth }) => (
-                    <form onSubmit={handleSubmit} noValidate>
-                        <Paper style={{ padding: 16 }}>
-                            <Grid container style={{ display: "contents" }} spacing={6}>
-                                <Grid item xs={6} style={{ maxWidth: "100%", width: "100%" }}  >
-                                    <Field
-                                        fullWidth
-                                        required
-                                        name="firstName"
-                                        component={TextField}
-                                        type="text"
-                                        label="Nombre"
-                                    />
-                                </Grid>
-                                <Grid item xs={6} style={{ maxWidth: "100%", width: "100%" }} >
-                                    <Field
-                                        fullWidth
-                                        required
-                                        name="lastName"
-                                        component={TextField}
-                                        type="text"
-                                        label="Apellido"
-                                    />
-                                </Grid>
-                                <Grid item xs={6} style={{ maxWidth: "100%", width: "100%" }} >
-                                    <Field
-                                        name="email"
-                                        fullWidth
-                                        required
-                                        component={TextField}
-                                        type="email"
-                                        label="Email"
-                                    />
-                                </Grid>
-                                <Grid item
-                                    xs={12}
-                                    style={{ marginTop: 16, display: "flex", justifyContent: "center" }}>
-                                 
-                            <GoogleButton
-                            item
-                            xs={12}
-                            
-                            variant="contained"
-                            color="secondary"
-                                onClick={handleClickFaceAuth}
-                            >Log in</GoogleButton>
-                                </Grid>
-                                
-                            </Grid>
-                        </Paper>
-                    </form>
-                )}
-            />
-        </div>
+        <Typography variant="body2" color="textSecondary" align="center">
+            {'Copyright © '}
+            <Link color="inherit" href="https://material-ui.com/">
+                Your Website
+      </Link>{' '}
+            {new Date().getFullYear()}
+            {'.'}
+        </Typography>
     );
 }
 
-export default LogIn;
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        backgroundColor: "white",
+        padding: theme.spacing(7),
+        borderRadius:"4px"
+
+    },
+    google:{
+        minWidth:"100%"
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+    },
+}));
+
+export default function LogIn({ faceAuth, auth }) {
+    const [input, setInput] = useState({
+        password: "",
+        email: ""
+      });
+    
+      const handleInputChange = (e) => {
+        setInput({
+          ...input,
+          [e.target.name]: e.target.value
+        });
+      };
+    const handleClickFaceAuth = () => {
+
+        faceAuth()
+    }
+    const handleClickAuth = (e) => {
+        e.preventDefault();
+        const { email, password } = input;
+        auth(email,password)
+    }
+    const classes = useStyles();
+
+    return (
+        <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                    <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                    Sign in
+        </Typography>
+                <form className={classes.form}
+                onSubmit={(e)=>handleClickAuth(e)}
+                noValidate>
+                    <TextField
+                        variant="standard"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        autoComplete="email"
+                        autoFocus
+                        onChange={handleInputChange}
+                    />
+                    <TextField
+                        variant="standard"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                        onChange={handleInputChange}
+
+                    />
+                    <FormControlLabel
+                        control={<Checkbox value="remember" color="primary" />}
+                        label="Remember me"
+                    />
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                    >
+                        Sign In
+          </Button>
+                    <GoogleButton
+                        className={classes.google}
+                        onClick={handleClickFaceAuth}
+                    >
+                        Log in
+                    </GoogleButton>
+                    <Grid container>
+                        <Grid item xs>
+                            <Typography to="/signup" component={Link}  variant="body2">
+                                Forgot password?
+              </Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography to="/signup" component={Link}  variant="body2">
+                                {"Don't have an account? Sign Up"}
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                </form>
+            </div>
+            <Box mt={8}>
+                <Copyright />
+            </Box>
+        </Container>
+    );
+}

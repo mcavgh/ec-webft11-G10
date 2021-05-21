@@ -59,7 +59,6 @@ export default function PersistentDrawerLeft() {
     };
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
-        console.log(currentUser)
         if (!currentUser) {
             history.push("/login")
         }

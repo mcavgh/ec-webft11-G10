@@ -18,7 +18,9 @@ export const getProductsInCart = (userId) => (dispatch, getState) => {
         axios.post(`/${element.id}/order/${order.id}/quantity/${element.count}`).then(prod => {
         })
       });
+
     })
+    .catch(err=>console.error(err))
 
   } else {
     //si no hay items me traigo los item de la db
