@@ -77,16 +77,7 @@ function LogIn({ faceAuth,auth }) {
                                 <Grid item
                                     xs={12}
                                     style={{ marginTop: 16, display: "flex", justifyContent: "center" }}>
-                                    {/* <Button
-                                        variant="contained"
-                                        color="primary"
-                                        type="submit"
-                                        disabled={submitting}
-                                        onClick={handleClickAuth}
-
-                                    >
-                                        LogIn
-                                    </Button> */}
+                                 
                             <GoogleButton
                             item
                             xs={12}

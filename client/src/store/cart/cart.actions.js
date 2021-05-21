@@ -8,18 +8,33 @@ export const GET_PRODUCTS_IN_CART = "GET_PRODUCTS_IN_CART"
 
 export const getProductsInCart = (userId) => (dispatch, getState) => {
   if (!userId) return
-  return axios.get(`/orders/userid/${userId}`).then(orders => {
+  let cartItems = JSON.parse(localStorage.getItem("cartItems"))
 
-    dispatch({
-      type: GET_PRODUCTS_IN_CART,
-      payload: orders.data
+  if (cartItems?.length > 0) {//si hay items en local storage
+
+    return axios.post(`/orders/cart/${userId}`).then(order => {
+
+      cartItems.forEach(element => {
+        axios.post(`/${element.id}/order/${order.id}/quantity/${element.count}`).then(prod => {
+        })
+      });
     })
-    localStorage.setItem("cartItems",JSON.stringify(orders.data))
-    dispatch(getQuantity())
-  })
+
+  } else {
+    //si no hay items me traigo los item de la db
+    return axios.get(`/orders/userid/${userId}`).then(orders => {
+
+      dispatch({
+        type: GET_PRODUCTS_IN_CART,
+        payload: orders.data
+      })
+      localStorage.setItem("cartItems", JSON.stringify(orders.data))
+      dispatch(getQuantity())
+    })
+      .catch(err => console.log(err))
+  }
 
 
-    .catch(err => console.log(err))
 }
 
 export const getQuantity = () => {
