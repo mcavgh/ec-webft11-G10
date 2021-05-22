@@ -176,6 +176,9 @@ export default function PersistentDrawerLeft() {
                     <ListItem button to="/PageCheckoutOrders" component={Link}>
                         <ListItemText className={classes.barOptions} primary="Ver Ordenes" />
                     </ListItem>
+                    <ListItem button to="/FormAdmin" component={Link}>
+                        <ListItemText className={classes.barOptions} primary="Crear Accsess" />
+                    </ListItem>
                 </List>
                 <Divider />
             </Drawer>
