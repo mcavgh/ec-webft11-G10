@@ -39,7 +39,6 @@ function App() {
           <Route exact path='/cart' component={CartProducts} />
           <Route exact path='/logIn' component={PageLogIn} />
           <Route exact path='/signUp' component={PageSignUp } />
-
           <Route exact path='/' component={Home} />
           <PrivateRoute path='/editProduct/:id' component={PageEditProduct} />
           <PrivateRoute path='/adminProduct' component={PageAdminProduct} />

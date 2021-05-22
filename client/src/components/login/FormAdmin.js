@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react';
 import { Form, Field } from 'react-final-form';
 import { TextField } from 'final-form-material-ui';
-import { Paper, Grid, Button, CssBaseline } from '@material-ui/core';
+import { Paper, Grid, Button, CssBaseline, ListItem, ListItemText } from '@material-ui/core';
 import { useDispatch } from 'react-redux'
 import { postAdmin } from '../../store/user/user.action';
 import Swal from 'sweetalert2'
+import { Link } from 'react-router-dom';
 
 
 const validate = values => {
@@ -47,7 +48,7 @@ export default function FormAdmin() {
   return (
     <div style={{ padding: 16, margin: 'auto', maxWidth: 600 }}>
       <CssBaseline />
-      <h4>Agregar Admin</h4>
+      <h3>Agregar Admin</h3>
       <Form
         onSubmit={onSubmit}
         initialValues={{}}
@@ -97,7 +98,7 @@ export default function FormAdmin() {
                   />
                 </Grid>
                 
-                <Grid item xs={12}>
+                {/* <Grid item xs={12}>
                   <Field
                     fullWidth
                     name="access"
@@ -105,7 +106,7 @@ export default function FormAdmin() {
                     multiline
                     label="access"
                   />
-                </Grid>
+                </Grid> */}
 
                 <Grid item style={{ marginTop: 16 }}>
                   <Button
@@ -120,6 +121,11 @@ export default function FormAdmin() {
                 </Grid>
               </Grid>
             </Paper>
+            <Grid item style={{ marginTop: 16 }}>
+                     <ListItem button to="/" component={Link}>
+                        <ListItemText  primary="Volver a Home" />
+                    </ListItem>
+                </Grid>
           </form>
         )}
       />
