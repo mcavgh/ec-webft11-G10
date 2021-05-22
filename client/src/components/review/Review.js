@@ -13,7 +13,7 @@ const Review = ({
 }) => {
   const [reviewList, setReviewList] = useState([]);
   const [form, setForm] = useState(false);
-  const [reviewsPerPage, setReviewsPerPage] = useState(1);
+  const [reviewsPerPage, setReviewsPerPage] = useState(3);
   const classes = useStyles();
   useEffect(() => {
     if (productReviews.reviews !== undefined) {
@@ -95,7 +95,7 @@ const Review = ({
         <Button
           variant="contained"
           color="primary"
-          onClick={() => setReviewsPerPage(reviewsPerPage + 1)}
+          onClick={() => setReviewsPerPage(reviewsPerPage + 3)}
           style={{ marginTop: "20px", width: "100%" }}
         >
           Ver mas
