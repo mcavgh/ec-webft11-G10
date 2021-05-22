@@ -9,6 +9,7 @@ const ReviewForm = ({
   loggedUserId,
   updateReviewList,
   dispatchUpdater,
+  cancelForm,
 }) => {
   const [postReview, setPostReview] = useState({
     reviewText: "",
@@ -23,6 +24,7 @@ const ReviewForm = ({
     dispatch(createProductReviews(postReview));
     setPostReview({ ...postReview, rating: 0 });
     event.target.reset();
+    await cancelForm();
     await dispatchUpdater();
     await updateReviewList();
   };
