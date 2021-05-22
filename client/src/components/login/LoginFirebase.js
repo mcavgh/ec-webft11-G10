@@ -16,13 +16,15 @@ const Login = () => {
   const dispatch = useDispatch();
   let history = useHistory();
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    const { email, password } = event.target.elements;
-    console.log(email, password);
+  const handleLogin = (email, password) => {
     try {
-      await app.auth().signInWithEmailAndPassword(email.value, password.value);
-      history.push("/");
+      app
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(({ user }) => {
+          console.log(user)
+          history.push("/");
+        })
     } catch (error) {
       alert(error);
     }
@@ -33,11 +35,10 @@ const Login = () => {
       .auth()
       .signInWithPopup(googleAuthProvider)
       .then(({ user }) => {
-        console.log(user.photoURL);
-        const { displayName, email, photoURL } = user;
+        const { displayName, email,uuid,photoURL } = user
         axios.get(`/users/email/${email}`).then((user) => {
           if (user.data === "el usuario no existe") {
-            dispatch(postUser(displayName, email, photoURL));
+            dispatch(postUser(displayName, email,uuid,photoURL))
           } else {
             dispatch({ type: "GET_ID_BYEMAIL", payload: user.data });
             dispatch(getProductsInCart(user.data.id))

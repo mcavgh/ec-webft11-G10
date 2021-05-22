@@ -10,23 +10,15 @@ export const SELECT_USER = "SELECT_USER";
 export const CREATE_USER = "CREATE_USER";
 export const GET_ID_BYEMAIL = "GET_ID_BYEMAIL";
 
-export const postUser = (displayName, email, photoURL) => {
-  return (dispatch, getState) => {
-    console.log("entra");
-    const nameArray = displayName.split(" ");
-    axios
-      .post(`/users/register`, {
-        name: nameArray[0],
-        surname: nameArray[1],
-        email,
-        password: "1234",
-        photoURL,
-      })
-      .then((res) => {
-        dispatch({ type: GET_ID_BYEMAIL, payload: res.data });
-      });
-  };
-};
+export const postUser = (displayName, email,uuid,photoURL) => {
+    return (dispatch, getState) => {
+        console.log("entra")
+        const nameArray = displayName.split(" ")
+        axios.post(`/users/register`, { name: nameArray[0], surname: nameArray[1], email, password: uuid,photoURL }).then((res) => {
+            dispatch({ type: GET_ID_BYEMAIL, payload: res.data });
+        })
+    }
+}
 
 export const getUsersByEmailId = (email) => {
   return function (dispatch) {
