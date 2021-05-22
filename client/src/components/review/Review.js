@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Divider, Avatar, Grid, Paper } from "@material-ui/core";
+import { Divider, Avatar, Grid, Paper, Button } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import { useStyles } from "./styles";
 import ReviewForm from "../reviewForm/ReviewForm";
@@ -11,8 +11,9 @@ const Review = ({
   dispatchUpdater,
   currentUser,
 }) => {
-  const [reviewList, setReviewList] = useState(productReviews.reviews);
+  const [reviewList, setReviewList] = useState([]);
   const [form, setForm] = useState(false);
+  const [reviewsPerPage, setReviewsPerPage] = useState(1);
   const classes = useStyles();
   useEffect(() => {
     if (productReviews.reviews !== undefined) {
@@ -25,10 +26,17 @@ const Review = ({
       found ? setForm(false) : setForm(true);
     }
     setReviewList(productReviews.reviews);
-  }, [productReviews.reviews, loggedUser]);
+    if (productReviews.reviews !== undefined) {
+      setReviewList(productReviews.reviews.slice(0, reviewsPerPage));
+    }
+  }, [productReviews.reviews, loggedUser, reviewsPerPage]);
 
   const updateReviewList = () => {
-    setReviewList(productReviews.reviews);
+    setReviewList(productReviews.reviews.slice(0, reviewsPerPage));
+  };
+
+  const cancelForm = () => {
+    setForm(false);
   };
 
   return (
@@ -39,6 +47,7 @@ const Review = ({
           loggedUserId={loggedUser.id}
           updateReviewList={updateReviewList}
           dispatchUpdater={dispatchUpdater}
+          cancelForm={cancelForm}
         />
       ) : null}
       <h1>Opiniones</h1>
@@ -81,6 +90,17 @@ const Review = ({
             })
           : null}
       </Paper>
+      {productReviews.reviews &&
+      reviewsPerPage >= productReviews.reviews.length ? null : (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => setReviewsPerPage(reviewsPerPage + 1)}
+          style={{ marginTop: "20px", width: "100%" }}
+        >
+          Ver mas
+        </Button>
+      )}
     </div>
   );
 };
