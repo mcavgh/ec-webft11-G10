@@ -32,11 +32,7 @@ export const createProductReviews = (review) => {
             userId: review.userId,
           },
         });
-        Swal.fire(
-          "Good job!",
-          "You updated the product succesfully!",
-          "success"
-        );
+        Swal.fire("Genial!", "Tu opinion se guardó correctamente!", "success");
       })
       .catch((err) => console.log({ message: err.message }));
   };

@@ -22,6 +22,8 @@ import { AuthProvider } from "./components/AuthContext";
 import PageLogIn from './pages/landingPage/LandingPage';
 import {Checkout} from './pages/checkOut/Checkout'
 import FormAdmin from './components/login/FormAdmin';
+import PageSignUp from './pages/landingPage/SignUp';
+
 
 dotenv.config()
 axios.defaults.baseURL=process.env.REACT_APP_API || "http://localhost:3001"
@@ -36,6 +38,8 @@ function App() {
           <Route exact path='/crearUsuario' component={AdminUser} />
           <Route exact path='/cart' component={CartProducts} />
           <Route exact path='/logIn' component={PageLogIn} />
+          <Route exact path='/signUp' component={PageSignUp } />
+
           <Route exact path='/' component={Home} />
           <PrivateRoute path='/editProduct/:id' component={PageEditProduct} />
           <PrivateRoute path='/adminProduct' component={PageAdminProduct} />
