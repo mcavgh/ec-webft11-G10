@@ -16,6 +16,7 @@ import defaultImg from "./default.png";
 import { addToCart } from "../../store/cart/cart.actions";
 import { getUsersByEmailId } from "../../store/user/user.action";
 import { getProductReviews } from "../../store/review/review.actions";
+import { getOrderByUserId } from "../../store/order/order.action";
 import Review from "../review/Review";
 import { AuthContext } from "../AuthContext";
 
@@ -24,11 +25,11 @@ export default function Product() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const product = useSelector((state) => state.productReducer?.oneProduct);
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     if (currentUser) dispatch(getUsersByEmailId(currentUser.email));
+    if (currentUser) dispatch(getOrderByUserId(currentUser.id));
     dispatch(getProductReviews(id));
   }, [dispatch]);
 
@@ -58,6 +59,11 @@ export default function Product() {
       }
     }
   }, [productReviews.reviews]);
+
+  useEffect(() => {
+    if (loggedUser.id) dispatch(getOrderByUserId(loggedUser.id));
+  }, [dispatch, loggedUser]);
+  const ordersUser = useSelector((state) => state.orderReducer.ordersUser);
 
   return (
     <>
@@ -103,7 +109,7 @@ export default function Product() {
                   variant="contained"
                   color="primary"
                   className={classes.button}
-                  onClick={() => dispatch(addToCart(product))}
+                  onClick={() => dispatch(addToCart(productReviews))}
                 >
                   Agregar al Carrito!
                 </Button>
@@ -119,6 +125,7 @@ export default function Product() {
         productReviews={productReviews}
         dispatchUpdater={dispatchUpdater}
         currentUser={currentUser}
+        ordersUser={ordersUser}
       />
     </>
   );
