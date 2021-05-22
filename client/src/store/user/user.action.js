@@ -21,13 +21,16 @@ export const postUser = (displayName, email,uuid,photoURL) => {
     }
 }
 
-export const postAdmin = (data) => {
+export const postAdmin = (id) => {
     return (dispatch, getState) => {
-        axios.post(`/users/register`,{data,access:"Admim"} ).then((res) => {
+        axios.put(`/${id}/usuario`,{access:"Admim"} ).then((res) => {
             dispatch({ type: POST_ADMIN, payload: res.data });
+            // dispatch(getUsers())
         })
     }
 }
+
+
 
 export const getUsersByEmailId = (email) => {
   return function (dispatch) {
