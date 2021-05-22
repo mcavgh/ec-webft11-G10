@@ -1,4 +1,4 @@
-import { GET_USER_BYID,GET_ID_BYEMAIL, POST_USER, DELETE_USER, PUT_USER, GET_USERS } from './user.action';
+import {POST_ADMIN, GET_USER_BYID,GET_ID_BYEMAIL, POST_USER, DELETE_USER, PUT_USER, GET_USERS } from './user.action';
 
 const initialState = {
   users: [],
@@ -9,7 +9,7 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     
-    
+    case POST_ADMIN:
     case GET_USER_BYID:
       return {
         ...state,

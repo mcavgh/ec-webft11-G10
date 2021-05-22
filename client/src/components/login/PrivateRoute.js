@@ -1,19 +1,23 @@
 import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
-import { AuthContext } from "../AuthContext";
+import { useSelector } from "react-redux";
+
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
-  const {currentUser} = useContext(AuthContext);
+  const access = useSelector((state) => state.userReducer?.userId.access);
+
   return (
     <Route
       {...rest}
       render={routeProps =>
-        !!currentUser ? (
+        access==="Admin" ? (
           <RouteComponent {...routeProps} />
         ) : (
-          <Redirect to={"/login"} />
-        )
-      }
+          <div>
+          <Redirect to={"/"} />
+          {alert("debes ser Admin")}
+          </div>
+        )}
     />
   );
 };

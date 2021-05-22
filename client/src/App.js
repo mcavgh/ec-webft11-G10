@@ -21,7 +21,9 @@ import   PrivateRoute  from "./components/login/PrivateRoute";
 import { AuthProvider } from "./components/AuthContext";
 import PageLogIn from './pages/landingPage/LandingPage';
 import {Checkout} from './pages/checkOut/Checkout'
+import FormAdmin from './components/login/FormAdmin';
 import PageSignUp from './pages/landingPage/SignUp';
+
 
 dotenv.config()
 axios.defaults.baseURL=process.env.REACT_APP_API || "http://localhost:3001"
@@ -49,6 +51,7 @@ function App() {
           <PrivateRoute path='/PageCheckoutOrders' component={PageCheckoutOrders} />
           <PrivateRoute path='/PageCheckout' component={Checkout} />
           <PrivateRoute path='/ViewOrder/:id' component={ViewOrder} />
+          <PrivateRoute path='/FormAdmin' component={FormAdmin} />
           <Route path='/product/:id' component={Product} />
           <Route path="*" component={() => "404 NOT FOUND"} />
           </Switch>
