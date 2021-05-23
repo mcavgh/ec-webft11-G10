@@ -22,10 +22,11 @@ export const postUser = (displayName, email) => {
 }
 
 export const postAdmin = (id) => {
-    return (dispatch, getState) => {
-        axios.put(`/${id}/usuario`,{access:"Admim"} ).then((res) => {
-            dispatch({ type: POST_ADMIN, payload: res.data });
-            // dispatch(getUsers())
+  console.log(id)
+    return (dispatch) => {
+        axios.put(`/users/${id}/usuario`).then((res) => {
+            dispatch({ type: POST_ADMIN });
+             dispatch(getUsers())
         })
     }
 }
