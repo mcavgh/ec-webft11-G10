@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import GoogleButton from 'react-google-button'
+import app from "../../firebase/index.js";
+
 
 function Copyright() {
     return (
@@ -60,6 +62,16 @@ export default function LogIn({ faceAuth, auth }) {
         email: ""
       });
     
+    
+
+      const forgotPassword = (email) => {
+        app.auth().sendPasswordResetEmail(input.email)
+      .then(function () {
+        alert('Please check your email...')
+      }).catch(function (e) {
+        console.log(e)
+      })
+      }
       const handleInputChange = (e) => {
         setInput({
           ...input,
@@ -136,9 +148,9 @@ export default function LogIn({ faceAuth, auth }) {
                     </GoogleButton>
                     <Grid container>
                         <Grid item xs>
-                            <Typography to="/signup" component={Link}  variant="body2">
+                            <a href="#" onClick={forgotPassword}   variant="body2">
                                 Forgot password?
-              </Typography>
+                             </a>
                         </Grid>
                         <Grid item>
                             <Typography to="/signup" component={Link}  variant="body2">
