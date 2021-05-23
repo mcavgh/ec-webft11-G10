@@ -23,7 +23,7 @@ export const postUser = (displayName, email) => {
 
 export const postAdmin = (data) => {
     return (dispatch, getState) => {
-        axios.post(`/users/register`,data ).then((res) => {
+        axios.post(`/users/register`,{data,access:"Admim"} ).then((res) => {
             dispatch({ type: POST_ADMIN, payload: res.data });
         })
     }
