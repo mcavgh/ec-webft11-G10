@@ -29,11 +29,11 @@ export default function PersistentDrawerLeft() {
 
     const { currentUser } = useContext(AuthContext)
     
+    if(currentUser){
+        console.log(currentUser.email)
+         dispatch(getUsersByEmailId(currentUser.email))
+    }
     useEffect(() => {
-        if(currentUser){
-            dispatch(getUsersByEmailId(currentUser.email))
-            //dispatch(getProductInCart)
-        }
         dispatch(getQuantity())
     }, [])
     const handleDrawerOpen = () => {

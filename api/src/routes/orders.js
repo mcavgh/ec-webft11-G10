@@ -17,7 +17,7 @@ server.post("/cart/:userId", async (req, res) => {
     res.json(order)
 
   } catch (error) {
-    console.err(error)
+    console.error(error)
   }
 })
 

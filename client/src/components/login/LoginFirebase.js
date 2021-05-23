@@ -38,12 +38,13 @@ const Login = () => {
         const { displayName, email,uuid,photoURL } = user
         axios.get(`/users/email/${email}`).then((user) => {
           if (user.data === "el usuario no existe") {
-            dispatch(postUser(displayName, email,uuid,photoURL))
+            dispatch(postUser(displayName, email))
           } else {
             dispatch({ type: "GET_ID_BYEMAIL", payload: user.data });
             dispatch(getProductsInCart(user.data.id))
           }
         });
+        
         history.push("/");
       })
       .catch((e) => {

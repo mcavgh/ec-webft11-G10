@@ -19,10 +19,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       //allowNull: false,
     },
-    photoURL: {
-      type: DataTypes.STRING,
-      //allowNull: false,
-    },
+      // photoURL: {
+      //   type: DataTypes.STRING,
+      //   //allowNull: false,
+      // },
     access: {
       type: DataTypes.ENUM,
       values: ["User", "Admin"],

@@ -11,11 +11,11 @@ export const CREATE_USER = "CREATE_USER";
 export const GET_ID_BYEMAIL = "GET_ID_BYEMAIL";
 export const POST_ADMIN = "POST_ADMIN";
 
-export const postUser = (displayName, email,uuid,photoURL) => {
+export const postUser = (displayName, email) => {
     return (dispatch, getState) => {
         console.log("entra")
         const nameArray = displayName.split(" ")
-        axios.post(`/users/register`, { name: nameArray[0], surname: nameArray[1], email, password: uuid,photoURL }).then((res) => {
+        axios.post(`/users/register`, { name: nameArray[0], surname: nameArray[1]}).then((res) => {
             dispatch({ type: GET_ID_BYEMAIL, payload: res.data });
         })
     }
