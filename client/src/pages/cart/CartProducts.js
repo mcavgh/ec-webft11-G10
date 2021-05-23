@@ -20,14 +20,18 @@ export default function Cart() {
   const cart = useSelector((state) => state.cart.cartItems);
   const total = useSelector((state) => state.cart.total);
   const userId = useSelector((state) => state.userReducer.userId.id);
+ 
 
   const { currentUser } = useContext(AuthContext);
+
+  
 
   useEffect(() => {
     dispatch(getTotal());
   }, [dispatch]);
 
   const handlerClick = () => {
+    if (!userId){alert("debe registrarse")}
     try {dispatch(findOrCreateOrders(userId))}
     catch (error) {Swal.fire({ icon: 'error', title: 'Oops...', text:'Something went wrong!', })}
   }
@@ -121,7 +125,7 @@ export default function Cart() {
               style={{ marginTop: 16 }}
               color="primary"
               variant="contained"
-              to="/PageCheckout"
+              to={userId ? ("/PageCheckout"):("/logIn")}
               component={Link}
             >
               Checkout
