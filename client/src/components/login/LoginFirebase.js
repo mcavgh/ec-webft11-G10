@@ -30,6 +30,7 @@ const Login = () => {
     }
   };
 
+
   const handleFaceAuth = () => {
     app
       .auth()
@@ -60,7 +61,7 @@ const Login = () => {
 
   return (
     <>
-      <LogIn faceAuth={handleFaceAuth} auth={handleLogin} />
+      <LogIn faceAuth={handleFaceAuth} auth={handleLogin}  />
     </>
   );
 };
