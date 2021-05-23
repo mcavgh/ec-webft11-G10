@@ -12,15 +12,17 @@ export const getProductsInCart = (userId) => (dispatch, getState) => {
 
   if (cartItems?.length > 0) {//si hay items en local storage
 
-    return axios.post(`/orders/cart/${userId}`).then(order => {
+  //   return axios.post(`/orders/cart/${userId}`).then(order => {
+  //  console.log("======================>",order.data.id)
 
-      cartItems.forEach(element => {
-        axios.post(`/${element.id}/order/${order.id}/quantity/${element.count}`).then(prod => {
-        })
-      });
+  //     cartItems.forEach(element => {
+  //       axios.post(`/${element.id}/order/${order.data.id}/quantity/${element.count}`).then(prod => {
+  //       }).
+  //       catch(err=>console.log(err))
+  //     });
 
-    })
-    .catch(err=>console.error(err))
+  //   })
+  //   .catch(err=>console.error(err))
 
   } else {
     //si no hay items me traigo los item de la db

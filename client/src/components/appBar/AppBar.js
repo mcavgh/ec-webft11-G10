@@ -28,14 +28,10 @@ export default function PersistentDrawerLeft() {
     const dispatch = useDispatch()
 
     const { currentUser } = useContext(AuthContext)
-    
-    if(currentUser){
-        console.log(currentUser.email)
-         dispatch(getUsersByEmailId(currentUser.email))
-    }
+  
     useEffect(() => {
         dispatch(getQuantity())
-    }, [])
+    }, [dispatch])
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -59,7 +55,6 @@ export default function PersistentDrawerLeft() {
     };
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
-        console.log(currentUser)
         if (!currentUser) {
             history.push("/login")
         }
@@ -137,7 +132,7 @@ export default function PersistentDrawerLeft() {
                             <div>
                                 <MenuItem onClick={handleClose}>Perfil</MenuItem>
                                 <MenuItem onClick={() => app.auth().signOut()
-                                    .then(res => handleClose())
+                                    .then(res =>dispatch({type:"DELETE_USER"}), handleClose())
 
                                 }>Log out</MenuItem>
                             </div>
