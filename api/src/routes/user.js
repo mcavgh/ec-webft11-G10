@@ -76,20 +76,20 @@ server.post("/register", (req, res) => {
 // });
 
 
-// server.put('/:id/usuario', (req, res, next) => {
-//   const { id } = req.params;
-//   const { access } = req.body;
+server.put('/:id/usuario', (req, res, next) => {
+  const { id } = req.params;
 
-//   User.update({ 
-//   where: { id: id } ,
-//   access,
- 
-  
-  
-//   })
-//       .then(r => res.send(r))
-//       .catch(next);
-// })
+  User.update(
+    {
+      access: "Admin",
+    },
+    {
+      where: { id},
+    }
+  )
+      .then(r => res.send(r))
+      .catch(next);
+})
 
 
 // MODIFICA UN PRODUCTO |

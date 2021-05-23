@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Button, makeStyles, Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core';
+import { Button, makeStyles, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux'
 import { getUsers, postAdmin } from '../../store/user/user.action';
 import Swal from 'sweetalert2'
@@ -11,25 +11,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FormAdmin () {
+export default function FormAdmin() {
   const classes = useStyles();
+  const users = useSelector((state) => state.userReducer?.users);
 
-  const dispatch= useDispatch()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getUsers())
   }, [dispatch]);
 
 
-  const users = useSelector((state) => state.userReducer?.users);
 
- function PromoverAdmin(id){
-    dispatch(postAdmin(id))
+  function PromoverAdmin(row) {
+    console.log(row.id)
+     dispatch(postAdmin(row.id))
   }
 
   return (
     <React.Fragment>
-      <Title>Tabla de Ordenes</Title>
+      <Title>Usuarios</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
@@ -48,7 +49,7 @@ export default function FormAdmin () {
                 <TableCell>{row.name} {row.surname} </TableCell>
                 <TableCell>{row.access}</TableCell>
                 <TableCell>{row.email}</TableCell>
-                <Button variant="contained" color="primary" onClick={PromoverAdmin(row.id)}>
+                <Button variant="contained" color="primary" onClick={(e) => PromoverAdmin(row)}>
                   Promover a Admin
               </Button>
               </TableRow>
