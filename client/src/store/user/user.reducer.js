@@ -21,6 +21,10 @@ const userReducer = (state = initialState, action) => {
         userId: action.payload,
       };
     case DELETE_USER:
+      return{
+        ...state,
+        userId:{}
+      }
     case PUT_USER:
     case GET_USERS:
       return {
