@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react';
-import { Button, makeStyles, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import { Button, ListItem, ListItemText, makeStyles, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux'
-import { getUsers, postAdmin } from '../../store/user/user.action';
-import Swal from 'sweetalert2'
+import { DestroyUsuario, getUsers, postAdmin, postUserAccess } from '../../store/user/user.action';
 import Title from '../admin/Title';
+import { Link } from 'react-router-dom';
+
+
+
+
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -13,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FormAdmin() {
   const classes = useStyles();
+  
   const users = useSelector((state) => state.userReducer?.users);
 
   const dispatch = useDispatch()
@@ -27,6 +32,19 @@ export default function FormAdmin() {
     console.log(row.id)
      dispatch(postAdmin(row.id))
   }
+
+
+  function PromoverUser(row) {
+    console.log(row.id)
+     dispatch(postUserAccess(row.id))
+  }
+  
+
+  function BorrarUsuario(row) {
+    console.log(row.id)
+     dispatch( DestroyUsuario(row.id))
+  }
+ 
 
   return (
     <React.Fragment>
@@ -52,12 +70,21 @@ export default function FormAdmin() {
                 <Button variant="contained" color="primary" onClick={(e) => PromoverAdmin(row)}>
                   Promover a Admin
               </Button>
+              <Button variant="contained"  onClick={(e) => PromoverUser(row)}>
+                  Promover a User
+              </Button>
+              <Button variant="contained" color="primary" onClick={(e) => BorrarUsuario(row)}>
+                  Borrar Usuario
+              </Button>
               </TableRow>
             ))
             ) : ("no hay usuarios")
           }
         </TableBody>
       </Table>
+      <ListItem button to="/" component={Link}>
+                        <ListItemText  primary="Volver a Home" />
+                    </ListItem>
     </React.Fragment>
   );
 }

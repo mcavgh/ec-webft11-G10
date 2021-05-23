@@ -10,6 +10,7 @@ export const SELECT_USER = "SELECT_USER";
 export const CREATE_USER = "CREATE_USER";
 export const GET_ID_BYEMAIL = "GET_ID_BYEMAIL";
 export const POST_ADMIN = "POST_ADMIN";
+export const POST_USER_ACCESS = "POST_USER_ACCESS";
 
 export const postUser = (displayName, email) => {
     return (dispatch, getState) => {
@@ -24,13 +25,33 @@ export const postUser = (displayName, email) => {
 export const postAdmin = (id) => {
   console.log(id)
     return (dispatch) => {
-        axios.put(`/users/${id}/usuario`).then((res) => {
+        axios.put(`/users/${id}/usuario/admin`).then((res) => {
             dispatch({ type: POST_ADMIN });
              dispatch(getUsers())
         })
     }
 }
 
+
+export const postUserAccess = (id) => {
+  console.log(id)
+    return (dispatch) => {
+        axios.put(`/users/${id}/usuario/user`).then((res) => {
+            dispatch({ type: POST_USER_ACCESS });
+             dispatch(getUsers())
+        })
+    }
+}
+
+export const DestroyUsuario= (id) => {
+  console.log(id)
+    return (dispatch) => {
+        axios.delete(`/users/${id}`).then((res) => {
+            dispatch({ type:DELETE_USER});
+             dispatch(getUsers())
+        })
+    }
+}
 
 
 export const getUsersByEmailId = (email) => {
