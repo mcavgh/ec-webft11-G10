@@ -27,7 +27,7 @@ server.get("/email/:email", (req, res) => {
   const { email } = req.params;
   User.findOne({ where: { email: email } })
     .then((user) => res.send(user ? user : "el usuario no existe"))
-    .catch((err) => res.send(err));
+    .catch((err) => res.send("errorrrrrrrrrrrrrrrrrrrrrrrrr"));
 });
 // CREAR USUARIO |
 //----------------
