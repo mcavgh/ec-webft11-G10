@@ -76,7 +76,7 @@ server.post("/register", (req, res) => {
 // });
 
 
-server.put('/:id/usuario', (req, res, next) => {
+server.put('/:id/usuario/admin', (req, res, next) => {
   const { id } = req.params;
 
   User.update(
@@ -92,24 +92,57 @@ server.put('/:id/usuario', (req, res, next) => {
 })
 
 
-// MODIFICA UN PRODUCTO |
-//-----------------------
-server.get("/:id/usuario", (req, res) => {
 
-  const id = req.params.id;
-  Product.findOne({ where: { id } })
-    .then((product) => {
-      
-        product.update({
-          access:"Admin"
+server.put('/:id/usuario/user', (req, res, next) => {
+  const { id } = req.params;
 
-        })
-        res.send(product);
+  User.update(
+    {
+      access: "User",
+    },
+    {
+      where: { id},
+    }
+  )
+      .then(r => res.send(r))
+      .catch(next);
+})
+
+//////////////// DELETE USER ////////////////
+server.delete('/:id', (req, res) => {
+  const id = req.params.id
+
+  User.destroy({
+    
+    where: { id: id },
+  })
+    .then((user) => {
+      if (user) res.send("user eliminated");
       
+      else res.send("user not found"); 
     })
-    .catch((error) => {
-      res.status(400).json(error);
-    });
-});
+    .catch((err) => res.send("an unexpected error occurred"));
+})
+
+
+// // MODIFICA UN PRODUCTO |
+// //-----------------------
+// server.get("/:id/usuario", (req, res) => {
+
+//   const id = req.params.id;
+//   Product.findOne({ where: { id } })
+//     .then((product) => {
+      
+//         product.update({
+//           access:"Admin"
+
+//         })
+//         res.send(product);
+      
+//     })
+//     .catch((error) => {
+//       res.status(400).json(error);
+//     });
+// });
 
 module.exports = server;
