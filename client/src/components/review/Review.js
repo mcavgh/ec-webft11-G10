@@ -10,26 +10,57 @@ const Review = ({
   productReviews,
   dispatchUpdater,
   currentUser,
+  ordersUser,
 }) => {
   const [reviewList, setReviewList] = useState([]);
   const [form, setForm] = useState(false);
-  const [reviewsPerPage, setReviewsPerPage] = useState(1);
+  const [reviewsPerPage, setReviewsPerPage] = useState(3);
   const classes = useStyles();
+
+  // Ordena las reviews de nuevas a viejas y hace la paginacion
+  //=============================================================
   useEffect(() => {
     if (productReviews.reviews !== undefined) {
       productReviews.reviews.sort((a, b) => {
         return new Date(b.createdAt) - new Date(a.createdAt);
       });
-      const found = productReviews.reviews.find(
-        (element) => element.user.id === loggedUser.id
-      );
-      found ? setForm(false) : setForm(true);
     }
     setReviewList(productReviews.reviews);
     if (productReviews.reviews !== undefined) {
       setReviewList(productReviews.reviews.slice(0, reviewsPerPage));
     }
-  }, [productReviews.reviews, loggedUser, reviewsPerPage]);
+  }, [productReviews.reviews, reviewsPerPage, form]);
+
+  // Check si el usuario compro el item y si ya hizo un comentario
+  //===============================================================
+  useEffect(() => {
+    let check = false;
+    if (ordersUser !== undefined && ordersUser.length > 0) {
+      for (let i = 0; i < ordersUser.length; i++) {
+        if (
+          ordersUser[i].state === "completa" &&
+          ordersUser[i].user.id === loggedUser.id
+        ) {
+          for (let j = 0; j < ordersUser[i].products.length; j++) {
+            if (
+              parseInt(ordersUser[i].products[j].id) === parseInt(productId)
+            ) {
+              check = true;
+              setForm(true);
+              break;
+            }
+          }
+        }
+      }
+    }
+    if (productReviews.reviews !== undefined && check) {
+      const found = productReviews.reviews.find(
+        (element) => element.user.id === loggedUser.id
+      );
+      found ? setForm(false) : setForm(true);
+      check = false;
+    }
+  }, [ordersUser, loggedUser]);
 
   const updateReviewList = () => {
     setReviewList(productReviews.reviews.slice(0, reviewsPerPage));
@@ -77,9 +108,6 @@ const Review = ({
                         />
                       </Grid>
                       <p style={{ textAlign: "left" }}>{review.reviewText}</p>
-                      {/* <p style={{ textAlign: "left", color: "gray" }}>
-                        posted 1 minute ago
-                      </p> */}
                     </Grid>
                   </Grid>
                   {index === reviewList.length - 1 ? null : (
@@ -95,7 +123,7 @@ const Review = ({
         <Button
           variant="contained"
           color="primary"
-          onClick={() => setReviewsPerPage(reviewsPerPage + 1)}
+          onClick={() => setReviewsPerPage(reviewsPerPage + 3)}
           style={{ marginTop: "20px", width: "100%" }}
         >
           Ver mas
