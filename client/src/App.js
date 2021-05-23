@@ -16,7 +16,6 @@ import {PageAdminCategories} from './pages/adminCategory/PageAdminCategories'
 import PageEditCategory from './pages/adminCategory/PageEditCategory'
 import dotenv from "dotenv";
 import axios from 'axios';
-import { AdminUser } from './components/admin/AdminUser';
 import   PrivateRoute  from "./components/login/PrivateRoute";
 import { AuthProvider } from "./components/AuthContext";
 import PageLogIn from './pages/landingPage/LandingPage';
@@ -35,7 +34,6 @@ function App() {
 
         <ThemeProvider theme={theme}>
         <Switch>
-          <Route exact path='/crearUsuario' component={AdminUser} />
           <Route exact path='/cart' component={CartProducts} />
           <Route exact path='/logIn' component={PageLogIn} />
           <Route exact path='/signUp' component={PageSignUp } />
@@ -48,7 +46,7 @@ function App() {
           <PrivateRoute path='/creaCategories' component={PageAddCategory} />
           <PrivateRoute path='/editCategory/:id' component={PageEditCategory} />
           <PrivateRoute path='/PageCheckoutOrders' component={PageCheckoutOrders} />
-          <PrivateRoute path='/PageCheckout' component={Checkout} />
+          <Route path='/PageCheckout' component={Checkout} />
           <PrivateRoute path='/ViewOrder/:id' component={ViewOrder} />
           <PrivateRoute path='/FormAdmin' component={FormAdmin} />
           <Route path='/product/:id' component={Product} />

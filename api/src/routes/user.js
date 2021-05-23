@@ -1,6 +1,17 @@
 const server = require("express").Router();
 const { Order, Product, User } = require("../db");
 
+
+// TRAE UN USUARIO POR ID |
+//------------------------
+server.get("/users", (req, res) => {
+  
+  User.findAll()
+    .then((user) => res.send(user ? user : "no hay usuarios"))
+    .catch((err) => res.send(err));
+});
+
+
 // TRAE UN USUARIO POR ID |
 //------------------------
 server.get("/:id", (req, res) => {
@@ -35,6 +46,70 @@ server.post("/register", (req, res) => {
       res.send(user);
     })
     .catch((err) => res.send(err));
+});
+
+
+// MODIFICA EL ACCESS DEL USUARIO |
+//----------------
+
+// server.put('/:id/usuario', (req, res) => {
+
+//   const { id } = req.params;
+//   const { access } = req.body;
+//   console.log("=======================>",id)
+//   console.log("=======================>",access)
+//   return User.Update({ where: { id: id } })
+//     .then((user) => {
+//       user.access = access;
+//       User.save();
+//       return res.status(200).json({
+//         message: `El usuario se a modificado`,
+//         data: user,
+//       });
+//     })
+//     .catch((err) => {
+//       return res.status(400).json({
+//         message: 'Error en el proceso de modificacion del user',
+//         data: err,
+//       });
+//     });
+// });
+
+
+// server.put('/:id/usuario', (req, res, next) => {
+//   const { id } = req.params;
+//   const { access } = req.body;
+
+//   User.update({ 
+//   where: { id: id } ,
+//   access,
+ 
+  
+  
+//   })
+//       .then(r => res.send(r))
+//       .catch(next);
+// })
+
+
+// MODIFICA UN PRODUCTO |
+//-----------------------
+server.get("/:id/usuario", (req, res) => {
+
+  const id = req.params.id;
+  Product.findOne({ where: { id } })
+    .then((product) => {
+      
+        product.update({
+          access:"Admin"
+
+        })
+        res.send(product);
+      
+    })
+    .catch((error) => {
+      res.status(400).json(error);
+    });
 });
 
 module.exports = server;
