@@ -22,7 +22,16 @@ const Login = () => {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(({ user }) => {
-          console.log(user)
+
+          const { displayName, email } = user
+          axios.get(`/users/email/${email}`).then((user) => {
+            if (user.data === "el usuario no existe") {
+              dispatch(postUser(displayName, email))
+            } else {
+              dispatch({ type: "GET_ID_BYEMAIL", payload: user.data });
+              dispatch(getProductsInCart(user.data.id))
+            }
+          })
           history.push("/");
         })
     } catch (error) {
