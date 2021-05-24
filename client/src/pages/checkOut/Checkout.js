@@ -34,6 +34,7 @@ export function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
   const cart = useSelector(state => state.cart.cartItems)
   const userId = useSelector(state => state.userReducer.userId.id)
+  const dataUser = useSelector(state => state.userReducer.dataUser)
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -82,7 +83,7 @@ export function Checkout() {
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}> Volver</Button>
                   )}
-                  {(activeStep === steps.length - 1)?(<Button onClick={()=>dispatch(orderToMp(cart,userId))} variant="contained" color="primary" className={classes.button}>
+                  {(activeStep === steps.length - 1)?(<Button onClick={()=>(dispatch(orderToMp(cart,userId)))} variant="contained" color="primary" className={classes.button}>
                   Terminar Compra</Button>):(<Button onClick={handleNext} variant="contained" color="primary" className={classes.button}>Siguiente</Button>)}
                 </div>
               </React.Fragment>
