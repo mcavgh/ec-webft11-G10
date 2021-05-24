@@ -15,14 +15,14 @@ import {useDispatch, useSelector} from "react-redux"
 import { Link, useHistory } from 'react-router-dom'
 import {orderToMp} from '../../store/order/order.action'
 
-const steps = ['Controla tu orden', 'Completa tus datos de envio'];
+const steps = ['Completa tus datos de envio','Controla tu orden'];
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <Review />;
-    case 1:
       return <AddressForm />;
+    case 1:
+      return <Review />;
     default:
       throw new Error('Unknown step');
   }
@@ -34,6 +34,14 @@ export function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
   const cart = useSelector(state => state.cart.cartItems)
   const userId = useSelector(state => state.userReducer.userId.id)
+
+  const handleNext = () => {
+    setActiveStep(activeStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+  };
   
   return (
     <React.Fragment>
@@ -72,14 +80,14 @@ export function Checkout() {
                 {getStepContent(activeStep)}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
-                    <Button className={classes.button}>
-                      Volver
-                    </Button>
+                    <Button onClick={handleBack} className={classes.button}> Volver</Button>
                   )}
-                  <Button onClick={()=>dispatch(orderToMp(cart,userId))} variant="contained" color="primary" className={classes.button}
+                  {(activeStep === steps.length - 1)?(<Button onClick={()=>dispatch(orderToMp(cart,userId))} variant="contained" color="primary" className={classes.button}>
+                  Terminar Compra</Button>):(<Button onClick={handleNext} variant="contained" color="primary" className={classes.button}>Siguiente</Button>) }
+                  {/* <Button  onClick={handleNext} onClick={()=>dispatch(orderToMp(cart,userId))} variant="contained" color="primary" className={classes.button}
                   >
                     {activeStep === steps.length - 1 ? 'Terminar Compra' : 'Next'}
-                  </Button>
+                  </Button> */}
                 </div>
               </React.Fragment>
             )}
