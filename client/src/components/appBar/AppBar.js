@@ -31,6 +31,7 @@ export default function PersistentDrawerLeft() {
   
     useEffect(() => {
         dispatch(getQuantity())
+        currentUser?.email&&dispatch(getUsersByEmailId(currentUser.email))
     }, [dispatch])
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -172,7 +173,7 @@ export default function PersistentDrawerLeft() {
                         <ListItemText className={classes.barOptions} primary="Ver Ordenes" />
                     </ListItem>
                     <ListItem button to="/FormAdmin" component={Link}>
-                        <ListItemText className={classes.barOptions} primary="Crear Accsess" />
+                        <ListItemText className={classes.barOptions} primary="Administrar roles" />
                     </ListItem>
                 </List>
                 <Divider />

@@ -16,7 +16,7 @@ export const postUser = (displayName, email) => {
     return (dispatch, getState) => {
         console.log("entra")
         const nameArray = displayName.split(" ")
-        axios.post(`/users/register`, { name: nameArray[0], surname: nameArray[1]}).then((res) => {
+        axios.post(`/users/register`, { name: nameArray[0], surname: nameArray[1],email:email}).then((res) => {
             dispatch({ type: GET_ID_BYEMAIL, payload: res.data });
         })
     }
