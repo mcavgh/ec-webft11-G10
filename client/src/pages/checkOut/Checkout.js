@@ -15,12 +15,14 @@ import {useDispatch, useSelector} from "react-redux"
 import { Link, useHistory } from 'react-router-dom'
 import {orderToMp} from '../../store/order/order.action'
 
-const steps = ['Controla tu orden'];
+const steps = ['Controla tu orden', 'Completa tus datos de envio'];
 
 function getStepContent(step) {
   switch (step) {
     case 0:
       return <Review />;
+    case 1:
+      return <AddressForm />;
     default:
       throw new Error('Unknown step');
   }
