@@ -91,7 +91,7 @@ export default function SignUp() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Registrate
         </Typography>
         <form className={classes.form} noValidate
           onSubmit={(e) => handleClickSignUp(e)}
@@ -105,7 +105,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="firstName"
-                label="First Name"
+                label="Nombre"
                 autoFocus
                 onChange={handleInputChange}
               />
@@ -116,7 +116,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="lastName"
-                label="Last Name"
+                label="Apellido"
                 name="lastName"
                 autoComplete="lname"
                 onChange={handleInputChange}
@@ -128,7 +128,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Email"
                 name="email"
                 autoComplete="email"
                 onChange={handleInputChange}
@@ -141,7 +141,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Contraseña"
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -152,7 +152,7 @@ export default function SignUp() {
             <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
+                label="Quiero recibir, marketing promociones y actualizaciones via email."
               />
             </Grid>
           </Grid>
@@ -165,7 +165,7 @@ export default function SignUp() {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+           Registrate
           </Button>
           <Grid container justify="flex-end">
             <Grid item>

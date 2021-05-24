@@ -1,11 +1,11 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -37,11 +37,11 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         backgroundColor: "white",
         padding: theme.spacing(7),
-        borderRadius:"4px"
+        borderRadius: "4px"
 
     },
-    google:{
-        minWidth:"100%"
+    google: {
+        minWidth: "100%"
     },
     avatar: {
         margin: theme.spacing(1),
@@ -60,24 +60,24 @@ export default function LogIn({ faceAuth, auth }) {
     const [input, setInput] = useState({
         password: "",
         email: ""
-      });
-    
-    
+    });
 
-      const forgotPassword = (email) => {
+
+
+    const forgotPassword = (email) => {
         app.auth().sendPasswordResetEmail(input.email)
-      .then(function () {
-        alert('Please check your email...')
-      }).catch(function (e) {
-        console.log(e)
-      })
-      }
-      const handleInputChange = (e) => {
+            .then(function () {
+                alert('Please check your email...')
+            }).catch(function (e) {
+                console.log(e)
+            })
+    }
+    const handleInputChange = (e) => {
         setInput({
-          ...input,
-          [e.target.name]: e.target.value
+            ...input,
+            [e.target.name]: e.target.value
         });
-      };
+    };
     const handleClickFaceAuth = () => {
 
         faceAuth()
@@ -85,7 +85,7 @@ export default function LogIn({ faceAuth, auth }) {
     const handleClickAuth = (e) => {
         e.preventDefault();
         const { email, password } = input;
-        auth(email,password)
+        auth(email, password)
     }
     const classes = useStyles();
 
@@ -97,18 +97,19 @@ export default function LogIn({ faceAuth, auth }) {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign in
+                Iniciar sesión
+
         </Typography>
                 <form className={classes.form}
-                onSubmit={(e)=>handleClickAuth(e)}
-                noValidate>
+                    onSubmit={(e) => handleClickAuth(e)}
+                    noValidate>
                     <TextField
                         variant="standard"
                         margin="normal"
                         required
                         fullWidth
                         id="email"
-                        label="Email Address"
+                        label="Email "
                         name="email"
                         autoComplete="email"
                         autoFocus
@@ -120,17 +121,14 @@ export default function LogIn({ faceAuth, auth }) {
                         required
                         fullWidth
                         name="password"
-                        label="Password"
+                        label="Contraseña"
                         type="password"
                         id="password"
                         autoComplete="current-password"
                         onChange={handleInputChange}
 
                     />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    />
+                   
                     <Button
                         type="submit"
                         fullWidth
@@ -138,23 +136,24 @@ export default function LogIn({ faceAuth, auth }) {
                         color="primary"
                         className={classes.submit}
                     >
-                        Sign In
+                        Iniciar sesión
+
           </Button>
                     <GoogleButton
                         className={classes.google}
                         onClick={handleClickFaceAuth}
                     >
-                        Log in
+                        Iniciar sesión
                     </GoogleButton>
                     <Grid container>
                         <Grid item xs>
-                            <a href="#" onClick={forgotPassword}   variant="body2">
-                                Forgot password?
+                            <a href="#" onClick={forgotPassword} variant="body2">
+                                Olvidaste la contraseña?
                              </a>
                         </Grid>
                         <Grid item>
-                            <Typography to="/signup" component={Link}  variant="body2">
-                                {"Don't have an account? Sign Up"}
+                            <Typography to="/signup" component={Link} variant="body2">
+                                {"No tenés cuenta? crea una"}
                             </Typography>
                         </Grid>
                     </Grid>

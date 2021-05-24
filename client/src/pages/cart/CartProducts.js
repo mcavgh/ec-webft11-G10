@@ -90,7 +90,7 @@ export default function Cart() {
                     color="primary"
                     onClick={() => dispatch(removeFromCart(product))}
                   >
-                    remove from cart
+                    eliminar del carrito
                   </Button>
                 </Grid>
                 <Grid xs={2} style={{ marginTop: 16 }}>
