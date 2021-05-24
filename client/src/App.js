@@ -48,7 +48,7 @@ function App() {
           <PrivateRoute path='/PageCheckoutOrders' component={PageCheckoutOrders} />
           <Route path='/PageCheckout' component={Checkout} />
           <PrivateRoute path='/ViewOrder/:id' component={ViewOrder} />
-          <PrivateRoute path='/FormAdmin' component={FormAdmin} />
+          <Route path='/FormAdmin' component={FormAdmin} />
           <Route path='/product/:id' component={Product} />
           <Route path="*" component={() => "404 NOT FOUND"} />
           </Switch>
