@@ -22,7 +22,7 @@ import PageLogIn from './pages/landingPage/LandingPage';
 import {Checkout} from './pages/checkOut/Checkout'
 import FormAdmin from './components/login/FormAdmin';
 import PageSignUp from './pages/landingPage/SignUp';
-
+import Catalog from './pages/catalog/Catalog';
 
 dotenv.config()
 axios.defaults.baseURL=process.env.REACT_APP_API || "http://localhost:3001"
@@ -34,6 +34,7 @@ function App() {
 
         <ThemeProvider theme={theme}>
         <Switch>
+        <Route exact path='/catalog' component={Catalog} />
           <Route exact path='/cart' component={CartProducts} />
           <Route exact path='/logIn' component={PageLogIn} />
           <Route exact path='/signUp' component={PageSignUp } />
