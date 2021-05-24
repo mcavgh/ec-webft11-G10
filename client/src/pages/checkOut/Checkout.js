@@ -83,11 +83,7 @@ export function Checkout() {
                     <Button onClick={handleBack} className={classes.button}> Volver</Button>
                   )}
                   {(activeStep === steps.length - 1)?(<Button onClick={()=>dispatch(orderToMp(cart,userId))} variant="contained" color="primary" className={classes.button}>
-                  Terminar Compra</Button>):(<Button onClick={handleNext} variant="contained" color="primary" className={classes.button}>Siguiente</Button>) }
-                  {/* <Button  onClick={handleNext} onClick={()=>dispatch(orderToMp(cart,userId))} variant="contained" color="primary" className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? 'Terminar Compra' : 'Next'}
-                  </Button> */}
+                  Terminar Compra</Button>):(<Button onClick={handleNext} variant="contained" color="primary" className={classes.button}>Siguiente</Button>)}
                 </div>
               </React.Fragment>
             )}
