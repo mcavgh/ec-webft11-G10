@@ -11,6 +11,10 @@ const userReducer = (state = initialState, action) => {
 
     
     case DELETE_USER:
+      return {
+        ...state,
+        userId: {},
+      };
     case  POST_USER_ACCESS:
     case POST_ADMIN:
     case GET_USER_BYID:
