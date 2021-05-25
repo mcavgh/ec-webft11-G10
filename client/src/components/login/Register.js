@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
@@ -7,16 +7,15 @@ import { Button } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     root: {
-      '& > *': {
-        margin: theme.spacing(1),
-      },
+        '& > *': {
+            margin: theme.spacing(1),
+        },
     },
-  }));
+}));
 
 function Register(props) {
-
     const classes = useStyles();
 
     const [name, setName] = useState('nombre');
@@ -32,97 +31,158 @@ function Register(props) {
         name: name,
         surname: surname,
         email: email,
-        contraseña: contraseña
-    }
+        contraseña: contraseña,
+    };
 
     function validateName(value) {
-    if(!/[aA-zZ].{4,}$/.test(value)) {
-          setErrorName("0");
+        if (!/[aA-zZ].{4,}$/.test(value)) {
+            setErrorName('0');
         } else {
-          setErrorName('');
+            setErrorName('');
         }
         setName(value);
-      }
+    }
     function validateSurname(value) {
-        if(!/[aA-zZ].{4,}$/.test(value)) {
-          setErrorSurname("0");
+        if (!/[aA-zZ].{4,}$/.test(value)) {
+            setErrorSurname('0');
         } else {
-          setErrorSurname('');
+            setErrorSurname('');
         }
         setSurname(value);
-      }
+    }
     function validateEmail(value) {
-        if(!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)) {
-          setErrorEmail("@");
+        if (
+            !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+                value
+            )
+        ) {
+            setErrorEmail('@');
         } else {
-          setErrorEmail('');
+            setErrorEmail('');
         }
         setEmail(value);
-      }
+    }
     function validatePassword(value) {
-        if(!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(value)) {
-          setErrorPassword("@");
+        if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(value)) {
+            setErrorPassword('@');
         } else {
-          setErrorPassword('');
+            setErrorPassword('');
         }
         setPassword(value);
-      }
-
-    const getDataRegister = () => {
-      if(errorName||errorSurname||errorEmail||errorPassword){
-        alert('Intente completar correctamente los campos.')
-      }
-        console.log(dataUserLogin)
     }
 
+    const getDataRegister = () => {
+        if (errorName || errorSurname || errorEmail || errorPassword) {
+            alert('Intente completar correctamente los campos.');
+        }
+        console.log(dataUserLogin);
+    };
+
     return (
-        <div >
-            <form className={classes.root} noValidate autoComplete="off">
+        <div>
+            <form className={classes.root} noValidate autoComplete='off'>
                 <div>
-                    <div >
+                    <div>
                         <FormControl>
                             <div>
-                            <InputLabel htmlFor="component-simple">Name</InputLabel>
-                            <Input onChange={e=>validateName(e.target.value)}/>
-                            {!errorName ? <CheckIcon/> : <span>{<CloseIcon/>}</span>}
+                                <InputLabel htmlFor='component-simple'>
+                                    Name
+                                </InputLabel>
+                                <Input
+                                    onChange={e => validateName(e.target.value)}
+                                />
+                                {!errorName ? (
+                                    <CheckIcon />
+                                ) : (
+                                    <span>{<CloseIcon />}</span>
+                                )}
                             </div>
                         </FormControl>
-                        {!errorName ? null : <span>Completa el campo con tu nombre</span>}
+                        {!errorName ? null : (
+                            <span>Completa el campo con tu nombre</span>
+                        )}
                     </div>
-                    <div >
+                    <div>
                         <FormControl>
                             <div>
-                                <InputLabel htmlFor="component-simple">Surname</InputLabel>
-                                <Input onChange={e=>validateSurname(e.target.value)} />
-                                {!errorSurname ? <CheckIcon/> : <span>{<CloseIcon/>}</span>}
+                                <InputLabel htmlFor='component-simple'>
+                                    Surname
+                                </InputLabel>
+                                <Input
+                                    onChange={e =>
+                                        validateSurname(e.target.value)
+                                    }
+                                />
+                                {!errorSurname ? (
+                                    <CheckIcon />
+                                ) : (
+                                    <span>{<CloseIcon />}</span>
+                                )}
                             </div>
                         </FormControl>
-                        {!errorSurname ? null : <span>Completa el campo con tu apellido</span>}
+                        {!errorSurname ? null : (
+                            <span>Completa el campo con tu apellido</span>
+                        )}
                     </div>
-                    <div >
-                    <FormControl>
-                        <div>
-                        <InputLabel htmlFor="component-simple">e-mail</InputLabel>
-                        <Input onChange={e=>validateEmail(e.target.value)}/>
-                        {!errorEmail ? <CheckIcon/> : <span>{<CloseIcon/>}</span>}
-                        </div>
-                    </FormControl>
-                        {!errorEmail ? null : <span>Completa el campo con un email valido</span>}
+                    <div>
+                        <FormControl>
+                            <div>
+                                <InputLabel htmlFor='component-simple'>
+                                    e-mail
+                                </InputLabel>
+                                <Input
+                                    onChange={e =>
+                                        validateEmail(e.target.value)
+                                    }
+                                />
+                                {!errorEmail ? (
+                                    <CheckIcon />
+                                ) : (
+                                    <span>{<CloseIcon />}</span>
+                                )}
+                            </div>
+                        </FormControl>
+                        {!errorEmail ? null : (
+                            <span>Completa el campo con un email valido</span>
+                        )}
                     </div>
-                    <div >
-                    <FormControl>
-                        <div>
-                        <InputLabel type='password' htmlFor="component-simple">Password</InputLabel>
-                        <Input type='password' onChange={e=>validatePassword(e.target.value)}/>
-                        {!errorPassword ? <CheckIcon/> : <span>{<CloseIcon/>}</span>}
-                        </div>
-                    </FormControl>
-                        {!errorPassword ? null : <span>La contraseña debe tener 8 caracteres, algun numero y alguna mayuscula</span>}
+                    <div>
+                        <FormControl>
+                            <div>
+                                <InputLabel
+                                    type='password'
+                                    htmlFor='component-simple'
+                                >
+                                    Password
+                                </InputLabel>
+                                <Input
+                                    type='password'
+                                    onChange={e =>
+                                        validatePassword(e.target.value)
+                                    }
+                                />
+                                {!errorPassword ? (
+                                    <CheckIcon />
+                                ) : (
+                                    <span>{<CloseIcon />}</span>
+                                )}
+                            </div>
+                        </FormControl>
+                        {!errorPassword ? null : (
+                            <span>
+                                La contraseña debe tener 8 caracteres, algun
+                                numero y alguna mayúscula
+                            </span>
+                        )}
                     </div>
                 </div>
-                <Button onClick={()=>{getDataRegister()}}>
-                    Register
-                </Button> 
+                <Button
+                    onClick={() => {
+                        getDataRegister();
+                    }}
+                >
+                    Registrarse
+                </Button>
             </form>
         </div>
     );

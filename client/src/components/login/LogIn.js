@@ -3,8 +3,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -12,36 +12,34 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import GoogleButton from 'react-google-button'
-import app from "../../firebase/index.js";
-
+import GoogleButton from 'react-google-button';
+import app from '../../firebase/index.js';
 
 function Copyright() {
     return (
-        <Typography variant="body2" color="textSecondary" align="center">
+        <Typography variant='body2' color='textSecondary' align='center'>
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-      </Link>{' '}
+            <Link color='inherit' href='https://ec-webft11-g10.vercel.app/'>
+                EATX
+            </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
         </Typography>
     );
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     paper: {
         marginTop: theme.spacing(8),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: "white",
+        backgroundColor: 'white',
         padding: theme.spacing(7),
-        borderRadius: "4px"
-
+        borderRadius: '4px',
     },
     google: {
-        minWidth: "100%"
+        minWidth: '100%',
     },
     avatar: {
         margin: theme.spacing(1),
@@ -58,87 +56,85 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LogIn({ faceAuth, auth }) {
     const [input, setInput] = useState({
-        password: "",
-        email: ""
+        password: '',
+        email: '',
     });
 
-
-
-    const forgotPassword = (email) => {
-        app.auth().sendPasswordResetEmail(input.email)
+    const forgotPassword = email => {
+        app.auth()
+            .sendPasswordResetEmail(input.email)
             .then(function () {
-                alert('Please check your email...')
-            }).catch(function (e) {
-                console.log(e)
+                alert('Por favor, revisa tu email...');
             })
-    }
-    const handleInputChange = (e) => {
+            .catch(function (e) {
+                console.log(e);
+            });
+    };
+    const handleInputChange = e => {
         setInput({
             ...input,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         });
     };
     const handleClickFaceAuth = () => {
-
-        faceAuth()
-    }
-    const handleClickAuth = (e) => {
+        faceAuth();
+    };
+    const handleClickAuth = e => {
         e.preventDefault();
         const { email, password } = input;
-        auth(email, password)
-    }
+        auth(email, password);
+    };
     const classes = useStyles();
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container component='main' maxWidth='xs'>
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">
-                Iniciar sesión
-
-        </Typography>
-                <form className={classes.form}
-                    onSubmit={(e) => handleClickAuth(e)}
-                    noValidate>
+                <Typography component='h1' variant='h5'>
+                    Iniciar sesión
+                </Typography>
+                <form
+                    className={classes.form}
+                    onSubmit={e => handleClickAuth(e)}
+                    noValidate
+                >
                     <TextField
-                        variant="standard"
-                        margin="normal"
+                        variant='standard'
+                        margin='normal'
                         required
                         fullWidth
-                        id="email"
-                        label="Email "
-                        name="email"
-                        autoComplete="email"
+                        id='email'
+                        label='Email'
+                        name='email'
+                        autoComplete='email'
                         autoFocus
                         onChange={handleInputChange}
                     />
                     <TextField
-                        variant="standard"
-                        margin="normal"
+                        variant='standard'
+                        margin='normal'
                         required
                         fullWidth
-                        name="password"
-                        label="Contraseña"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
+                        name='password'
+                        label='Contraseña'
+                        type='password'
+                        id='password'
+                        autoComplete='current-password'
                         onChange={handleInputChange}
-
                     />
-                   
+
                     <Button
-                        type="submit"
+                        type='submit'
                         fullWidth
-                        variant="contained"
-                        color="primary"
+                        variant='contained'
+                        color='primary'
                         className={classes.submit}
                     >
                         Iniciar sesión
-
-          </Button>
+                    </Button>
                     <GoogleButton
                         className={classes.google}
                         onClick={handleClickFaceAuth}
@@ -147,13 +143,21 @@ export default function LogIn({ faceAuth, auth }) {
                     </GoogleButton>
                     <Grid container>
                         <Grid item xs>
-                            <a href="#" onClick={forgotPassword} variant="body2">
-                                Olvidaste la contraseña?
-                             </a>
+                            <a
+                                href='#'
+                                onClick={forgotPassword}
+                                variant='body2'
+                            >
+                                Olvidé la contraseña
+                            </a>
                         </Grid>
                         <Grid item>
-                            <Typography to="/signup" component={Link} variant="body2">
-                                {"No tenés cuenta? crea una"}
+                            <Typography
+                                to='/signup'
+                                component={Link}
+                                variant='body2'
+                            >
+                                {'Crear cuenta'}
                             </Typography>
                         </Grid>
                     </Grid>

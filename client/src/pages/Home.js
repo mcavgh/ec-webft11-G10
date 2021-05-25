@@ -1,12 +1,12 @@
-import React from 'react'
-import AppBar from '../components/appBar/AppBar'
-import CategoryCatalog from '../components/category/CatalogCategory'
+import React from 'react';
+import AppBar from '../components/appBar/AppBar';
+// import CategoryCatalog from '../components/category/CatalogCategory';
 import Banner from '../components/banner/BannerImage';
 import Footer from '../components/footer/Footer';
 import Catalog from './catalog/Catalog';
 // import Catalog from '../components/Product/catalog/Catalog';
 
-export const Home = (props) => {
+export const Home = props => {
     return (
         <div>
             <AppBar />
@@ -14,5 +14,5 @@ export const Home = (props) => {
             <Catalog />
             <Footer />
         </div>
-    )
-}
+    );
+};

@@ -1,5 +1,5 @@
 import React from 'react';
-import AppBar from '../../components/appBar/AppBar'
+import AppBar from '../../components/appBar/AppBar';
 // import OrderView from '../../components/admin/OrderView'
 // import Orders from '../../components/admin/Orders';
 // import Dashboard from '../../components/admin/Dashboard';
@@ -10,20 +10,18 @@ import Dashboard from '../../components/admin/Dashboard';
 // import ViewOrder from "../../components/admin/ViewOrder"
 // import Cardorder from '../../components/admin/Cardorder';
 
-
 function PageCheckoutOrders(props) {
     return (
         <div>
-            <AppBar/>
+            <AppBar />
             {/* <OrderView/> */}
             {/* <Orders/> */}
             {/* < Deposits/> */}
             {/* <Chart/> */}
             {/* <mainListItems/> */}
-            <Dashboard/>
+            <Dashboard />
             {/* <ViewOrder/> */}
             {/* <Cardorder/> */}
-
         </div>
     );
 }

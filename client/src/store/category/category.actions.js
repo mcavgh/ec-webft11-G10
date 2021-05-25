@@ -1,108 +1,137 @@
-import axios from 'axios'
-import Swal from 'sweetalert2'
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
-export const GET_CATEGORY = "GET_CATEGORY";
-export const DELETE_CATEGORY_BY_ID = "DELETE_CATEGORY_BY_ID"
-export const POST_ADD_CATEGORY = 'POST_ADD_CATEGORY'
-export const SEARCH_PRODUCT_REQUEST_CATEGORIES = "SEARCH_PRODUCT_REQUEST_CATEGORIES";
-export const SEARCH_PRODUCT_SUCCESS_CATEGORIES = "SEARCH_PRODUCT_SUCCESS_CATEGORIES";
-export const SEARCH_PRODUCT_FAILURE_CATEGORIES = "SEARCH_PRODUCT_FAILURE_CATEGORIES";
-export const EDIT_CATEGORY_BY_ID = 'EDIT_CATEGORY_BY_ID'
+export const GET_CATEGORY = 'GET_CATEGORY';
+export const DELETE_CATEGORY_BY_ID = 'DELETE_CATEGORY_BY_ID';
+export const POST_ADD_CATEGORY = 'POST_ADD_CATEGORY';
+export const SEARCH_PRODUCT_REQUEST_CATEGORIES =
+    'SEARCH_PRODUCT_REQUEST_CATEGORIES';
+export const SEARCH_PRODUCT_SUCCESS_CATEGORIES =
+    'SEARCH_PRODUCT_SUCCESS_CATEGORIES';
+export const SEARCH_PRODUCT_FAILURE_CATEGORIES =
+    'SEARCH_PRODUCT_FAILURE_CATEGORIES';
+export const EDIT_CATEGORY_BY_ID = 'EDIT_CATEGORY_BY_ID';
 
 export const getCategory = () => dispatch => {
-    let URL = "/category/get"
-    axios.get(URL)
+    let URL = '/category/get';
+    axios
+        .get(URL)
         .then(res => {
-            dispatch({ type: 'GET_CATEGORY', payload: res.data })
-        }).catch(err => {
-            dispatch({ type: 'GET_CATEGORY', payload: err })
+            dispatch({ type: 'GET_CATEGORY', payload: res.data });
         })
-}
+        .catch(err => {
+            dispatch({ type: 'GET_CATEGORY', payload: err });
+        });
+};
 
 export const putEditCategory = (values, categoryId) => {
-    return (dispatch) => {
+    return dispatch => {
         const options = {
             method: 'PUT',
             url: `/category/${categoryId}`,
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
-            data: values
+            data: values,
         };
-        return axios.request(options).then(function (values) {
-            console.log(values.data)
-            Swal.fire(
-                'Good job!',
-                'You updated the product succesfully!',
-                'success'
-            )
-            dispatch({type: EDIT_CATEGORY_BY_ID})
-        })
-            .catch(error => {
-                console.error(error)
-                Swal.fire({
-                    icon: 'error', title: 'Oops...', text: 'Something went wrong!',
-                })
+        return axios
+            .request(options)
+            .then(function (values) {
+                console.log(values.data);
+                Swal.fire(
+                    '¡Excelente!',
+                    'Actualizaste la categoría exitósamente.',
+                    'success'
+                );
+                dispatch({ type: EDIT_CATEGORY_BY_ID });
             })
-    }
-}
+            .catch(error => {
+                console.error(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ups...',
+                    text: 'Algo anduvo mal',
+                });
+            });
+    };
+};
 
-export const putDeleteCategory = (id) => dispatch => {
-    axios.delete(`/category/${id}`)
+export const putDeleteCategory = id => dispatch => {
+    axios
+        .delete(`/category/${id}`)
         .then(res => {
-            dispatch({ type: DELETE_CATEGORY_BY_ID, payload: res })
-            dispatch(getCategory())
-            Swal.fire('Good job!', 'You delete the product succesfully!', 'success')
+            dispatch({ type: DELETE_CATEGORY_BY_ID, payload: res });
+            dispatch(getCategory());
+            Swal.fire(
+                '¡Excelente!',
+                'Eliminaste la categoría exitósamente.',
+                'success'
+            );
         })
         .catch(error => {
-            console.log(error)
+            console.log(error);
             Swal.fire({
-                icon: 'error', title: 'Oops...', text: 'Something went wrong!',
-            })
-        })
-}
+                icon: 'error',
+                title: 'Ups...',
+                text: 'Algo anduvo mal',
+            });
+        });
+};
 
-export const postAddCategory = (category) => dispatch => {
-    let URL = `/category`
-    axios.post(URL, category, { headers: { 'Content-Type': 'application/json' } })
-        .then(res => {
-            dispatch({ type: 'POST_ADD_CATEGORY', payload: res })
-            console.log(res)
-            Swal.fire('Good job!', 'You updated the product succesfully!', 'success')
-        }).catch(err => {
-            dispatch({ type: 'POST_ADD_CATEGORY', payload: err })
-            Swal.fire({ icon: 'error', title: 'Oops...', text: 'Something went wrong!', })
+export const postAddCategory = category => dispatch => {
+    let URL = `/category`;
+    axios
+        .post(URL, category, {
+            headers: { 'Content-Type': 'application/json' },
         })
-}
+        .then(res => {
+            dispatch({ type: 'POST_ADD_CATEGORY', payload: res });
+            console.log(res);
+            Swal.fire(
+                '¡Excelente!',
+                'Agregaste la categoría exitósamente.',
+                'success'
+            );
+        })
+        .catch(err => {
+            dispatch({ type: 'POST_ADD_CATEGORY', payload: err });
+            Swal.fire({
+                icon: 'error',
+                title: 'Ups...',
+                text: 'Algo anduvo mal',
+            });
+        });
+};
 
 export const searchProductRequest = () => {
     return {
         type: 'SEARCH_PRODUCT_REQUEST_CATEGORIES',
-    }
-}
-export const searchProductSuccess = (products) => {
+    };
+};
+export const searchProductSuccess = products => {
     return {
         type: 'SEARCH_PRODUCT_SUCCESS_CATEGORIES',
-        payload: products
-    }
-}
-export const searchProductFailure = (error) => {
+        payload: products,
+    };
+};
+export const searchProductFailure = error => {
     return {
         type: 'SEARCH_PRODUCT_FAILURE_CATEGORIES',
-        payload: error
-    }
-}
+        payload: error,
+    };
+};
 
-export const searchProducts = (name) => {
-    return (dispatch) => {
-        dispatch(searchProductRequest())
-        axios.get(`/category/productsbycategories/${name}`)
+export const searchProducts = name => {
+    return dispatch => {
+        dispatch(searchProductRequest());
+        axios
+            .get(`/category/productsbycategories/${name}`)
             .then(products => {
-                console.log(products.data[0].products)
-                dispatch(searchProductSuccess(products.data[0].products))
+                console.log(products.data[0].products);
+                dispatch(searchProductSuccess(products.data[0].products));
             })
             .catch(error => {
-                dispatch(searchProductFailure(error))
-            })
-    }
-}
+                dispatch(searchProductFailure(error));
+            });
+    };
+};
