@@ -64,7 +64,7 @@ export default function Cart() {
                 <Grid className={classes.input} xs={2}>
                   <Typography component="h3" variant="h6"></Typography>
                   <IconButton
-                    onClick={() => dispatch(addToCart(product))}
+                    onClick={() => product.count<product.stock&&dispatch(addToCart(product))}
                     color="primary"
                     aria-label="add to shopping cart"
                   >
