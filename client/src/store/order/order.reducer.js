@@ -12,6 +12,7 @@ import {
 var initialState = {
   orders: [],
   ordersUser: [],
+  orderId:'',
   filterorders: [],
 };
 
@@ -40,6 +41,10 @@ const orderReducer = (state = initialState, action) => {
       };
     case GET_PRODUCTS_OF_USER:
     case GET_ORDER_BY_ID:
+      return {
+        ...state,
+        orderId: action.payload,
+      };
     case GET_ORDER_BY_USER_ID:
       return {
         ...state,
