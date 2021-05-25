@@ -21,10 +21,7 @@ export default function Cart() {
   const total = useSelector((state) => state.cart.total);
   const userId = useSelector((state) => state.userReducer.userId.id);
  
-
   const { currentUser } = useContext(AuthContext);
-
-  
 
   useEffect(() => {
     dispatch(getTotal());

@@ -14,8 +14,8 @@ export const GET_FILTER_ORDERS = "GET_FILTER_ORDERS";
 export const findOrCreateOrders = (userId) => {
   return (dispatch) => {
     axios.post(`/orders/cart/${userId}`).then((res) => {
-      //findOrCreate
-      dispatch(updateOrder(res.data.id));
+      dispatch(updateOrder(res.data.id))
+      dispatch({type: GET_ORDER_BY_ID, payload:res.data.id})
     });
   };
 };
@@ -28,26 +28,19 @@ export const updateOrder = (orderId) => {
       price: total,
       quantity: cartQuantity,
     };
-    axios
-      .put(`/orders/${orderId}/modifica`, newOrder)
+    axios.put(`/orders/${orderId}/modifica`, newOrder)
       .then(async (resp) => {
-        //findOrCreate
         await cartItems.forEach((product) => {
-          axios
-            .post(
-              `/cart/${product.id}/order/${resp.data.data.id}/quantity/${product.count}`
-            )
-            .then((res) => {});
+          axios.post(`/cart/${product.id}/order/${resp.data.data.id}/quantity/${product.count}`
+          ).then((res) => {});
         });
-      })
-      .then((resp) => {
+      }).then((resp) => {
         Swal.fire(
           "Muy bien!",
           "Completa los datos para terminar la compra",
           "success"
         );
-      })
-      .catch((err) => console.log(err));
+      }).catch((err) => console.log(err));
   };
 };
 
@@ -79,7 +72,6 @@ export const FilterOrders = (estado) => {
           ? res.data.filter((e) => e.state === `${estado}`)
           : res.data,
       });
-      //  console.log("======================>",res.data.filter(e=>e.state===`${estado}`))
     });
   };
 };
@@ -109,13 +101,6 @@ export const putOrderById = (id, data) => {
       .then((payload) => {
         dispatch({ type: PUT_ORDER_BY_ID, payload: payload.data });
         dispatch(getOrderById(id));
-        // Swal.fire({
-        //   position: 'center',
-        //   icon: 'success',
-        //   title: 'tu orden se a modificado',
-        //   showConfirmButton: false,
-        //   timer: 1500
-        // })
       })
       .catch((err) => console.log(err));
   };
@@ -127,22 +112,22 @@ export const cleanCart = (id) => {
       .delete(`/cart/${id}/cart`)
       .then((payload) => {
         dispatch({ type: DELETE_CART, payload: payload });
-        // Swal.fire({
-        //   position: 'center',
-        //   icon: 'success',
-        //   title: 'tu orden se cancelado',
-        //   showConfirmButton: false,
-        //   timer: 1500
-        // })
       })
       .catch((err) => console.log(err));
   };
 };
 
+export const putDataAddress = (data, id) => {
+  return function(disptch) {
+    axios.put(`orders/${id}/modifica`, data)
+      .then((res) => {console.log(res)})
+      .catch((err) => {console.log(err)});
+  };
+};
+
 export const orderToMp = (products, id) => {
   return function (dispatch) {
-    return axios
-      .post(`mercadopago/${id}`, { products })
+    return axios.post(`mercadopago/${id}`, { products })
       .then((res) => {
         console.log(res.data.init_point);
       })

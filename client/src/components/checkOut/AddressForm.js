@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import {useDispatch, useSelector} from "react-redux"
+import {putDataAddress} from '../../store/order/order.action'
 
 export default function AddressForm() {
   const dispatch = useDispatch()
@@ -14,6 +15,7 @@ export default function AddressForm() {
   const [state, setState]=React.useState('')
   const [zip, setZip]=React.useState('')
   const [country, setCountry]=React.useState('')
+  const orderId = useSelector((state) => state.orderReducer?.orderId);
 
   const handleChangeName = event => {
     setFirstName(event.target.value);
@@ -36,14 +38,9 @@ export default function AddressForm() {
   const handleChangeCountry = event => {
     setCountry(event.target.value)
   }
-  useEffect(()=>{
-    console.log('firstName',firstName)
-    console.log('lastName',lastName)
-    console.log('address',address)
-    console.log('number',number)
-    console.log('state',state)
-    console.log('zip',zip)
-    console.log('country',country)
+  const data={address:address,state:'procesando'}
+  useEffect(()=>{ 
+    dispatch(putDataAddress(data, orderId))  
   },[country])
 
   return (
