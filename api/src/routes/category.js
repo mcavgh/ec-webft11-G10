@@ -7,7 +7,9 @@ const { searchProductsByCategoryName } = require('../controllers/product');
 server.get('/get', (req, res, next) => {
     category.read()
         .then(r => res.send(r))
-        .catch(next);
+        .catch((error) => {
+            res.status(400).json(error);
+        });
 });
 //TRAE LOS PRODUCTOS DE LA CATEGORIA
 server.get("/productsbycategories/:categoryName", (req, res, next) => {
@@ -23,11 +25,11 @@ server.get("/productsbycategories/:categoryName", (req, res, next) => {
 server.post('/', (req, res, next) => {
     const { name, description } = req.body
     if (!name || !description) {
-        return res.error()
+        return res.send("no hay nombre o descripcion")
     }
     category.create(req.body)
         .then(r => res.send(r))
-        .catch(next);
+        .catch(err=>console.error(err));
 })
 // MODIFICA UNA CATEGORIA |
 //-------------------------
@@ -35,25 +37,29 @@ server.put('/:id', (req, res, next) => {
     const { id } = req.params;
     const { name, description } = req.body;
     if (!id) {
-        return res.error()
+        return res.send("no hay id")
     }
     if (!name || !description) {
-        return res.error()
+        return res.send("no hay nombre o descripcion")
     }
     category.update(id, req.body)
         .then(r => res.send(r))
-        .catch(next);
+        .catch((error) => {
+            res.status(400).json(error);
+        });
 })
 // ELIMINA UNA CATEGORIA |
 //------------------------
 server.delete('/:id', (req, res, next) => {
     const { id } = req.params;
     if (!id) {
-        return res.error()
+        return res.send("no hay id")
     }
     category.delete(id)
         .then(r => res.send(r))
-        .catch(next);
+        .catch((error) => {
+            res.status(400).json(error);
+        });
 })
 
 module.exports = server;
