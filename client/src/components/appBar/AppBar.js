@@ -22,16 +22,18 @@ import { getUsersByEmailId } from '../../store/user/user.action';
 export default function PersistentDrawerLeft() {
     const history = useHistory()
     const cartQuantity = useSelector(state => state.cart.cartQuantity)
+    const user = useSelector(state => state.userReducer.userId)
+
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const dispatch = useDispatch()
 
     const { currentUser } = useContext(AuthContext)
-  
+
     useEffect(() => {
         dispatch(getQuantity())
-        currentUser?.email&&dispatch(getUsersByEmailId(currentUser.email))
+        currentUser?.email && dispatch(getUsersByEmailId(currentUser.email))
     }, [dispatch])
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -73,7 +75,7 @@ export default function PersistentDrawerLeft() {
                 })}
             >
                 <Toolbar >
-                    <IconButton
+                    {user?.access === "Admin" && <IconButton
                         color="inherit"
                         aria-label="open drawer"
                         onClick={handleDrawerOpen}
@@ -82,6 +84,7 @@ export default function PersistentDrawerLeft() {
                     >
                         <MenuIcon />
                     </IconButton>
+                    }
                     <Button onClick={refreshSearch} variant="h6" color='inherit' to="/" component={Link}>
                         eatx
                     </Button>
@@ -133,7 +136,7 @@ export default function PersistentDrawerLeft() {
                             <div>
                                 <MenuItem onClick={handleClose}>Perfil</MenuItem>
                                 <MenuItem onClick={() => app.auth().signOut()
-                                    .then(res =>dispatch({type:"DELETE_USER"}), handleClose())
+                                    .then(res => dispatch({ type: "DELETE_USER" }), handleClose())
 
                                 }>Log out</MenuItem>
                             </div>
@@ -154,6 +157,7 @@ export default function PersistentDrawerLeft() {
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>
+
                 </div>
                 <Divider />
                 <List >
