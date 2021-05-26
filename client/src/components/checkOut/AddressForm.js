@@ -5,24 +5,17 @@ import TextField from '@material-ui/core/TextField';
 import {useDispatch, useSelector} from "react-redux"
 import {putDataAddress} from '../../store/order/order.action'
 
-export default function AddressForm() {
-    // const dispatch = useDispatch()
-
-  const [firstName, setFirstName]=React.useState('')
-  const [lastName, setLastName]=React.useState('')
+export default function AddressForm({setFormValidate}) {
+  const dispatch = useDispatch()
+  
   const [address, setAddress]=React.useState('')
   const [number, setNumber]=React.useState('')
   const [state, setState]=React.useState('')
   const [zip, setZip]=React.useState('')
   const [country, setCountry]=React.useState('')
   const orderId = useSelector((state) => state.orderReducer?.orderId);
-
-  const handleChangeName = event => {
-    setFirstName(event.target.value);
-  };
-  const handleChangeLastName = event => {
-    setLastName(event.target.value)
-  }
+  const addressData=address+number+country+state+zip
+  
   const handleChangeAddress = event => {
     setAddress(event.target.value)
   }
@@ -38,93 +31,38 @@ export default function AddressForm() {
   const handleChangeCountry = event => {
     setCountry(event.target.value)
   }
-  const data={address:address,state:'procesando'}
+  const data={address:addressData,state:'procesando'}
   useEffect(()=>{ 
+    setFormValidate(addressData)
     dispatch(putDataAddress(data, orderId))  
   },[country])
 
-    return (
-        <React.Fragment>
-            <Typography variant='h6' gutterBottom>
-                Detalles de envio
-            </Typography>
-            <Grid container spacing={3}>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        onChange={handleChangeName}
-                        id='firstName'
-                        name='firstName'
-                        label='Nombre'
-                        fullWidth
-                        autoComplete='given-name'
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        onChange={handleChangeLastName}
-                        id='lastName'
-                        name='lastName'
-                        label='Apellido'
-                        fullWidth
-                        autoComplete='family-name'
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        required
-                        onChange={handleChangeAddress}
-                        id='address1'
-                        name='address1'
-                        label='Domicilio'
-                        fullWidth
-                        autoComplete='shipping address-line1'
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        onChange={handleChangeNumber}
-                        id='number'
-                        name='number'
-                        label='Numeración'
-                        fullWidth
-                        autoComplete='number'
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        onChange={handleChangeState}
-                        id='state'
-                        name='state'
-                        label='Provincia'
-                        fullWidth
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        onChange={handleChangeZip}
-                        id='zip'
-                        name='zip'
-                        label='Código postal'
-                        fullWidth
-                        autoComplete='shipping postal-code'
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        onChange={handleChangeCountry}
-                        id='country'
-                        name='country'
-                        label='Ciudad'
-                        fullWidth
-                        autoComplete='shipping country'
-                    />
-                </Grid>
-            </Grid>
-        </React.Fragment>
-    );
+  return (
+    <React.Fragment>
+      <Typography variant="h6" gutterBottom>
+        Detalles de envio
+      </Typography>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <TextField required onChange={handleChangeAddress} id="address1" name="address1" label="Domicilio" fullWidth autoComplete="shipping address-line1"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField required onChange={handleChangeNumber} id="number" name="number" label="Numeración" fullWidth autoComplete="number" type='number'
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField onChange={handleChangeState} id="state" name="state" label="Provincia" fullWidth />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField required onChange={handleChangeZip} id="zip" name="zip" label="Código postal" fullWidth autoComplete="shipping postal-code" type='number'
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField required onChange={handleChangeCountry} id="country"  name="country" label="Ciudad" fullWidth autoComplete="shipping country"
+          />
+        </Grid>
+      </Grid>
+    </React.Fragment>
+  );
 }
