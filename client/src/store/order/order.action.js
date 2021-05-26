@@ -12,12 +12,12 @@ export const POST_ORDERS = 'POST_ORDERS';
 export const GET_FILTER_ORDERS = 'GET_FILTER_ORDERS';
 
 export const findOrCreateOrders = userId => {
-    return dispatch => {
-        axios.post(`/orders/cart/${userId}`).then(res => {
-            //findOrCreate
-            dispatch(updateOrder(res.data.id));
-        });
-    };
+  return (dispatch) => {
+    axios.post(`/orders/cart/${userId}`).then((res) => {
+      dispatch(updateOrder(res.data.id))
+      dispatch({type: GET_ORDER_BY_ID, payload:res.data.id})
+    });
+  };
 };
 export const updateOrder = orderId => {
     return (dispatch, getState) => {
@@ -49,6 +49,21 @@ export const updateOrder = orderId => {
             })
             .catch(err => console.log(err));
     };
+
+    axios.put(`/orders/${orderId}/modifica`, newOrder)
+      .then(async (resp) => {
+        await cartItems.forEach((product) => {
+          axios.post(`/cart/${product.id}/order/${resp.data.data.id}/quantity/${product.count}`
+          ).then((res) => {});
+        });
+      }).then((resp) => {
+        Swal.fire(
+          "Muy bien!",
+          "Completa los datos para terminar la compra",
+          "success"
+        );
+      }).catch((err) => console.log(err));
+  };
 };
 
 export const addProducttoOrder = (orderId, productId) => {
@@ -70,18 +85,17 @@ export const getAllOrders = () => {
     };
 };
 
-export const FilterOrders = estado => {
-    return dispatch => {
-        axios.get(`/orders/`).then(res => {
-            dispatch({
-                type: GET_FILTER_ORDERS,
-                payload: estado
-                    ? res.data.filter(e => e.state === `${estado}`)
-                    : res.data,
-            });
-            //  console.log("======================>",res.data.filter(e=>e.state===`${estado}`))
-        });
-    };
+export const FilterOrders = (estado) => {
+  return (dispatch) => {
+    axios.get(`/orders/`).then((res) => {
+      dispatch({
+        type: GET_FILTER_ORDERS,
+        payload: estado
+          ? res.data.filter((e) => e.state === `${estado}`)
+          : res.data,
+      });
+    });
+  };
 };
 
 export const getOrderById = id => {
@@ -103,40 +117,34 @@ export const getOrderByUserId = id => {
 };
 
 export const putOrderById = (id, data) => {
-    return function (dispatch) {
-        axios
-            .put(`/orders/${id}/modifica`, data)
-            .then(payload => {
-                dispatch({ type: PUT_ORDER_BY_ID, payload: payload.data });
-                dispatch(getOrderById(id));
-                // Swal.fire({
-                //   position: 'center',
-                //   icon: 'success',
-                //   title: 'tu orden se a modificado',
-                //   showConfirmButton: false,
-                //   timer: 1500
-                // })
-            })
-            .catch(err => console.log(err));
-    };
+  return function (dispatch) {
+    axios
+      .put(`/orders/${id}/modifica`, data)
+      .then((payload) => {
+        dispatch({ type: PUT_ORDER_BY_ID, payload: payload.data });
+        dispatch(getOrderById(id));
+      })
+      .catch((err) => console.log(err));
+  };
 };
 
-export const cleanCart = id => {
-    return function (dispatch) {
-        axios
-            .delete(`/cart/${id}/cart`)
-            .then(payload => {
-                dispatch({ type: DELETE_CART, payload: payload });
-                // Swal.fire({
-                //   position: 'center',
-                //   icon: 'success',
-                //   title: 'tu orden se cancelado',
-                //   showConfirmButton: false,
-                //   timer: 1500
-                // })
-            })
-            .catch(err => console.log(err));
-    };
+export const cleanCart = (id) => {
+  return function (dispatch) {
+    axios
+      .delete(`/cart/${id}/cart`)
+      .then((payload) => {
+        dispatch({ type: DELETE_CART, payload: payload });
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+export const putDataAddress = (data, id) => {
+  return function(disptch) {
+    axios.put(`orders/${id}/modifica`, data)
+      .then((res) => {console.log(res)})
+      .catch((err) => {console.log(err)});
+  };
 };
 
 export const orderToMp = (products, id) => {

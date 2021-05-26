@@ -1,23 +1,16 @@
 import axios from 'axios';
 
-export const GET_CART = 'GET_CART';
-export const GET_USER_BYID = 'GET_USER_BYID';
-export const GET_USERS = 'GET_USERS';
-export const POST_USER = 'POST_USER';
-export const PUT_USER = 'PUT_USER';
-export const DELETE_USER = 'DELETE_USER';
-export const SELECT_USER = 'SELECT_USER';
-export const CREATE_USER = 'CREATE_USER';
-export const GET_ID_BYEMAIL = 'GET_ID_BYEMAIL';
-export const POST_ADMIN = 'POST_ADMIN';
-export const POST_USER_ACCESS = 'POST_USER_ACCESS';
-export const POST_USER_DATA = 'GET_USER_DATA';
-
-export const postUserData = userData => {
-    return dispatch => {
-        dispatch({ type: POST_USER_DATA, payload: userData });
-    };
-};
+export const GET_CART = "GET_CART";
+export const GET_USER_BYID = "GET_USER_BYID";
+export const GET_USERS = "GET_USERS";
+export const POST_USER = "POST_USER";
+export const PUT_USER = "PUT_USER";
+export const DELETE_USER = "DELETE_USER";
+export const SELECT_USER = "SELECT_USER";
+export const CREATE_USER = "CREATE_USER";
+export const GET_ID_BYEMAIL = "GET_ID_BYEMAIL";
+export const POST_ADMIN = "POST_ADMIN";
+export const POST_USER_ACCESS = "POST_USER_ACCESS";
 
 export const postUser = (displayName, email) => {
     return (dispatch, getState) => {

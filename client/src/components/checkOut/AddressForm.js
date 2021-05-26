@@ -2,49 +2,46 @@ import React, { useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-// import {useDispatch, useSelector} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
+import {putDataAddress} from '../../store/order/order.action'
 
 export default function AddressForm() {
     // const dispatch = useDispatch()
 
-    const [firstName, setFirstName] = React.useState('');
-    const [lastName, setLastName] = React.useState('');
-    const [address, setAddress] = React.useState('');
-    const [number, setNumber] = React.useState('');
-    const [state, setState] = React.useState('');
-    const [zip, setZip] = React.useState('');
-    const [country, setCountry] = React.useState('');
+  const [firstName, setFirstName]=React.useState('')
+  const [lastName, setLastName]=React.useState('')
+  const [address, setAddress]=React.useState('')
+  const [number, setNumber]=React.useState('')
+  const [state, setState]=React.useState('')
+  const [zip, setZip]=React.useState('')
+  const [country, setCountry]=React.useState('')
+  const orderId = useSelector((state) => state.orderReducer?.orderId);
 
-    const handleChangeName = event => {
-        setFirstName(event.target.value);
-    };
-    const handleChangeLastName = event => {
-        setLastName(event.target.value);
-    };
-    const handleChangeAddress = event => {
-        setAddress(event.target.value);
-    };
-    const handleChangeNumber = event => {
-        setNumber(event.target.value);
-    };
-    const handleChangeState = event => {
-        setState(event.target.value);
-    };
-    const handleChangeZip = event => {
-        setZip(event.target.value);
-    };
-    const handleChangeCountry = event => {
-        setCountry(event.target.value);
-    };
-    useEffect(() => {
-        console.log('firstName', firstName);
-        console.log('lastName', lastName);
-        console.log('address', address);
-        console.log('number', number);
-        console.log('state', state);
-        console.log('zip', zip);
-        console.log('country', country);
-    }, [country]);
+  const handleChangeName = event => {
+    setFirstName(event.target.value);
+  };
+  const handleChangeLastName = event => {
+    setLastName(event.target.value)
+  }
+  const handleChangeAddress = event => {
+    setAddress(event.target.value)
+  }
+  const handleChangeNumber = event => {
+    setNumber(event.target.value)
+  }
+  const handleChangeState = event => {
+    setState(event.target.value)
+  }
+  const handleChangeZip = event => {
+    setZip(event.target.value)
+  }
+  const handleChangeCountry = event => {
+    setCountry(event.target.value)
+  }
+  const data={address:address,state:'procesando'}
+  useEffect(()=>{ 
+    dispatch(putDataAddress(data, orderId))  
+  },[country])
 
     return (
         <React.Fragment>

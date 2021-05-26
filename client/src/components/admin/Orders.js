@@ -12,11 +12,12 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 
-// const useStyles = makeStyles(theme => ({
-//     seeMore: {
-//         marginTop: theme.spacing(3),
-//     },
-// }));
+
+const useStyles = makeStyles((theme) => ({
+  seeMore: {
+    marginTop: theme.spacing(3),
+  },
+}));
 
 export default function Orders() {
     // const classes = useStyles();

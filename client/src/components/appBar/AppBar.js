@@ -89,6 +89,7 @@ export default function PersistentDrawerLeft() {
                     [classes.appBarShift]: open,
                 })}
             >
+
                 <Toolbar>
                     {user?.access === 'Admin' && (
                         <IconButton
