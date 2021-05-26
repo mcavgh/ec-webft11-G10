@@ -15,29 +15,29 @@ import {useDispatch, useSelector} from "react-redux"
 import { Link, useHistory } from 'react-router-dom'
 import {orderToMp} from '../../store/order/order.action'
 
-const steps = ['Completa tus datos de envio','Controla tu orden'];
-
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AddressForm />;
-    case 1:
-      return <Review />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
-
 export function Checkout() {
   const dispatch = useDispatch()
-  const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const classes = useStyles()
+  const [activeStep, setActiveStep] = React.useState(0)
+  const [formValidate, setFormValidate] = React.useState('')
   const cart = useSelector(state => state.cart.cartItems)
-  const userId = useSelector(state => state.userReducer.userId.id)
-  const dataUser = useSelector(state => state.userReducer.dataUser)
+  const userId = useSelector(state => state.userReducer.userId.id)  
+  const steps = ['Completa tus datos de envio','Controla tu orden'];
 
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <AddressForm setFormValidate={setFormValidate}/>;
+      case 1:
+        return <Review />;
+      default:
+        throw new Error('Unknown step');
+    }
+  }
+  
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
+    if(formValidate!=''){setActiveStep(activeStep + 1)}
+    else{alert('Debe completar los campos')}
   };
 
   const handleBack = () => {
