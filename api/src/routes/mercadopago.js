@@ -16,9 +16,9 @@ server.post('/:userId', (req, res) => {
     const preference = {
         items: itemsToMP,
         back_urls: {
-            success: '/',
-            failure: '/',
-            pending: '/'
+            success: 'https://ec-webft11-g10.vercel.app/',
+            failure: 'https://ec-webft11-g10.vercel.app/',
+            pending: 'https://ec-webft11-g10.vercel.app/'
         },
         auto_return: 'approved'
     };

@@ -124,12 +124,13 @@ export const putDataAddress = (data, id) => {
       .catch((err) => {console.log(err)});
   };
 };
-
 export const orderToMp = (products, id) => {
+
   return function (dispatch) {
     return axios.post(`mercadopago/${id}`, { products })
       .then((res) => {
-        console.log(res.data.init_point);
+        console.log(res.data.init_point)
+        window.location.replace(res.data.init_point)
       })
       .catch((err) => {
         console.log(err);
