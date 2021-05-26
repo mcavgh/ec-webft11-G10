@@ -16,7 +16,7 @@ export default function AddressForm() {
   const [zip, setZip]=React.useState('')
   const [country, setCountry]=React.useState('')
   const orderId = useSelector((state) => state.orderReducer?.orderId);
-
+  const addressData=address+number+country+state+zip
   const handleChangeName = event => {
     setFirstName(event.target.value);
   };
@@ -38,7 +38,7 @@ export default function AddressForm() {
   const handleChangeCountry = event => {
     setCountry(event.target.value)
   }
-  const data={address:address,state:'procesando'}
+  const data={address:addressData,state:'procesando'}
   useEffect(()=>{ 
     dispatch(putDataAddress(data, orderId))  
   },[country])
