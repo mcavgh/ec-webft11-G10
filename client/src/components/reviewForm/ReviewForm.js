@@ -24,8 +24,8 @@ const ReviewForm = ({
     dispatch(createProductReviews(postReview));
     setPostReview({ ...postReview, rating: 0 });
     event.target.reset();
-    await cancelForm();
     await dispatchUpdater();
+    await cancelForm();
     await updateReviewList();
   };
 

@@ -27,6 +27,10 @@ export default function Product() {
   const { id } = useParams();
   const { currentUser } = useContext(AuthContext);
 
+  const dispatchUpdater = async () => {
+    await dispatch(getProductReviews(id));
+  };
+
   useEffect(() => {
     if (currentUser) dispatch(getUsersByEmailId(currentUser.email));
     if (currentUser) dispatch(getOrderByUserId(currentUser.id));
@@ -38,10 +42,6 @@ export default function Product() {
     (state) => state.reviewReducer.productReviews
   );
   const { img, name, description, price, stock } = productReviews;
-
-  const dispatchUpdater = () => {
-    dispatch(getProductReviews(id));
-  };
 
   useEffect(() => {
     if (productReviews.reviews !== undefined) {
