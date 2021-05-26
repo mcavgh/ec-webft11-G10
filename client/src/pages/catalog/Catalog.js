@@ -28,11 +28,11 @@ const Catalog = () => {
                                </Typography>
                     <FilterGeneres />
                 </Paper>
-                <div className="catalog--main-col">
+                <div className="grid-container">
                     {products && products.length >= 1 ? (
                         products.map((product, index) => {
                             return (
-                                <Grid item xs={12} sm={4} md={3} lg={2} xl={2}>
+                                <Grid item xs={12} sm={4} md={3} lg={2} xl={2} className="grid">
                                     <ProductCard
                                         key={index}
                                         id={product.id}
