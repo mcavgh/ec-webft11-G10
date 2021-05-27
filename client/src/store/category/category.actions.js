@@ -30,7 +30,6 @@ export const putEditCategory = (values, categoryId) => {
             data: values
         };
         return axios.request(options).then(function (values) {
-            console.log(values.data)
             Swal.fire(
                 'Good job!',
                 'You updated the product succesfully!',

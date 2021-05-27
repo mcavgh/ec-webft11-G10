@@ -53,7 +53,6 @@ export default function ViewOrder() {
 
   return (
     <div className={s.viewOrder}>
-      {console.log(orderId)}
       <div className={s.content}>
         <h3>Panel de ordenes</h3>
         <div className={[s.info, s.topShadow].join(" ")}>

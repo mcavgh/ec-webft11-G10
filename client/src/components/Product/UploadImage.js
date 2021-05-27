@@ -52,8 +52,6 @@ const UploadImage = ({ img }) => {
         }
     };
 
-    console.log("image: ", image);
-
     return (
         <>
             <label>Product Image</label>
