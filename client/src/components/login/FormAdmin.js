@@ -14,22 +14,16 @@ export default function FormAdmin() {
   }, [dispatch]);
 
   function PromoverAdmin(row) {
-    console.log(row.id)
      dispatch(postAdmin(row.id))
   }
 
-
   function PromoverUser(row) {
-    console.log(row.id)
      dispatch(postUserAccess(row.id))
   }
-  
 
   function BorrarUsuario(row) {
-    console.log(row.id)
      dispatch( DestroyUsuario(row.id))
   }
- 
 
   return (
     <React.Fragment>

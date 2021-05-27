@@ -27,7 +27,6 @@ export const putProduct = (product, idProduct) => {
     return axios
       .request(options)
       .then(function (products) {
-        console.log(products.data);
         Swal.fire(
           "Good job!",
           "You updated the product succesfully!",
