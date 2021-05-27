@@ -6,7 +6,7 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import AccessibilityIcon from '@material-ui/icons/Accessibility';
-import LaptopIcon from '@material-ui/icons/Laptop';
+// import LaptopIcon from '@material-ui/icons/Laptop';
 import { useDispatch} from "react-redux";
 import { FilterOrders } from '../../../store/order/order.action';
 
@@ -46,9 +46,9 @@ export default function FilterOrder() {
     dispatch( FilterOrders("cancelada"))
   };
 
-  const handleClickCreada = () => {
-    dispatch( FilterOrders("creada"))
-  };
+  // const handleClickCreada = () => {
+  //   dispatch( FilterOrders("creada"))
+  // };
   
   const handleClickTodos = () => {
     dispatch( FilterOrders())
@@ -57,13 +57,13 @@ export default function FilterOrder() {
 
   return (
     <div className={classes.root}>
-      <Chip
+      {/* <Chip
         size="small"
         icon={<LaptopIcon/>}
         label="creada"
         onClick={handleClickCreada}
         color="primary"
-      />
+      /> */}
       <Chip
         size="small"
         icon={<FaceIcon/>}
