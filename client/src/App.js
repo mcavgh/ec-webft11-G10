@@ -2,7 +2,6 @@ import React from 'react';
 import { Route,Switch} from "react-router-dom";
 import { Home } from './pages/Home';
 import PageAddProduct from './pages/adminProduct/PageAddProduct'
-import LogIn from './pages/landingPage/LandingPage'
 import Product from './components/Product/Product'
 import {PageAdminProduct} from './pages/adminProduct/PageAdminProduct';
 import PageEditProduct from './pages/adminProduct/PageEditProduct';
