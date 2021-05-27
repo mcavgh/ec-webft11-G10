@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { useDispatch } from "react-redux";
 import { TextField, Button, Grid, Paper } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import { createProductReviews } from "../../store/review/review.actions";
 
-const ReviewForm = ({
-  productId,
-  loggedUserId,
-  updateReviewList,
-  dispatchUpdater,
-  cancelForm,
-}) => {
+const ReviewForm = ({ productId, loggedUserId, updateReviewList, dispatchUpdater, cancelForm, }) => {
   const [postReview, setPostReview] = useState({
     reviewText: "",
     rating: 0,

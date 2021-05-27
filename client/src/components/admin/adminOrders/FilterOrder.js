@@ -8,8 +8,7 @@ import AutorenewIcon from '@material-ui/icons/Autorenew';
 import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import LaptopIcon from '@material-ui/icons/Laptop';
 import { useDispatch} from "react-redux";
-import { FilterOrders } from '../../store/order/order.action';
-
+import { FilterOrders } from '../../../store/order/order.action';
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -2,18 +2,13 @@ import React, { useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import {useDispatch, useSelector} from "react-redux"
-import {putDataAddress} from '../../store/order/order.action'
 
-export default function AddressForm({setFormValidate}) {
-  const dispatch = useDispatch()
-  
+export default function AddressForm({setFormValidate}) {  
   const [address, setAddress]=React.useState('')
   const [number, setNumber]=React.useState('')
   const [state, setState]=React.useState('')
   const [zip, setZip]=React.useState('')
   const [country, setCountry]=React.useState('')
-  const orderId = useSelector((state) => state.orderReducer?.orderId);
   const addressData=address+number+country+state+zip
   
   const handleChangeAddress = event => {
@@ -31,11 +26,11 @@ export default function AddressForm({setFormValidate}) {
   const handleChangeCountry = event => {
     setCountry(event.target.value)
   }
-  const data={address:addressData,state:'procesando'}
+  
   useEffect(()=>{ 
     setFormValidate(addressData)
-    dispatch(putDataAddress(data, orderId))  
-  },[country])
+  },[setFormValidate,addressData])
+  
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>

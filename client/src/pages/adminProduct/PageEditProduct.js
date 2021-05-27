@@ -57,7 +57,7 @@ function PageEditProduct() {
     useEffect(() => {
         dispatch(getCategory())
         dispatch(getOneProduct(id))
-    }, [dispatch]);
+    }, [dispatch,id]);
 
     const onSubmit = async values => {
 

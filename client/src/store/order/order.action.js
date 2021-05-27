@@ -120,7 +120,7 @@ export const cleanCart = (id) => {
 export const putDataAddress = (data, id) => {
   return function(disptch) {
     axios.put(`orders/${id}/modifica`, data)
-      .then((res) => {console.log(res)})
+      .then((res) => {})
       .catch((err) => {console.log(err)});
   };
 };

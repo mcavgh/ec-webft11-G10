@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom'
 import { Grid, Typography, Divider, Button, Box } from '@material-ui/core/';
 import { useStyles } from '../components/product/styles'
 import AppBar from '../components/appBar/AppBar'
-
 import { getOneProduct } from '../store/product/product.actions';
 import { Cart } from '../components/product/cart/Cart';
 import { addToCart } from '../store/user/user.action';

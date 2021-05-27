@@ -3,8 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -61,13 +59,10 @@ export default function LogIn({ faceAuth, auth }) {
         password: "",
         email: ""
     });
-
-
-
     const forgotPassword = (email) => {
         app.auth().sendPasswordResetEmail(input.email)
             .then(function () {
-                alert('Please check your email...')
+                alert('Se envio un correo a tu correo para reestablecer la contraseña')
             }).catch(function (e) {
                 console.log(e)
             })
@@ -147,9 +142,7 @@ export default function LogIn({ faceAuth, auth }) {
                     </GoogleButton>
                     <Grid container>
                         <Grid item xs>
-                            <a href="#" onClick={forgotPassword} variant="body2">
-                                Olvidaste la contraseña?
-                             </a>
+                            <Link to='/' onClick={forgotPassword} variant="body2">Olvidaste la contraseña?</Link>                                
                         </Grid>
                         <Grid item>
                             <Typography to="/signup" component={Link} variant="body2">

@@ -15,7 +15,7 @@ export default function Catalog() {
         axios.get(`/products/`).then(result => {
             dispatch(searchProductSuccess(result.data))
         })
-    }, [])
+    }, [dispatch])
     return (
         <div>
             <Grid container spacing={2} className={classes.container}>

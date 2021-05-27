@@ -1,6 +1,5 @@
 import React from 'react'
 import AppBar from '../components/appBar/AppBar'
-import CategoryCatalog from '../components/category/CatalogCategory'
 import Banner from '../components/banner/BannerImage';
 import Footer from '../components/footer/Footer';
 import Catalog from './catalog/Catalog';
