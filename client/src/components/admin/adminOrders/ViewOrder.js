@@ -14,7 +14,7 @@ export default function ViewOrder() {
 
   useEffect(() => {
     dispatch(getOrderById(id))
-  }, [dispatch])
+  }, [dispatch,id])
 
   const handleInputChange = function (e) {
     setInput({
