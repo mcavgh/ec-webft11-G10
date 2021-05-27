@@ -2,11 +2,8 @@ import React, { useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import {useDispatch, useSelector} from "react-redux"
 
-export default function AddressForm({setFormValidate}) {
-  const dispatch = useDispatch()
-  
+export default function AddressForm({setFormValidate}) {  
   const [address, setAddress]=React.useState('')
   const [number, setNumber]=React.useState('')
   const [state, setState]=React.useState('')
@@ -32,7 +29,8 @@ export default function AddressForm({setFormValidate}) {
   
   useEffect(()=>{ 
     setFormValidate(addressData)
-  },[])
+  },[setFormValidate,addressData])
+  
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
