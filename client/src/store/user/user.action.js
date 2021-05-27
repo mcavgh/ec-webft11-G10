@@ -12,47 +12,52 @@ export const GET_ID_BYEMAIL = "GET_ID_BYEMAIL";
 export const POST_ADMIN = "POST_ADMIN";
 export const POST_USER_ACCESS = "POST_USER_ACCESS";
 
-export const postUser = (displayName, email) => {
-    return (dispatch, getState) => {
-        console.log("entra")
-        const nameArray = displayName.split(" ")
-        axios.post(`/users/register`, { name: nameArray[0], surname: nameArray[1],email:email}).then((res) => {
-            dispatch({ type: GET_ID_BYEMAIL, payload: res.data });
-        })
-    }
-}
+export const postUser = (displayName, email, photoURL) => {
+  return (dispatch, getState) => {
+    console.log("entra");
+    const nameArray = displayName.split(" ");
+    axios
+      .post(`/users/register`, {
+        name: nameArray[0],
+        surname: nameArray[1],
+        email: email,
+        photoURL: photoURL,
+      })
+      .then((res) => {
+        dispatch({ type: GET_ID_BYEMAIL, payload: res.data });
+      });
+  };
+};
 
 export const postAdmin = (id) => {
-  console.log(id)
-    return (dispatch) => {
-        axios.put(`/users/${id}/usuario/admin`).then((res) => {
-            dispatch({ type: POST_ADMIN });
-             dispatch(getUsers())
-        })
-    }
-}
-
+  console.log(id);
+  return (dispatch) => {
+    axios.put(`/users/${id}/usuario/admin`).then((res) => {
+      dispatch({ type: POST_ADMIN });
+      dispatch(getUsers());
+    });
+  };
+};
 
 export const postUserAccess = (id) => {
-  console.log(id)
-    return (dispatch) => {
-        axios.put(`/users/${id}/usuario/user`).then((res) => {
-            dispatch({ type: POST_USER_ACCESS });
-             dispatch(getUsers())
-        })
-    }
-}
+  console.log(id);
+  return (dispatch) => {
+    axios.put(`/users/${id}/usuario/user`).then((res) => {
+      dispatch({ type: POST_USER_ACCESS });
+      dispatch(getUsers());
+    });
+  };
+};
 
-export const DestroyUsuario= (id) => {
-  console.log(id)
-    return (dispatch) => {
-        axios.delete(`/users/${id}`).then((res) => {
-            dispatch({ type:DELETE_USER});
-             dispatch(getUsers())
-        })
-    }
-}
-
+export const DestroyUsuario = (id) => {
+  console.log(id);
+  return (dispatch) => {
+    axios.delete(`/users/${id}`).then((res) => {
+      dispatch({ type: DELETE_USER });
+      dispatch(getUsers());
+    });
+  };
+};
 
 export const getUsersByEmailId = (email) => {
   return function (dispatch) {

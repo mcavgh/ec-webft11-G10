@@ -54,7 +54,6 @@ const deleteReview = (req, res, next) => {
 const updateReview = (req, res, next) => {
   Review.update(
     {
-      title: req.body.title,
       reviewText: req.body.reviewText,
       rating: req.body.rating,
     },

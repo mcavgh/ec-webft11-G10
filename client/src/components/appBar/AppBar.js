@@ -44,8 +44,6 @@ export default function PersistentDrawerLeft() {
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
 
-  console.log(user);
-
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
@@ -81,6 +79,7 @@ export default function PersistentDrawerLeft() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+    history.push("/");
   };
   return (
     <div className={classes.root}>

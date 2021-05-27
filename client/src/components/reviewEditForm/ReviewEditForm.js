@@ -2,38 +2,30 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { TextField, Button, Grid, Paper } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
-import { createProductReviews } from "../../store/review/review.actions";
+import { editReview } from "../../store/review/review.actions";
 
-const ReviewForm = ({
-  productId,
-  loggedUserId,
-  updateReviewList,
-  dispatchUpdater,
-  cancelForm,
-}) => {
+const ReviewEditForm = ({ loggedUserId, reviewId, closeEditForm }) => {
   const [postReview, setPostReview] = useState({
     reviewText: "",
     rating: 0,
-    productId: parseInt(productId),
     userId: null,
   });
   const dispatch = useDispatch();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(createProductReviews(postReview, productId));
-    setPostReview({ ...postReview, rating: 0 });
+    dispatch(editReview(postReview, reviewId, loggedUserId));
+    closeEditForm();
     event.target.reset();
-    await dispatchUpdater();
-    await cancelForm();
-    await updateReviewList();
   };
 
   return (
-    <Paper style={{ padding: "20px 20px", marginTop: "20px" }}>
+    <Paper
+      style={{ padding: "20px 20px", marginTop: "20px", marginBottom: "20px" }}
+    >
       <form onSubmit={handleSubmit}>
         <Grid container direction="column" justify="center" alignItems="center">
-          <h2>¿Te gustó la comida? ¡Dejá tu opinión!</h2>
+          <h2>Ya puedes editar el comentario!</h2>
         </Grid>
         <Grid container direction="column" justify="center" alignItems="center">
           <Rating
@@ -62,14 +54,11 @@ const ReviewForm = ({
             color="primary"
             type="submit"
             disabled={
-              !postReview.rating ||
-              !postReview.reviewText ||
-              !postReview.productId ||
-              !postReview.userId
+              !postReview.rating || !postReview.reviewText || !postReview.userId
             }
             style={{ marginTop: "20px" }}
           >
-            Enviar
+            Editar
           </Button>
         </Grid>
       </form>
@@ -77,4 +66,4 @@ const ReviewForm = ({
   );
 };
 
-export default ReviewForm;
+export default ReviewEditForm;
