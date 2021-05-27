@@ -47,7 +47,7 @@ export default function CatalogComponent() {
             ) : (
                 <Swiper className={classes.root}
                     centeredSlides
-                    // loop
+                    loop
                     autoplay={{ delay: 5000 }}
                     slidesPerView={9}
                 >
