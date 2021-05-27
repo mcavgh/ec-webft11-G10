@@ -10,43 +10,43 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Tilt from 'react-vanilla-tilt'
 
 
-export default function ProductCard({stock, id, img, name, description, price }) {
+export default function ProductCard({ stock, id, img, name, description, price }) {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch()
-  const product = {stock, id, img, name, description, price }
-  
+  const product = { stock, id, img, name, description, price }
+
   return (
     <Tilt >
-    <Card className={classes.root}>
-      <CardActionArea onClick={() => history.push(`/product/${id}`)} className={classes.action}>
-        <CardMedia
-          component="img"
-          alt="Food"
-          height="140"
-          image={img==="no tiene" ? defaultImg : img}
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {!name ? 'Some food' : name}
+      <Card className={classes.root}>
+        <CardActionArea onClick={() => history.push(`/product/${id}`)} className={classes.action}>
+          <CardMedia
+            component="img"
+            alt="Food"
+            height="140"
+            image={img === "no tiene" ? defaultImg : img}
+            title="Contemplative Reptile"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {!name ? 'Some food' : name}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {!description ? 'Food is great to eat, it makes you healthy! Sometimes...' : description}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <Typography variant='h5'>
+            ${!price ? 150 : price}
+            <IconButton onClick={() => dispatch(addToCart(product))}
+              color="primary" aria-label="add to shopping cart">
+              <AddShoppingCartIcon fontSize="large" className={classes.buy} />
+              {product.count}
+            </IconButton>
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {!description ? 'Food is great to eat, it makes you healthy! Sometimes...' : description}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Typography variant='h5'>
-          ${!price ? 150 : price}
-      <IconButton onClick={() => dispatch(addToCart(product))}
-                color="primary" aria-label="add to shopping cart">
-                <AddShoppingCartIcon fontSize="large" className={classes.buy}/>
-                {product.count}
-              </IconButton>
-        </Typography>
-      </CardActions>
-    </Card>
-     </Tilt>
+        </CardActions>
+      </Card>
+    </Tilt>
   );
 }

@@ -4,14 +4,7 @@ import Rating from "@material-ui/lab/Rating";
 import { useStyles } from "./styles";
 import ReviewForm from "../reviewForm/ReviewForm";
 
-const Review = ({
-  productId,
-  loggedUser,
-  productReviews,
-  dispatchUpdater,
-  currentUser,
-  ordersUser,
-}) => {
+const Review = ({ productId, loggedUser, productReviews, dispatchUpdater, currentUser, ordersUser, }) => {
   const [reviewList, setReviewList] = useState([]);
   const [form, setForm] = useState(false);
   const [reviewsPerPage, setReviewsPerPage] = useState(3);
@@ -60,7 +53,7 @@ const Review = ({
       found ? setForm(false) : setForm(true);
       check = false;
     }
-  }, [ordersUser, loggedUser]);
+  }, [ordersUser, loggedUser,productReviews,productId]);
 
   const updateReviewList = () => {
     setReviewList(productReviews.reviews.slice(0, reviewsPerPage));

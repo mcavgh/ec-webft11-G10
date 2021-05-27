@@ -19,10 +19,10 @@ import { searchProductSuccess } from '../../store/product/product.actions';
 import { getQuantity } from '../../store/cart/cart.actions';
 import { AuthContext } from '../AuthContext';
 import { getUsersByEmailId } from '../../store/user/user.action';
+
 export default function PersistentDrawerLeft() {
     const history = useHistory()
     const cartQuantity = useSelector(state => state.cart.cartQuantity)
-    const user = useSelector(state => state.userReducer.userId)
 
     const classes = useStyles();
     const theme = useTheme();
@@ -34,7 +34,7 @@ export default function PersistentDrawerLeft() {
     useEffect(() => {
         dispatch(getQuantity())
         currentUser?.email && dispatch(getUsersByEmailId(currentUser.email))
-    }, [dispatch])
+    }, [dispatch,currentUser])
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -44,18 +44,14 @@ export default function PersistentDrawerLeft() {
 
     // const history=useHistory()
     //USER BUTTON
-    const [auth, setAuth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const dropdown = Boolean(anchorEl);
 
     const refreshSearch = () => {
-        axios.get(`/products/`).then(result => {
+        axios.get('/products').then(result => {
             dispatch(searchProductSuccess(result.data))
         })
     }
-    const handleChange = (event) => {
-        setAuth(event.target.checked);
-    };
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
         if (!currentUser) {

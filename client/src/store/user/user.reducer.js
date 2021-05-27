@@ -1,4 +1,4 @@
-import {POST_USER_ACCESS, POST_ADMIN, GET_USER_BYID,GET_ID_BYEMAIL, POST_USER, DELETE_USER, PUT_USER, GET_USERS } from './user.action';
+import { POST_USER_ACCESS, POST_ADMIN, GET_USER_BYID, GET_ID_BYEMAIL, DELETE_USER, PUT_USER, GET_USERS } from './user.action';
 
 const initialState = {
   users: [],
@@ -8,12 +8,7 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case DELETE_USER:
-      return {
-        ...state,
-        userId: {},
-      };
-    case  POST_USER_ACCESS:
+    case POST_USER_ACCESS:
     case POST_ADMIN:
     case GET_USER_BYID:
       return {
@@ -26,9 +21,9 @@ const userReducer = (state = initialState, action) => {
         userId: action.payload,
       };
     case DELETE_USER:
-      return{
+      return {
         ...state,
-        userId:{}
+        userId: {}
       }
     case PUT_USER:
     case GET_USERS:

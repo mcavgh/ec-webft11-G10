@@ -1,10 +1,9 @@
 import "./catalog.css";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import AppBar from "../../components/appBar/AppBar"
 import ProductCard from '../../components/Product/productCard/ProductCard';
 import FilterGeneres from './FilterGeneres';
-import { Typography, Button, Paper, Grid } from '@material-ui/core/';
+import { Typography, Paper, Grid } from '@material-ui/core/';
 import axios from "axios"
 import { searchProductSuccess } from '../../store/product/product.actions';
 import CatalogComponent from '../../components/category/CatalogCategory';
@@ -19,7 +18,7 @@ const Catalog = () => {
         axios.get(`/products/`).then(result => {
             dispatch(searchProductSuccess(result.data))
         })
-    }, [])
+    }, [dispatch])
 
     return (
         <>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useStyles } from './stylesCheckout'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -12,9 +12,9 @@ import Typography from '@material-ui/core/Typography';
 import AddressForm from '../../components/checkOut/AddressForm';
 import Review from '../../components/checkOut/Review';
 import { useDispatch, useSelector } from "react-redux"
-import { Link, useHistory } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import { orderToMp } from '../../store/order/order.action'
-import {putDataAddress} from '../../store/order/order.action'
+import { putDataAddress } from '../../store/order/order.action'
 import emailjs from 'emailjs-com';
 
 export function Checkout() {
@@ -28,7 +28,7 @@ export function Checkout() {
   const userId = useSelector(state => state.userReducer.userId.id)
   const steps = ['Completa tus datos de envio', 'Controla tu orden'];
   const orderId = useSelector((state) => state.orderReducer?.orderId);
-  const data={address:formValidate,state:'procesando'} 
+  const data = { address: formValidate, state: 'procesando' }
 
   function getStepContent(step) {
     switch (step) {
@@ -40,11 +40,11 @@ export function Checkout() {
         throw new Error('Unknown step');
     }
   }
-  
+
   const handleNext = () => {
-    if (formValidate != '') { 
-      setActiveStep(activeStep + 1) 
-      dispatch(putDataAddress(data, orderId))  
+    if (formValidate !== '') {
+      setActiveStep(activeStep + 1)
+      dispatch(putDataAddress(data, orderId))
     }
     else { alert('Debe completar los campos') }
   };
@@ -52,22 +52,16 @@ export function Checkout() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-const terminarCompra=()=>{
-  dispatch(orderToMp(cart, userId))
-  let products = cart.map(prod => prod.name).join(", ");
-console.log(products,total,email)
-  emailjs.send('service_wh6ybz2', 'template_adk9g6f', {
-   products:products,
-   total:total,
-   email:email
 
- }, 'user_TgPSia94H5R5iet7h197p')
-   .then((result) => {
-     console.log(result.text);
-   }, (error) => {
-     console.log(error.text);
-   })
-}
+  const terminarCompra = () => {
+    dispatch(orderToMp(cart, userId))
+    let products = cart.map(prod => prod.name).join(", ");
+    console.log(products, total, email)
+    emailjs.send('service_wh6ybz2', 'template_adk9g6f', {products: products, total: total, email: email }, 'user_TgPSia94H5R5iet7h197p')
+      .then((result) => { console.log(result.text);
+      }, (error) => { console.log(error.text); })
+  }
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -107,7 +101,7 @@ console.log(products,total,email)
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}> Volver</Button>
                   )}
-                  {(activeStep === steps.length - 1) ? (<Button onClick={terminarCompra  } variant="contained" color="primary" className={classes.button}>
+                  {(activeStep === steps.length - 1) ? (<Button onClick={terminarCompra} variant="contained" color="primary" className={classes.button}>
                     Terminar Compra</Button>) : (<Button onClick={handleNext} variant="contained" color="primary" className={classes.button}>Siguiente</Button>)}
                 </div>
               </React.Fragment>
