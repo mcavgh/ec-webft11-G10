@@ -14,6 +14,7 @@ import Review from '../../components/checkOut/Review';
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useHistory } from 'react-router-dom'
 import { orderToMp } from '../../store/order/order.action'
+import {putDataAddress} from '../../store/order/order.action'
 import emailjs from 'emailjs-com';
 
 export function Checkout() {
@@ -26,6 +27,8 @@ export function Checkout() {
   const email = useSelector(state => state.userReducer.userId.email)
   const userId = useSelector(state => state.userReducer.userId.id)
   const steps = ['Completa tus datos de envio', 'Controla tu orden'];
+  const orderId = useSelector((state) => state.orderReducer?.orderId);
+  const data={address:formValidate,state:'procesando'} 
 
   function getStepContent(step) {
     switch (step) {
@@ -37,9 +40,12 @@ export function Checkout() {
         throw new Error('Unknown step');
     }
   }
-
+  
   const handleNext = () => {
-    if (formValidate != '') { setActiveStep(activeStep + 1) }
+    if (formValidate != '') { 
+      setActiveStep(activeStep + 1) 
+      dispatch(putDataAddress(data, orderId))  
+    }
     else { alert('Debe completar los campos') }
   };
 
