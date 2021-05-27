@@ -7,7 +7,11 @@ import FilterGeneres from './FilterGeneres';
 import { Typography, Button, Paper, Grid } from '@material-ui/core/';
 import axios from "axios"
 import { searchProductSuccess } from '../../store/product/product.actions';
+import CatalogComponent from '../../components/category/CatalogCategory';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 const Catalog = () => {
+    const matches = useMediaQuery('(min-width:600px)');
+
     const dispatch = useDispatch()
     let products = useSelector(state => state.productReducer.searchResults)
 
@@ -19,15 +23,16 @@ const Catalog = () => {
 
     return (
         <>
-            <AppBar />
+           {matches?"":<CatalogComponent/>} 
             <div className="catalog--main-row">
-                <Paper className="catalog--main-col-menu-box">
+                {matches &&<Paper className="catalog--main-col-menu-box">
                     <Typography
                         gutterBottom variant="h5" component="h2">
                         Categorias
                                </Typography>
                     <FilterGeneres />
-                </Paper>
+                </Paper>}
+               
                 <div className="grid-container">
                     {products && products.length >= 1 ? (
                         products.map((product, index) => {

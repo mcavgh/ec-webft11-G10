@@ -47,9 +47,9 @@ export default function CatalogComponent() {
             ) : (
                 <Swiper className={classes.root}
                     centeredSlides
-                    loop
-                    autoplay={{ delay: 5000 }}
-                    slidesPerView={9}
+                     loop
+                    autoplay={{ delay: 500 }}
+                    slidesPerView={3}
                 >
                     {(categories) && (categories[0]) &&
                         categoryList.map(categoryList => {
