@@ -9,8 +9,8 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   root: {
-    position: 'relative',
-    display: 'contents',
+    // position: 'relative',
+    // display: 'contents',
   },
   gridList: {
     justifyContent: "center",
