@@ -13,7 +13,7 @@ export function PageAdminCategories() {
   
     useEffect(() => {
         dispatch(getCategory())        
-    }, [])
+    }, [dispatch])
 
     return (
         <div>
