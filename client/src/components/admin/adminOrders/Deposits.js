@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Title from './Title';
 import { useSelector, useDispatch } from "react-redux";
-import {getAllOrders} from "../../store/order/order.action"
+import {getAllOrders} from "../../../store/order/order.action"
 
 const useStyles = makeStyles({
   depositContext: {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import s from "./ViewOrder.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { cleanCart, putOrderById, getOrderById } from '../../store/order/order.action';
+import { cleanCart, putOrderById, getOrderById } from '../../../store/order/order.action';
 
 export default function ViewOrder() {
   const history = useHistory()
@@ -14,7 +14,7 @@ export default function ViewOrder() {
 
   useEffect(() => {
     dispatch(getOrderById(id))
-  }, [])
+  }, [dispatch])
 
   const handleInputChange = function (e) {
     setInput({

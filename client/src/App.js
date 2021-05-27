@@ -9,7 +9,7 @@ import PageAddCategory from './pages/adminCategory/PageAddCategory';
 import { ThemeProvider } from '@material-ui/core/styles'
 import theme from './theme'
 import PageCheckoutOrders from './pages/ordersCheck/PageCheckoutOrders'
-import ViewOrder from './components/admin/ViewOrder'
+import ViewOrder from './components/admin/adminOrders/ViewOrder'
 import CartProducts from './pages/cart/CartProducts'
 import {PageAdminCategories} from './pages/adminCategory/PageAdminCategories'
 import PageEditCategory from './pages/adminCategory/PageEditCategory'

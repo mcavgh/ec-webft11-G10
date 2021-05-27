@@ -2,12 +2,8 @@ import React, { useEffect } from 'react';
 import { Button, ListItem, ListItemText, makeStyles, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux'
 import { DestroyUsuario, getUsers, postAdmin, postUserAccess } from '../../store/user/user.action';
-import Title from '../admin/Title';
-import { Link } from 'react-router-dom';
-
-
-
-
+import Title from '../admin/adminOrders/Title';
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -25,8 +21,6 @@ export default function FormAdmin() {
   useEffect(() => {
     dispatch(getUsers())
   }, [dispatch]);
-
-
 
   function PromoverAdmin(row) {
     console.log(row.id)
