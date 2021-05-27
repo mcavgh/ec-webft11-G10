@@ -72,7 +72,6 @@ function Register(props) {
       if(errorName||errorSurname||errorEmail||errorPassword){
         alert('Intente completar correctamente los campos.')
       }
-        console.log(dataUserLogin)
     }
 
     return (
