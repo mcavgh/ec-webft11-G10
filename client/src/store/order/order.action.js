@@ -120,16 +120,16 @@ export const cleanCart = (id) => {
 export const putDataAddress = (data, id) => {
   return function(disptch) {
     axios.put(`orders/${id}/modifica`, data)
-      .then((res) => {console.log(res)})
+      .then((res) => {})
       .catch((err) => {console.log(err)});
   };
 };
-
 export const orderToMp = (products, id) => {
+
   return function (dispatch) {
     return axios.post(`mercadopago/${id}`, { products })
       .then((res) => {
-        console.log(res.data.init_point);
+        window.location.replace(res.data.init_point)
       })
       .catch((err) => {
         console.log(err);

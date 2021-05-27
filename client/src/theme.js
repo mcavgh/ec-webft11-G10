@@ -1,25 +1,28 @@
 import { createMuiTheme,responsiveFontSizes } from "@material-ui/core/styles";
-import { purple } from "@material-ui/core/colors";
-import { red } from "@material-ui/core/colors";
 
 let theme = createMuiTheme({
+  typography: {
+    fontFamily: [
+      'Open Sans',
+      'Comfortaa',
+    ].join(','),
+  },
   palette: {
     primary:{
-      main: red[800],
+      main: '#f27121',
       light:'#76ff03',
-      darck:'#ff6f00',
+      dark:'#ff6f00',
     },
-    secondary: purple,
+    secondary: {
+      main: '#14141A'
+    },
     background: {
-       default: "#cfd8dc",
-       level1: "#cfd8dc",
+      default: "#cfd8dc",
+      level1: "#cfd8dc",
       level2: "#cfd8dc",
       paper: "#fafafa"
-
     },
   },
-  
-
 });
 
 theme = responsiveFontSizes(theme);

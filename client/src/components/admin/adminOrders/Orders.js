@@ -1,26 +1,14 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
-import Title from './Title';
 import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles((theme) => ({
-  seeMore: {
-    marginTop: theme.spacing(3),
-  },
-}));
-
 export default function Orders() {
-  const classes = useStyles();
-
-
-  const orders = useSelector((state) => state.orderReducer?.orders);
+  const orders = useSelector((state) => state.orderReducer?.orders)
 
   return (
     <React.Fragment>
-      <Title>Tabla de Ordenes</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
@@ -35,7 +23,6 @@ export default function Orders() {
         </TableHead>
         <TableBody>
           {orders && orders[0] ?
-
             (orders.map((row) => (
               <TableRow key={row.id}>
                 <TableCell>{row.id}</TableCell>
@@ -46,7 +33,7 @@ export default function Orders() {
                 <TableCell>{row.quantity}</TableCell>
                 <TableCell align="right">{row.price}</TableCell>
                 <Button variant="contained" color="primary" to={`/ViewOrder/${row.id}`} component={Link}>
-                  Link
+                  Detalles
               </Button>
               </TableRow>
             ))

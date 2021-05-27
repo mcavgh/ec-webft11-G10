@@ -1,13 +1,10 @@
-import React, { useCallback, useContext } from "react";
+import React, { useContext } from "react";
 import { withRouter, Redirect } from "react-router";
-import app, {
-  facebookAuthProvider,
-  googleAuthProvider,
-} from "../../firebase/index.js";
+import app, { googleAuthProvider, } from "../../firebase/index.js";
 import { AuthContext } from "../AuthContext";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { postUser, getUsersByEmailId } from "../../store/user/user.action";
+import { postUser } from "../../store/user/user.action";
 import LogIn from "./LogIn";
 import axios from "axios";
 import { getProductsInCart } from "../../store/cart/cart.actions";
@@ -43,7 +40,7 @@ const Login = () => {
       .auth()
       .signInWithPopup(googleAuthProvider)
       .then(({ user }) => {
-        const { displayName, email, uuid, photoURL } = user;
+        const { displayName, email, photoURL } = user;
         axios.get(`/users/email/${email}`).then((user) => {
           if (user.data === "el usuario no existe") {
             dispatch(postUser(displayName, email, photoURL));

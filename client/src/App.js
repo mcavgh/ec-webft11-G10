@@ -1,19 +1,18 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-import { Home } from "./pages/Home";
-import PageAddProduct from "./pages/adminProduct/PageAddProduct";
-import LogIn from "./pages/landingPage/LandingPage";
-import Product from "./components/Product/Product";
-import { PageAdminProduct } from "./pages/adminProduct/PageAdminProduct";
-import PageEditProduct from "./pages/adminProduct/PageEditProduct";
-import PageAddCategory from "./pages/adminCategory/PageAddCategory";
-import { ThemeProvider } from "@material-ui/core/styles";
-import theme from "./theme";
-import PageCheckoutOrders from "./pages/ordersCheck/PageCheckoutOrders";
-import ViewOrder from "./components/admin/ViewOrder";
-import CartProducts from "./pages/cart/CartProducts";
-import { PageAdminCategories } from "./pages/adminCategory/PageAdminCategories";
-import PageEditCategory from "./pages/adminCategory/PageEditCategory";
+import React from 'react';
+import { Route,Switch} from "react-router-dom";
+import { Home } from './pages/Home';
+import PageAddProduct from './pages/adminProduct/PageAddProduct'
+import Product from './components/Product/Product'
+import {PageAdminProduct} from './pages/adminProduct/PageAdminProduct';
+import PageEditProduct from './pages/adminProduct/PageEditProduct';
+import PageAddCategory from './pages/adminCategory/PageAddCategory';
+import { ThemeProvider } from '@material-ui/core/styles'
+import theme from './theme'
+import PageCheckoutOrders from './pages/ordersCheck/PageCheckoutOrders'
+import ViewOrder from './components/admin/adminOrders/ViewOrder'
+import CartProducts from './pages/cart/CartProducts'
+import {PageAdminCategories} from './pages/adminCategory/PageAdminCategories'
+import PageEditCategory from './pages/adminCategory/PageEditCategory'
 import dotenv from "dotenv";
 import axios from "axios";
 import PrivateRoute from "./components/login/PrivateRoute";

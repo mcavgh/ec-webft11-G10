@@ -1,50 +1,29 @@
 import React, { useEffect } from 'react';
-import { Button, ListItem, ListItemText, makeStyles, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import { Button, ListItem, ListItemText, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux'
 import { DestroyUsuario, getUsers, postAdmin, postUserAccess } from '../../store/user/user.action';
-import Title from '../admin/Title';
-import { Link } from 'react-router-dom';
-
-
-
-
-
-const useStyles = makeStyles((theme) => ({
-  seeMore: {
-    marginTop: theme.spacing(3),
-  },
-}));
+import Title from '../admin/adminOrders/Title';
+import { Link } from 'react-router-dom'
 
 export default function FormAdmin() {
-  const classes = useStyles();
-  
-  const users = useSelector((state) => state.userReducer?.users);
-
   const dispatch = useDispatch()
+  const users = useSelector((state) => state.userReducer?.users);
 
   useEffect(() => {
     dispatch(getUsers())
   }, [dispatch]);
 
-
-
   function PromoverAdmin(row) {
-    console.log(row.id)
      dispatch(postAdmin(row.id))
   }
 
-
   function PromoverUser(row) {
-    console.log(row.id)
      dispatch(postUserAccess(row.id))
   }
-  
 
   function BorrarUsuario(row) {
-    console.log(row.id)
      dispatch( DestroyUsuario(row.id))
   }
- 
 
   return (
     <React.Fragment>

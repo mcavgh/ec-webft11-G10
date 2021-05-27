@@ -35,7 +35,7 @@ export default function Product() {
     if (currentUser) dispatch(getUsersByEmailId(currentUser.email));
     if (currentUser) dispatch(getOrderByUserId(currentUser.id));
     dispatch(getProductReviews(id));
-  }, [dispatch]);
+  }, [dispatch,currentUser,id]);
 
   const loggedUser = useSelector((state) => state.userReducer.userId);
   const productReviews = useSelector(

@@ -18,9 +18,7 @@ const validate = values => {
 };
 
 function AddCategory() {
-
   const dispatch = useDispatch()
-
   const addCategoryPost = (values) => {
     onSubmit(values)
   }

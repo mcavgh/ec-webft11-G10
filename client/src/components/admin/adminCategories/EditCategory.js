@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect } from 'react';
 import {useParams} from 'react-router-dom'
 import { Form, Field } from 'react-final-form';
 import { TextField } from 'final-form-material-ui';
 import { Paper, Grid, Button, CssBaseline } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch} from 'react-redux'
 import { putEditCategory } from '../../../store/category/category.actions'
 import { getCategory } from '../../../store/category/category.actions'
 
@@ -20,27 +20,7 @@ const validate = values => {
 
 function EditCategory() {
     const dispatch = useDispatch()
-    const statusPost = useSelector(state => state.categoryReducer.postState)
-    const categories = useSelector(state => state.categoryReducer.category)
     const {id} = useParams()
-
-    const [status, setStatusPost] = useState('')
-
-    const checkCategory = (categories) => {
-        if (categories && categories[0]) {
-            let categoryList = []
-            for (let i in categories) {
-                if (categoryList.find(e => e === categories[i].name)) {
-                    continue
-                } else {
-                    categoryList.push(categories[i])
-                }
-            }
-            return categoryList
-        }
-    }
-
-    let categoryList = checkCategory(categories)
 
     useEffect(() => {
         dispatch(getCategory())
@@ -50,7 +30,6 @@ function EditCategory() {
         const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
         await sleep(300);
         dispatch(putEditCategory(values, id))
-        setStatusPost(statusPost)
         values.name=''
         values.description=''
     };
@@ -67,47 +46,14 @@ function EditCategory() {
                     <form onSubmit={handleSubmit} noValidate>
                         <Paper style={{ padding: 16 }}>
                             <Grid container alignItems="flex-start" spacing={2}>
-                                {/* <Grid item xs={12}>
-                                    <Field
-                                        fullWidth
-                                        name="categoryId"
-                                        component={Select}
-                                        label="Selecciona la categoria"
-                                        formControlProps={{ fullWidth: true }}
-                                    >
-                                        {(!categoryList) ?
-                                            (<Typography >No se encontraron categorias</Typography>)
-                                            :
-                                            (categoryList.map(category => {
-                                                return (
-                                                    <MenuItem value={category.id}>{category.name}</MenuItem>
-                                                )
-                                            })
-                                            )}
-                                    </Field>
-                                </Grid> */}
-
                                 <Grid item xs={6}>
-                                    <Field
-                                        fullWidth
-                                        required
-                                        name="name"
-                                        component={TextField}
-                                        type="text"
-                                        label="Nombre de la categoria"
+                                    <Field fullWidth required name="name" component={TextField} type="text" label="Nombre de la categoria"
                                     />
                                 </Grid>
-
                                 <Grid item xs={12}>
-                                    <Field
-                                        fullWidth
-                                        name="description"
-                                        component={TextField}
-                                        multiline
-                                        label="Descripción"
+                                    <Field fullWidth name="description" component={TextField} multiline label="Descripción"
                                     />
                                 </Grid>
-
                                 <Grid item style={{ marginTop: 16 }}>
                                     <Button variant="contained" color="primary" type="submit" disabled={submitting} >
                                         Editar

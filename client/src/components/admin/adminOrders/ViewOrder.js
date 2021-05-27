@@ -2,39 +2,19 @@ import React, { useState, useEffect } from "react";
 import s from "./ViewOrder.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import {
-    cleanCart,
-    putOrderById,
-    getOrderById
-} from '../../store/order/order.action';
-
+import { cleanCart, putOrderById, getOrderById } from '../../../store/order/order.action';
 
 export default function ViewOrder() {
-  const history=useHistory()
+  const history = useHistory()
   const { id } = useParams()
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
-  const [input, setInput] = useState({
-    state: "",
-    address: "",
-  });
-  const user = useSelector((state) => state.userReducer.user)
+  const [input, setInput] = useState({ state: "", address: "", });
   const orderId = useSelector((state) => state.orderReducer.orderId)
-  
 
   useEffect(() => {
     dispatch(getOrderById(id))
-  }, [])
-  
-
-
-  const sumTotal = function () {
-    let total = 0;
-    if (orderId.products) {
-        total= orderId.products.reduce((ac,e)=>ac+parseFloat(e.price),0)
-      }
-    return "$ " + total;
-  };
+  }, [dispatch,id])
 
   const handleInputChange = function (e) {
     setInput({
@@ -50,18 +30,15 @@ export default function ViewOrder() {
     };
     dispatch(putOrderById(parseInt(orderId.id), data));
     setEdit(false)
-    // history.push(`/ViewOrder/${id}`)
-
   };
-
- 
 
   const onClose = function () {
     history.push("/PageCheckoutOrders")
   };
 
   const onClean = function () {
-    dispatch(cleanCart(id));
+    dispatch(cleanCart(id))
+    history.push("/PageCheckoutOrders")
 
   };
 
@@ -77,17 +54,16 @@ export default function ViewOrder() {
 
   return (
     <div className={s.viewOrder}>
-      {console.log(orderId)}
       <div className={s.content}>
         <h3>Panel de ordenes</h3>
         <div className={[s.info, s.topShadow].join(" ")}>
           <p>
             <span>Email: </span>
-            {orderId.user &&orderId.user.email}
+            {orderId.user && orderId.user.email}
           </p>
           <p>
             <span>Rol: </span>
-            {orderId.user &&orderId.user.access}
+            {orderId.user && orderId.user.access}
           </p>
         </div>
         <div className={[s.info, s.botShadow].join(" ")}>
@@ -105,7 +81,6 @@ export default function ViewOrder() {
                 id="state"
               >
                 <option value="">Seleccione el nuevo estado</option>
-                <option value="creada">Creada</option>
                 <option value="carrito">Carrito</option>
                 <option value="procesando">Procesando</option>
                 <option value="cancelada">Cancelada</option>
@@ -138,18 +113,16 @@ export default function ViewOrder() {
             </tr>
           </thead>
           <tbody>
-            { orderId.products &&
-               orderId.products.map(function (product) {
-                return (
-                  <tr id={product.id}>
-                    <td>{product.name}</td>
-                    <td>{product.stock}</td>
-                    <td>{product.price}</td>
-                    <td>{product.order_line.quantity}</td>
-
-                  </tr>
-                );
-              })}
+            {orderId.products && orderId.products.map(function (product) {
+              return (
+                <tr id={product.id}>
+                  <td>{product.name}</td>
+                  <td>{product.stock}</td>
+                  <td>{product.price}</td>
+                  <td>{product.order_line.quantity}</td>
+                </tr>
+              );
+            })}
             <tr className={s.total}>
               <td></td>
               <td>Total:</td>

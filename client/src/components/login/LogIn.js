@@ -3,8 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -18,10 +16,10 @@ import app from "../../firebase/index.js";
 
 function Copyright() {
     return (
-        <Typography variant="body2" color="textSecondary" align="center">
+        <Typography variant="body2" color="textPrimary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
+            <Link color="inherit" href="https://ec-webft11-g10.vercel.app/">
+                EATX
       </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -35,17 +33,18 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: "white",
+        backgroundColor: theme.palette.background.paper,
         padding: theme.spacing(7),
-        borderRadius: "4px"
-
+        borderRadius: "30px",
     },
     google: {
-        minWidth: "100%"
+        minWidth: "100%",
+        marginBottom: '18px',
     },
     avatar: {
         margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.background.paper,
     },
     form: {
         width: '100%', // Fix IE 11 issue.
@@ -53,6 +52,16 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
+        borderRadius: '30px',
+        padding: '12px',
+        transition: 'background 0.2s, transform 0.2s',
+        background: 'linear-gradient(100deg, rgba(242,113,33,1) 0%, rgba(233,64,87,1) 65%, rgba(138,35,135,1) 100%)',
+        '&:hover': {
+            transition: 'background 0.2s, transform 0.2s',
+            background: 'linear-gradient(100deg, rgba(241,124,52,1) 0%, rgba(230,90,109,1) 65%, rgba(136,51,134,1) 100%)',
+            transform: 'scale(1.05)'
+        },
+        color: theme.palette.background.paper,
     },
 }));
 
@@ -61,13 +70,10 @@ export default function LogIn({ faceAuth, auth }) {
         password: "",
         email: ""
     });
-
-
-
     const forgotPassword = (email) => {
         app.auth().sendPasswordResetEmail(input.email)
             .then(function () {
-                alert('Please check your email...')
+                alert('Se envio un correo a tu correo para reestablecer la contraseña')
             }).catch(function (e) {
                 console.log(e)
             })
@@ -147,13 +153,11 @@ export default function LogIn({ faceAuth, auth }) {
                     </GoogleButton>
                     <Grid container>
                         <Grid item xs>
-                            <a href="#" onClick={forgotPassword} variant="body2">
-                                Olvidaste la contraseña?
-                             </a>
+                            <Link to='/' onClick={forgotPassword} variant="body2">Olvidé mi constraseña</Link>                                
                         </Grid>
                         <Grid item>
                             <Typography to="/signup" component={Link} variant="body2">
-                                {"No tenés cuenta? crea una"}
+                                {"Crear cuenta"}
                             </Typography>
                         </Grid>
                     </Grid>
