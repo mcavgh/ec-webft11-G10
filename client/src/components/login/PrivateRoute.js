@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
-
+import { useSelector } from "react-redux"
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
   const access = useSelector((state) => state.userReducer?.userId.access);
