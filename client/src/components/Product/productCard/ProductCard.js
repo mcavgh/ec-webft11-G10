@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 import { addToCart } from '../../../store/cart/cart.actions';
 import IconButton from '@material-ui/core/IconButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import Tilt from 'react-vanilla-tilt'
+
 
 export default function ProductCard({stock, id, img, name, description, price }) {
   const classes = useStyles();
@@ -15,8 +17,9 @@ export default function ProductCard({stock, id, img, name, description, price })
   const product = {stock, id, img, name, description, price }
   
   return (
+    <Tilt >
     <Card className={classes.root}>
-      <CardActionArea onClick={() => history.push(`/product/${id}`)}>
+      <CardActionArea onClick={() => history.push(`/product/${id}`)} className={classes.action}>
         <CardMedia
           component="img"
           alt="Food"
@@ -38,11 +41,12 @@ export default function ProductCard({stock, id, img, name, description, price })
           ${!price ? 150 : price}
       <IconButton onClick={() => dispatch(addToCart(product))}
                 color="primary" aria-label="add to shopping cart">
-                <AddShoppingCartIcon fontSize="large" />
+                <AddShoppingCartIcon fontSize="large" className={classes.buy}/>
                 {product.count}
               </IconButton>
         </Typography>
       </CardActions>
     </Card>
+     </Tilt>
   );
 }
