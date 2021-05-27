@@ -37,7 +37,8 @@ export default function ViewOrder() {
   };
 
   const onClean = function () {
-    dispatch(cleanCart(id));
+    dispatch(cleanCart(id))
+    history.push("/PageCheckoutOrders")
 
   };
 
@@ -80,7 +81,6 @@ export default function ViewOrder() {
                 id="state"
               >
                 <option value="">Seleccione el nuevo estado</option>
-                <option value="creada">Creada</option>
                 <option value="carrito">Carrito</option>
                 <option value="procesando">Procesando</option>
                 <option value="cancelada">Cancelada</option>
