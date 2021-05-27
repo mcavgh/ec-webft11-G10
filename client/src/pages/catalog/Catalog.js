@@ -1,4 +1,4 @@
-import "./catalog.css";
+// import "./catalog.css";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ProductCard from '../../components/Product/productCard/ProductCard';
@@ -8,6 +8,8 @@ import axios from "axios"
 import { searchProductSuccess } from '../../store/product/product.actions';
 import CatalogComponent from '../../components/category/CatalogCategory';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Tilt from 'react-vanilla-tilt'
+
 const Catalog = () => {
     const matches = useMediaQuery('(min-width:600px)');
 
@@ -32,11 +34,14 @@ const Catalog = () => {
                     <FilterGeneres />
                 </Paper>}
                
-                <div className="grid-container">
+                <Grid    container
+                  direction="row"
+                  justify="center"
+                  alignItems="center"className="grid-container">
                     {products && products.length >= 1 ? (
                         products.map((product, index) => {
                             return (
-                                <Grid item xs={12} sm={4} md={3} lg={2} xl={2} className="grid">
+                                <Tilt item xs={12} sm={4} md={3} lg={2} xl={2} className="grid">
                                     <ProductCard
                                         key={index}
                                         id={product.id}
@@ -46,13 +51,13 @@ const Catalog = () => {
                                         price={product.price}
                                         stock={product.stock}
                                     />
-                                </Grid>
+                                </Tilt>
                             );
                         })
                     ) : (
                         <p>NO PRODUCTS IN DB</p>
                     )}
-                </div>
+                </Grid>
 
             </div>
 
