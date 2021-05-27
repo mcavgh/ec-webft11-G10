@@ -5,12 +5,12 @@ import clsx from 'clsx';
 import axios from "axios";
 import { useTheme } from '@material-ui/core/styles';
 import { Menu, Avatar, MenuItem, Drawer, CssBaseline, AppBar, Toolbar, Badge, List, Button, Divider, IconButton, ListItem, ListItemText, } from '@material-ui/core';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import SearchIcon from '@material-ui/icons/Search';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
+import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
+import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
+import ChevronLeftRoundedIcon from '@material-ui/icons/ChevronLeftRounded';
+import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
+import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import { useStyles } from './styles'
 import { Link, useHistory } from 'react-router-dom';
 import { SearchBar } from './searchBar/SearchBar';
@@ -82,7 +82,7 @@ export default function PersistentDrawerLeft() {
                         edge="start"
                         className={clsx(classes.menuButton, open && classes.hide)}
                     >
-                        <MenuIcon />
+                        <MenuRoundedIcon fontSize="large"/>
                     </IconButton>
                     }
                     <Button onClick={refreshSearch} variant="h6" color='inherit' to="/" component={Link}>
@@ -90,7 +90,7 @@ export default function PersistentDrawerLeft() {
                     </Button>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
-                            <SearchIcon />
+                            <SearchRoundedIcon />
                         </div>
                         <SearchBar />
                     </div>
@@ -100,7 +100,7 @@ export default function PersistentDrawerLeft() {
                             aria-label="" color="inherit">
 
                             <Badge badgeContent={cartQuantity} color="secondary">
-                                <ShoppingCartIcon fontSize="large" />
+                                <ShoppingCartRoundedIcon fontSize="large" className={classes.icons}/>
                             </Badge>
 
                         </IconButton>
@@ -113,9 +113,10 @@ export default function PersistentDrawerLeft() {
                             onClick={handleMenu}
                             color="inherit"
                         >
-                            {currentUser ? (<Avatar alt="Remy Sharp" src={currentUser.photoURL} />
-                            ) : (<AccountCircleIcon
+                            {currentUser ? (<Avatar alt="Usuario" src={currentUser.photoURL} />
+                            ) : (<AccountCircleRoundedIcon
                                 fontSize="large"
+                                className={classes.icons}
                             />)}
                         </IconButton>
                         <Menu
@@ -138,7 +139,7 @@ export default function PersistentDrawerLeft() {
                                 <MenuItem onClick={() => app.auth().signOut()
                                     .then(res => dispatch({ type: "DELETE_USER" }), handleClose())
 
-                                }>Log out</MenuItem>
+                                }>Cerrar sesión</MenuItem>
                             </div>
                         </Menu>
                     </div>
@@ -155,26 +156,26 @@ export default function PersistentDrawerLeft() {
             >
                 <div className={classes.drawerHeader}>
                     <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                        {theme.direction === 'ltr' ? <ChevronLeftRoundedIcon fontSize="large" className={classes.icons}/> : <ChevronRightRoundedIcon fontSize="large" className={classes.icons}/>}
                     </IconButton>
 
                 </div>
                 <Divider />
                 <List >
                     <ListItem button to="/adminProduct" component={Link}>
-                        <ListItemText className={classes.barOptions} primary="Administrar Productos" />
+                        <ListItemText className={classes.barOptions} primary="Administrar productos" />
                     </ListItem>
                     <ListItem button to="/CreateProduct" component={Link}>
-                        <ListItemText className={classes.barOptions} primary="Crear Productos" />
+                        <ListItemText className={classes.barOptions} primary="Crear productos" />
                     </ListItem>
                     <ListItem button to="/adminCategories" component={Link}>
-                        <ListItemText className={classes.barOptions} primary="Administrar Categorias" />
+                        <ListItemText className={classes.barOptions} primary="Administrar categorías" />
                     </ListItem>
                     <ListItem button to="/creaCategories" component={Link}>
-                        <ListItemText className={classes.barOptions} primary="Crear Categorias" />
+                        <ListItemText className={classes.barOptions} primary="Crear categorías" />
                     </ListItem>
                     <ListItem button to="/PageCheckoutOrders" component={Link}>
-                        <ListItemText className={classes.barOptions} primary="Ver Ordenes" />
+                        <ListItemText className={classes.barOptions} primary="Administrar órdenes" />
                     </ListItem>
                     <ListItem button to="/FormAdmin" component={Link}>
                         <ListItemText className={classes.barOptions} primary="Administrar roles" />

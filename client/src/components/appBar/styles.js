@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
     },
     appBar: {
-        // background: 'linear-gradient(45deg, #0058ff4f 50%, #2326299c 250%)',
+        background: theme.palette.background.paper,
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
@@ -26,6 +26,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     menuButton: {
         marginRight: theme.spacing(2),
+        color: theme.palette.primary.main,
     },
     hide: {
         display: 'none',
@@ -36,10 +37,10 @@ export const useStyles = makeStyles((theme) => ({
     },
     drawerPaper: {
         width: drawerWidth,
+        color: theme.palette.primary.main,
     },
     barOptions:{
         textAlign: 'center',
-
     },
     drawerHeader: {
         display: 'flex',
@@ -48,6 +49,9 @@ export const useStyles = makeStyles((theme) => ({
         // necessary for content to be below app bar
         ...theme.mixins.toolbar,
         justifyContent: 'flex-end',
+    },
+    icons: {
+        color: theme.palette.primary.main,
     },
     content: {
         flexGrow: 1,
@@ -81,28 +85,33 @@ export const useStyles = makeStyles((theme) => ({
         },
     },
     searchIcon: {
-        padding: theme.spacing(0, 2),
+        padding: theme.spacing(0, 2.5),
         height: '100%',
         position: 'absolute',
         pointerEvents: 'none',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        color: theme.palette.primary.main,
     },
     cart:{
         display:"none",
     },
     inputRoot: {
-        color: 'inherit',
+        color: theme.palette.primary.main,
+        fontWeight: 'bold',
+        border: '3.8px solid #f27121',
+        borderRadius: '30px',
+        padding: '2.8px',
+        width: '500px',
     },
     inputInput: {
         padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('md')]: {
-            width: '20ch',
+            width: '45ch',
         },
     },
     sectionDesktop: {

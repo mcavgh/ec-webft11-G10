@@ -6,58 +6,68 @@ import Link from '@material-ui/core/Link'
 
 export default function Footer (){
     return <footer>
-        <Box px={{xs:3,sm:10}} py={{xs:5,sm:10}} bgcolor="error.main" color="white">
+        <Box px={{xs:3,sm:10}} py={{xs:5,sm:10}} bgcolor="#f27121" color="#ffffff">
             <Container maxWidth="lg">
                 <Grid container spacing={5}>
                     <Grid item xs={12} sm={4}>
-                        <Box borderBottom={1} fontWeight="fontWeightBold" >Help</Box>
+                        <Box borderBottom={1} fontWeight="fontWeightBold" >Contacto</Box>
                         <Box>
                             <Link href="/" color="inherit" >
-                            Contact                            
+                            Contáctanos                            
                             </Link>
                         </Box>
                         <Box>
                             <Link href="/" color="inherit" >
-                            Support                            
-                            </Link>
-                        </Box>
-                        <Box>
-                            <Link href="/" color="inherit" >
-                            Privacy                            
+                            Acerca de nosotros                            
                             </Link>
                         </Box>
 
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <Box borderBottom={1} fontWeight="fontWeightBold" >Account</Box>
+                        <Box borderBottom={1} fontWeight="fontWeightBold" >Cuenta</Box>
                         <Box>
-                            <Link href="/" color="inherit" >
-                            Login                            
+                            <Link href="https://ec-webft11-g10.vercel.app/login" color="inherit" >
+                            Iniciar sesión                            
                             </Link>
                         </Box>
                         <Box>
-                            <Link href="/" color="inherit" >
-                            Register                            
+                            <Link href="https://ec-webft11-g10.vercel.app/signup" color="inherit" >
+                            Crear cuenta                            
                             </Link>
                         </Box>
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <Box borderBottom={1} fontWeight="fontWeightBold">Messages</Box>
+                        <Box borderBottom={1} fontWeight="fontWeightBold">Equipo EATX</Box>
                         <Box>
-                            <Link href="/" color="inherit" >
-                            Backup                            
+                            <Link href="https://www.linkedin.com/in/martincavanagh/" color="inherit" >
+                            Martín Cavanagh                            
                             </Link>
                         </Box>
                         <Box>
-                            <Link href="/" color="inherit" >
-                            History                            
+                            <Link href="https://www.linkedin.com/in/lucianoojeda/" color="inherit" >
+                            Luciano Ojeda                            
+                            </Link>
+                        </Box>
+                        <Box>
+                            <Link href="https://www.linkedin.com/in/luciano-nu%C3%B1ez/" color="inherit" >
+                            Luciano Nuñez                         
+                            </Link>
+                        </Box>
+                        <Box>
+                            <Link href="https://www.linkedin.com/in/esteban-cespedes-/" color="inherit" >
+                            Esteban Cespedes                            
+                            </Link>
+                        </Box>
+                        <Box>
+                            <Link href="https://www.linkedin.com/in/braiaguilar/" color="inherit" >
+                            Brian Aguilar                            
                             </Link>
                         </Box>
                     </Grid>
 
                 </Grid>
                 <Box textAlign="center" pt={{xs:5,sm:10}} pb={{xs:5,sm:0}}>
-                 Grupo 10 Henry Ecommerce &reg;{new Date().getFullYear()}
+                Copyright © EATX {new Date().getFullYear()}
                 </Box>
 
             </Container>
