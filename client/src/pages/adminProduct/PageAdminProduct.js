@@ -13,7 +13,7 @@ export function PageAdminProduct() {
   
     useEffect(() => {
         dispatch(getProducts())        
-    }, [])
+    }, [dispatch])
 
     return (
         <div>

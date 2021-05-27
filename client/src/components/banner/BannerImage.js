@@ -9,7 +9,7 @@ const Banner = () => {
   const images = [ banner1, banner2, banner3];
   const zoomOutProperties = { indicators: true, scale: 0.4 }
   return (
-    <div ClassName="container">
+    <div className="container">
       <Zoom {...zoomOutProperties}>
         {images.map((each, index) => (
           <div key={index} style={{width: "100%"}}>
