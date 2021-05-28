@@ -55,7 +55,7 @@ const Catalog = () => {
                     ) : (
                         <p>NO PRODUCTS IN DB</p>
                     )}
-                </Grid>
+                </div>
 
             </div>
 
