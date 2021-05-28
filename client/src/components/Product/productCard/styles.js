@@ -1,4 +1,4 @@
-import {red } from '@material-ui/core/colors'
+import {blue, red } from '@material-ui/core/colors'
 import { makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles({
@@ -6,6 +6,7 @@ export const useStyles = makeStyles({
       margin:"10px",
       maxWidth: 345,
       maxHeight: 400,
+      border:blue,
       
     },
     container:{

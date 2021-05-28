@@ -1,7 +1,7 @@
 import React, { useEffect} from "react";
 import { Card,  CardContent,  Typography,  Grid,  Button,  CardMedia
 } from "@material-ui/core/";
-import {Link } from "react-router-dom";
+import {Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import AppBar from "../../components/appBar/AppBar";
 import defaultImg from "../../components/Product/productCard/ProductCard";
@@ -12,6 +12,7 @@ import RemoveShoppingCartOutlinedIcon from '@material-ui/icons/RemoveShoppingCar
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Swal from 'sweetalert2';
 import { findOrCreateOrders } from '../../store/order/order.action';
+import {FindMe} from '../../components/localizacion/Geolocalizacion'
 
 export default function Cart() {
   const classes = useStyles();
@@ -19,16 +20,20 @@ export default function Cart() {
   const cart = useSelector((state) => state.cart.cartItems);
   const total = useSelector((state) => state.cart.total);
   const userId = useSelector((state) => state.userReducer.userId.id);
-
+  const history= useHistory()
   useEffect(() => {
     dispatch(getTotal());
   }, [dispatch]);
 
   const handlerClick = () => {
-    if (!userId){alert("debe registrarse")}
-    try {dispatch(findOrCreateOrders(userId))}
+    if(localizacion > 50 ){history.push("/advertencia")}
+     else if (!userId){alert("debe registrarse")}else {
+        try {dispatch(findOrCreateOrders(userId))}
     catch (error) {Swal.fire({ icon: 'error', title: 'Oops...', text:'Something went wrong!', })}
-  }
+  }}
+
+  const localizacion =FindMe()
+
   return (
     <div className={classes.container}>
       <AppBar />
@@ -119,7 +124,7 @@ export default function Cart() {
               style={{ marginTop: 16 }}
               color="primary"
               variant="contained"
-              to={userId ? ("/PageCheckout"):("/logIn")}
+              // to={userId && localizacion < 50 ?("/PageCheckout"):("/logIn")}
               component={Link}
             >
               Checkout
