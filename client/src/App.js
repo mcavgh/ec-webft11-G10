@@ -22,6 +22,7 @@ import {Checkout} from './pages/checkOut/Checkout'
 import FormAdmin from './components/login/FormAdmin';
 import PageSignUp from './pages/landingPage/SignUp';
 import Catalog from './pages/catalog/Catalog';
+import { Advertencia } from './components/localizacion/Advertencia';
 
 dotenv.config()
 axios.defaults.baseURL=process.env.REACT_APP_API || "http://localhost:3001"
@@ -46,6 +47,7 @@ function App() {
           <PrivateRoute path='/creaCategories' component={PageAddCategory} />
           <PrivateRoute path='/editCategory/:id' component={PageEditCategory} />
           <PrivateRoute path='/PageCheckoutOrders' component={PageCheckoutOrders} />
+          <Route path='/Advertencia' component={Advertencia} />
           <Route path='/PageCheckout' component={Checkout} />
           <PrivateRoute path='/ViewOrder/:id' component={ViewOrder} />
           <Route path='/FormAdmin' component={FormAdmin} />
