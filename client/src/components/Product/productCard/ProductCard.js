@@ -8,7 +8,7 @@ import { addToCart, addToWishList } from '../../../store/cart/cart.actions';
 import IconButton from '@material-ui/core/IconButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import Tilt from 'react-vanilla-tilt'
+// import Tilt from 'react-vanilla-tilt'
 
 
 export default function ProductCard({ stock, id, img, name, description, price }) {
@@ -18,7 +18,7 @@ export default function ProductCard({ stock, id, img, name, description, price }
   const product = { stock, id, img, name, description, price }
 
   return (
-    <Tilt >
+    // <Tilt >
       <Card className={classes.root}>
         <CardActionArea onClick={() => history.push(`/product/${id}`)} className={classes.action}>
           <CardMedia
@@ -51,6 +51,6 @@ export default function ProductCard({ stock, id, img, name, description, price }
           </Typography>
         </CardActions>
       </Card>
-    </Tilt>
+    // </Tilt>
   );
 }
