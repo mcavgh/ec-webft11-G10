@@ -17,11 +17,12 @@ import dotenv from "dotenv";
 import axios from "axios";
 import PrivateRoute from "./components/login/PrivateRoute";
 import { AuthProvider } from "./components/AuthContext";
-import PageLogIn from "./pages/landingPage/LandingPage";
-import { Checkout } from "./pages/checkOut/Checkout";
-import FormAdmin from "./components/login/FormAdmin";
-import PageSignUp from "./pages/landingPage/SignUp";
-import Catalog from "./pages/catalog/Catalog";
+import PageLogIn from './pages/landingPage/LandingPage';
+import {Checkout} from './pages/checkOut/Checkout'
+import FormAdmin from './components/login/FormAdmin';
+import PageSignUp from './pages/landingPage/SignUp';
+//import Catalog from './pages/catalog/Catalog';
+import { Catalog } from './pages/Catalog';
 import Profile from "./pages/profile/Profile";
 
 dotenv.config();
@@ -32,35 +33,27 @@ function App() {
     <React.Fragment>
       <AuthProvider>
         <ThemeProvider theme={theme}>
-          <Switch>
-            <Route exact path="/catalog" component={Catalog} />
-            <Route exact path="/cart" component={CartProducts} />
-            <Route exact path="/logIn" component={PageLogIn} />
-            <Route exact path="/signUp" component={PageSignUp} />
-            <Route exact path="/" component={Home} />
-            <PrivateRoute path="/editProduct/:id" component={PageEditProduct} />
-            <PrivateRoute path="/adminProduct" component={PageAdminProduct} />
-            <PrivateRoute path="/createProduct" component={PageAddProduct} />
-            <PrivateRoute path="/creaCategories" component={PageAddCategory} />
-            <PrivateRoute
-              path="/adminCategories"
-              component={PageAdminCategories}
-            />
-            <PrivateRoute path="/creaCategories" component={PageAddCategory} />
-            <PrivateRoute
-              path="/editCategory/:id"
-              component={PageEditCategory}
-            />
-            <PrivateRoute
-              path="/PageCheckoutOrders"
-              component={PageCheckoutOrders}
-            />
-            <Route path="/PageCheckout" component={Checkout} />
-            <PrivateRoute path="/ViewOrder/:id" component={ViewOrder} />
-            <Route path="/FormAdmin" component={FormAdmin} />
-            <Route path="/product/:id" component={Product} />
-            <Route path="/me/:id/:name" component={Profile} />
-            <Route path="*" component={() => "404 NOT FOUND"} />
+        <Switch>
+          <Route exact path='/cart' component={CartProducts} />
+          <Route exact path='/logIn' component={PageLogIn} />
+          <Route exact path='/signUp' component={PageSignUp } />
+          <Route exact path='/home' component={Catalog} />
+          <Route exact path='/' component={Home} />
+
+          <PrivateRoute path='/editProduct/:id' component={PageEditProduct} />
+          <PrivateRoute path='/adminProduct' component={PageAdminProduct} />
+          <PrivateRoute path='/createProduct' component={PageAddProduct} />
+          <PrivateRoute path='/creaCategories' component={PageAddCategory} />
+          <PrivateRoute path='/adminCategories' component={PageAdminCategories} />
+          <PrivateRoute path='/creaCategories' component={PageAddCategory} />
+          <PrivateRoute path='/editCategory/:id' component={PageEditCategory} />
+          <PrivateRoute path='/PageCheckoutOrders' component={PageCheckoutOrders} />
+          <Route path='/PageCheckout' component={Checkout} />
+          <PrivateRoute path='/ViewOrder/:id' component={ViewOrder} />
+          <Route path='/FormAdmin' component={FormAdmin} />
+          <Route path='/product/:id' component={Product} />
+          <Route path="/me/:id/:name" component={Profile} />
+          <Route path="*" component={() => "404 NO SE ENCONTRÓ"} />
           </Switch>
         </ThemeProvider>
       </AuthProvider>
