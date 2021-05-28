@@ -5,6 +5,7 @@ export const REMOVE_FROM_CART = "REMOVE_FROM_CART"
 export const GET_TOTAL = "GET_TOTAL"
 export const GET_QUANTITY = "GET_QUANTITY"
 export const GET_PRODUCTS_IN_CART = "GET_PRODUCTS_IN_CART"
+export const GET_PRODUCTS_IN_WISHLIST= "GET_PRODUCTS_IN_WISHLIST"
 
 export const getProductsInCart = (userId) => (dispatch, getState) => {
   if (!userId) return
@@ -12,17 +13,17 @@ export const getProductsInCart = (userId) => (dispatch, getState) => {
 
   if (cartItems?.length > 0) {//si hay items en local storage
 
-  //   return axios.post(`/orders/cart/${userId}`).then(order => {
-  //  console.log("======================>",order.data.id)
+    //   return axios.post(`/orders/cart/${userId}`).then(order => {
+    //  console.log("======================>",order.data.id)
 
-  //     cartItems.forEach(element => {
-  //       axios.post(`/${element.id}/order/${order.data.id}/quantity/${element.count}`).then(prod => {
-  //       }).
-  //       catch(err=>console.log(err))
-  //     });
+    //     cartItems.forEach(element => {
+    //       axios.post(`/${element.id}/order/${order.data.id}/quantity/${element.count}`).then(prod => {
+    //       }).
+    //       catch(err=>console.log(err))
+    //     });
 
-  //   })
-  //   .catch(err=>console.error(err))
+    //   })
+    //   .catch(err=>console.error(err))
 
   } else {
     //si no hay items me traigo los item de la db
@@ -122,3 +123,14 @@ export const removeFromCart = (product) => (dispatch, getState) => {
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
   dispatch(getTotal())
 };
+///////////////////WISHLIST
+export const addToWishList = (product) => (dispatch, getState) => {
+  const userId = getState().userReducer.userId.id;
+console.log(userId,product.id)
+  return axios.post(`users/${userId}/Product/${product.id}`).then(product => {
+    dispatch({
+      type: GET_PRODUCTS_IN_WISHLIST,
+      payload: product.data
+    })
+  })
+}

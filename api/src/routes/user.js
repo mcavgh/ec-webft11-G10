@@ -1,6 +1,6 @@
+const { addProductToUser }=require ('../controllers/user');
 const server = require("express").Router();
 const { Order, Product, User } = require("../db");
-
 
 // TRAE UN USUARIO POR ID |
 //------------------------
@@ -48,6 +48,16 @@ server.post("/register", (req, res) => {
     .catch((err) => res.send(err));
 });
 
+// AGREGAR PRODUCTS A LA WISHLIST DEL USER
+server.post("/:idUser/Product/:idProduct", async (req, res) => {
+  let { idUser, idProduct } = req.params;
+
+  return addProductToUser(idUser, idProduct).then((data) => {
+    return res.status(201).send(data);
+  }).catch(error => {
+    return res.status(400).send({ data: error });
+  });
+});
 
 // MODIFICA EL ACCESS DEL USUARIO |
 //----------------
