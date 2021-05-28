@@ -21,6 +21,10 @@ import PageLogIn from './pages/landingPage/LandingPage';
 import {Checkout} from './pages/checkOut/Checkout'
 import FormAdmin from './components/login/FormAdmin';
 import PageSignUp from './pages/landingPage/SignUp';
+
+// import Catalog from './pages/catalog/Catalog';
+import { Advertencia } from './components/localizacion/Advertencia';
+
 //import Catalog from './pages/catalog/Catalog';
 import { Catalog } from './pages/Catalog';
 import Profile from "./pages/profile/Profile";
@@ -48,6 +52,7 @@ function App() {
           <PrivateRoute path='/creaCategories' component={PageAddCategory} />
           <PrivateRoute path='/editCategory/:id' component={PageEditCategory} />
           <PrivateRoute path='/PageCheckoutOrders' component={PageCheckoutOrders} />
+          <Route path='/Advertencia' component={Advertencia} />
           <Route path='/PageCheckout' component={Checkout} />
           <PrivateRoute path='/ViewOrder/:id' component={ViewOrder} />
           <Route path='/FormAdmin' component={FormAdmin} />
