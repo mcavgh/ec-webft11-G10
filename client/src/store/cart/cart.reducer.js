@@ -1,7 +1,12 @@
-import { GET_PRODUCTS_IN_CART,GET_QUANTITY, GET_TOTAL, ADD_TO_CART, REMOVE_FROM_CART } from "./cart.actions";
+import {
+  GET_PRODUCTS_IN_WISHLIST, GET_PRODUCTS_IN_CART, GET_QUANTITY, GET_TOTAL, ADD_TO_CART, REMOVE_FROM_CART
+} from "./cart.actions";
 
 export const cartReducer = (
-  state = { cartItems: JSON.parse(localStorage.getItem("cartItems") || "[]") },
+  state = {
+    cartItems: JSON.parse(localStorage.getItem("cartItems") || "[]"),
+    wishlist: []
+  },
   action
 ) => {
   switch (action.type) {
@@ -32,6 +37,11 @@ export const cartReducer = (
       return {
         ...state,
         total: action.payload
+      }
+    case GET_PRODUCTS_IN_WISHLIST:
+      return {
+        ...state,
+        wishlist: [...state.wishlist, action.payload]
       }
     default:
       return state;

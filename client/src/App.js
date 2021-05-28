@@ -33,7 +33,6 @@ function App() {
 
         <ThemeProvider theme={theme}>
         <Switch>
-        <Route exact path='/catalog' component={Catalog} />
           <Route exact path='/cart' component={CartProducts} />
           <Route exact path='/logIn' component={PageLogIn} />
           <Route exact path='/signUp' component={PageSignUp } />

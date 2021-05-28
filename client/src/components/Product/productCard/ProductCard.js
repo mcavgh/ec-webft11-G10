@@ -4,9 +4,10 @@ import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography }
 import { useStyles } from './styles'
 import defaultImg from './default.png'
 import { useDispatch } from "react-redux";
-import { addToCart } from '../../../store/cart/cart.actions';
+import { addToCart, addToWishList } from '../../../store/cart/cart.actions';
 import IconButton from '@material-ui/core/IconButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Tilt from 'react-vanilla-tilt'
 
 
@@ -42,7 +43,10 @@ export default function ProductCard({ stock, id, img, name, description, price }
             <IconButton onClick={() => dispatch(addToCart(product))}
               color="primary" aria-label="add to shopping cart">
               <AddShoppingCartIcon fontSize="large" className={classes.buy} />
-              {product.count}
+            </IconButton>
+            <IconButton onClick={() => dispatch(addToWishList(product))}
+              color="primary" aria-label="add to shopping cart">
+              <FavoriteBorderIcon fontSize="large" className={classes.buy} />
             </IconButton>
           </Typography>
         </CardActions>
