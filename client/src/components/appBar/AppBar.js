@@ -18,7 +18,7 @@ import { useSelector } from "react-redux";
 import { searchProductSuccess } from '../../store/product/product.actions';
 import { getQuantity } from '../../store/cart/cart.actions';
 import { AuthContext } from '../AuthContext';
-import { getUsersByEmailId } from '../../store/user/user.action';
+import { getUsersByEmailId, getUserWishList } from '../../store/user/user.action';
 
 export default function PersistentDrawerLeft() {
     const history = useHistory()
@@ -30,7 +30,7 @@ export default function PersistentDrawerLeft() {
     const dispatch = useDispatch()
 
     const { currentUser } = useContext(AuthContext)
-
+   
     useEffect(() => {
         dispatch(getQuantity())
         currentUser?.email && dispatch(getUsersByEmailId(currentUser.email))

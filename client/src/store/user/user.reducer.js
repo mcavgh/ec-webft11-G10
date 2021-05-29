@@ -1,13 +1,19 @@
-import { POST_USER_ACCESS, POST_ADMIN, GET_USER_BYID, GET_ID_BYEMAIL, DELETE_USER, PUT_USER, GET_USERS } from './user.action';
+import {GET_USER_WISHLIST, POST_USER_ACCESS, POST_ADMIN, GET_USER_BYID, GET_ID_BYEMAIL, DELETE_USER, PUT_USER, GET_USERS } from './user.action';
 
 const initialState = {
   users: [],
   user: undefined,
   userId: {},
+  wishList:[]
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_USER_WISHLIST:
+      return{
+        ...state,
+        wishList:action.payload
+      }
     case POST_USER_ACCESS:
     case POST_ADMIN:
     case GET_USER_BYID:
