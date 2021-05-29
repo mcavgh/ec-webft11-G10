@@ -124,7 +124,7 @@ export default function Cart() {
               style={{ marginTop: 16 }}
               color="primary"
               variant="contained"
-              // to={userId && localizacion < 50 ?("/PageCheckout"):("/logIn")}
+              to={userId && localizacion < 50 ?("/PageCheckout"):("/advertencia")}
               component={Link}
             >
               Checkout
