@@ -11,6 +11,16 @@ export const CREATE_USER = "CREATE_USER";
 export const GET_ID_BYEMAIL = "GET_ID_BYEMAIL";
 export const POST_ADMIN = "POST_ADMIN";
 export const POST_USER_ACCESS = "POST_USER_ACCESS";
+export const GET_USER_WISHLIST = "GET_USER_WISHLIST";
+
+export const getUserWishList = (userId) =>(dispatch)=> {
+  console.log(userId)
+  axios.get(`/users/${userId}/wishList`).then((res) => {
+    dispatch({ type: GET_USER_WISHLIST, payload: res.data });
+    
+})
+}
+
 
 export const postUser = (displayName, email) => {
     return (dispatch, getState) => {

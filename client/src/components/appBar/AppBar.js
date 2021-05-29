@@ -18,11 +18,12 @@ import { useSelector } from "react-redux";
 import { searchProductSuccess } from '../../store/product/product.actions';
 import { getQuantity } from '../../store/cart/cart.actions';
 import { AuthContext } from '../AuthContext';
-import { getUsersByEmailId } from '../../store/user/user.action';
+import { getUsersByEmailId, getUserWishList } from '../../store/user/user.action';
 
 export default function PersistentDrawerLeft() {
     const history = useHistory()
     const cartQuantity = useSelector(state => state.cart.cartQuantity)
+    const userAccess = useSelector(state => state.userReducer.userId.access)
 
     const classes = useStyles();
     const theme = useTheme();
@@ -30,7 +31,7 @@ export default function PersistentDrawerLeft() {
     const dispatch = useDispatch()
 
     const { currentUser } = useContext(AuthContext)
-
+   
     useEffect(() => {
         dispatch(getQuantity())
         currentUser?.email && dispatch(getUsersByEmailId(currentUser.email))
@@ -42,7 +43,6 @@ export default function PersistentDrawerLeft() {
         setOpen(false);
     };
 
-    // const history=useHistory()
     //USER BUTTON
     const [anchorEl, setAnchorEl] = React.useState(null);
     const dropdown = Boolean(anchorEl);
@@ -71,7 +71,7 @@ export default function PersistentDrawerLeft() {
                 })}
             >
                 <Toolbar >
-                    {<IconButton
+                    {userAccess==="Admin"&&<IconButton
                         color="inherit"
                         aria-label="open drawer"
                         onClick={handleDrawerOpen}
