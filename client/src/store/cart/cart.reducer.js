@@ -5,7 +5,6 @@ import {
 export const cartReducer = (
   state = {
     cartItems: JSON.parse(localStorage.getItem("cartItems") || "[]"),
-    wishlist: []
   },
   action
 ) => {
