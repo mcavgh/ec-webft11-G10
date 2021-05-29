@@ -18,6 +18,7 @@ server.use((req, res, next) => {
 });
 
 server.use('/', routes);
+server.set('port', (process.env.PORT || 5000));
 
 // Error catching endware.
 server.use((err, req, res, next) => {
