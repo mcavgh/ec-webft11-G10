@@ -18,7 +18,7 @@ const FilterGeneres = () => {
 
     return (
         <div>
-            {categories&&categories.map((category, index) => {
+            {categories[0]&&categories.map((category, index) => {
                 if (category.name !== "") {
                     return (
                         <Typography key={index} name={category.name}
