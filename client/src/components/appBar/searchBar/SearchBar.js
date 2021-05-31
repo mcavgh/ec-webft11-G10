@@ -26,7 +26,7 @@ export const SearchBar = () => {
     return (
         <>
             <form >
-                <InputBase onClick={(e)=> history.push("/")} classes={{ root: classes.inputRoot, input: classes.inputInput, }} inputProps={{ 'aria-label': 'search' }} type="text" id="title" value={title} onChange={(e) => handleChange(e)}
+                <InputBase onClick={(e)=> history.push("/home")} classes={{ root: classes.inputRoot, input: classes.inputInput, }} inputProps={{ 'aria-label': 'search' }} type="text" id="title" value={title} onChange={(e) => handleChange(e)}
                 />
             </form>
         </>

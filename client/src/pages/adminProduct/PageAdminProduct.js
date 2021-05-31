@@ -5,7 +5,7 @@ import { deleteProductById,getProducts } from '../../store/product/product.actio
 import { useHistory } from "react-router-dom"
 import { Paper} from '@material-ui/core';
 import AppBar from "../../components/appBar/AppBar"
-
+import MoneyOffIcon from '@material-ui/icons/MoneyOff';
 export function PageAdminProduct() {
     const products = useSelector(state => state.productReducer.products)
     const dispatch = useDispatch()
@@ -31,6 +31,11 @@ export function PageAdminProduct() {
                 data={products}
                 title="Products"
                 actions={[
+                    {
+                        icon: MoneyOffIcon,
+                        tooltip: 'discount',
+                        onClick: (event, rowData) => history.push ('/discountProduct/'+ rowData.id)
+                    },
                     {
                         icon: 'edit',
                         tooltip: 'edita',

@@ -23,5 +23,9 @@ module.exports = sequelize => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    discount: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
   });
 };

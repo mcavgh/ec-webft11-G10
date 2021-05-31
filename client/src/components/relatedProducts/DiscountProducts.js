@@ -2,30 +2,28 @@ import React, { useEffect } from "react";
 import Carousel from "react-elastic-carousel";
 import Item from "./Item";
 import { useSelector } from "react-redux";
-import { getUserWishList } from '../../store/user/user.action';
 import { Typography } from '@material-ui/core/';
 import { useDispatch } from "react-redux";
 import axios from "axios"
+import { getDiscountProducts } from '../../store/product/product.actions';
 const breakPoints = [
     { width: 1, itemsToShow: 1 },
     { width: 550, itemsToShow: 2 },
     { width: 768, itemsToShow: 3 },
     { width: 1200, itemsToShow: 5 },
 ];
-export const WishListProducts = () => {
+export const DiscountProducts = () => {
     const dispatch = useDispatch()
-
-    const wishList = useSelector(state => state.userReducer?.wishList)
-    const userId = useSelector(state => state.userReducer.userId.id)
+    const discountProducts = useSelector(state => state.productReducer?.discountProducts)
     useEffect(() => {
-        if (userId) dispatch(getUserWishList(userId))
+        dispatch(getDiscountProducts())
 
-    }, [userId])
+    }, [dispatch])
 
     return (
         <>
             <Typography component="p" variant="h4" color="primary">
-                Productos de su Wishlist
+                Productos con descuento
 </Typography>
             <Carousel
                 itemPadding={[50, 10]}
@@ -34,9 +32,9 @@ export const WishListProducts = () => {
 
             >
                 {
-                    wishList && wishList[0] ? (
+                    discountProducts && discountProducts[0] ? (
 
-                        wishList.map(p => {
+                        discountProducts.map(p => {
                             return <Item product={p} />
 
                         })) : (<h1>no hay productos</h1>)
