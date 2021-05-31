@@ -71,7 +71,7 @@ export default function PersistentDrawerLeft() {
                 })}
             >
                 <Toolbar >
-                    {userAccess==="Admin"&&<IconButton
+                    {userAccess==="User"&&<IconButton
                         color="inherit"
                         aria-label="open drawer"
                         onClick={handleDrawerOpen}
