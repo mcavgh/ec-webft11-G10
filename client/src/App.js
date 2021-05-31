@@ -4,6 +4,7 @@ import { Home } from './pages/Home';
 import PageAddProduct from './pages/adminProduct/PageAddProduct'
 import Product from './components/Product/Product'
 import {PageAdminProduct} from './pages/adminProduct/PageAdminProduct';
+import PageDiscountProduct from './pages/adminProduct/PageDiscountProduct.js';
 import PageEditProduct from './pages/adminProduct/PageEditProduct';
 import PageAddCategory from './pages/adminCategory/PageAddCategory';
 import { ThemeProvider } from '@material-ui/core/styles'
@@ -21,12 +22,8 @@ import PageLogIn from './pages/landingPage/LandingPage';
 import {Checkout} from './pages/checkOut/Checkout'
 import FormAdmin from './components/login/FormAdmin';
 import PageSignUp from './pages/landingPage/SignUp';
-
-// import Catalog from './pages/catalog/Catalog';
 import { Advertencia } from './components/localizacion/Advertencia';
-
-//import Catalog from './pages/catalog/Catalog';
-import { Catalog } from './pages/Catalog';
+import { LandingPage } from './pages/LandingPage';
 
 
 dotenv.config()
@@ -42,9 +39,9 @@ function App() {
           <Route exact path='/cart' component={CartProducts} />
           <Route exact path='/logIn' component={PageLogIn} />
           <Route exact path='/signUp' component={PageSignUp } />
-          <Route exact path='/home' component={Catalog} />
-          <Route exact path='/' component={Home} />
-
+          <Route exact path='/' component={LandingPage} />
+          <Route exact path='/home' component={Home} />
+          <Route path='/discountProduct/:id' component={PageDiscountProduct} />
           <PrivateRoute path='/editProduct/:id' component={PageEditProduct} />
           <PrivateRoute path='/adminProduct' component={PageAdminProduct} />
           <PrivateRoute path='/createProduct' component={PageAddProduct} />

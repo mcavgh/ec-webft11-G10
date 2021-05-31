@@ -9,6 +9,7 @@ import {
   GET_ONE_PRODUCT,
   DELETE_PRODUCT_BY_ID,
   PUT_PRODUCT_BY_ID,
+  GET_DISCOUNT_PRODUCTS
 } from "./product.actions";
 import {
   SEARCH_PRODUCT_REQUEST_CATEGORIES,
@@ -24,10 +25,16 @@ const initialState = {
   Error: "",
   Loading: "",
   searchResults: [],
+  discountProducts:[]
 };
 
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_DISCOUNT_PRODUCTS:
+      return{
+        ...state,
+        discountProducts:action.payload
+      }
     case PUT_PRODUCT_BY_ID:
       return { ...state };
     case DELETE_PRODUCT_BY_ID:

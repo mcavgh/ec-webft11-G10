@@ -143,6 +143,23 @@ server.delete("/:id", (req, res) => {
     });
 });
 
+// MODIFICA EL DESCUENTO DEL PRODUCTO |
+//------------------------------------
+server.put("/:productId/discount/:discount", (req, res) => {
+  const {productId,discount} = req.params;
 
+  Product.findOne({ where: { id:productId } })
+    .then((product) => {
+      if (!product) {
+        res.send("product not found");
+      } else {
+        product.update({ discount });
+        res.send(product);
+      }
+    })
+    .catch((error) => {
+      res.status(400).json(error);
+    });
+})
 
 module.exports = server;

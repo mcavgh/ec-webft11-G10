@@ -43,8 +43,8 @@ export default function Cart() {
         ? cart.map((product) => {
             return (
               <Card className={classes.root}>
-                <Grid xs={1} />
-                <Grid xs={2}>
+                <Grid item xs={1} />
+                <Grid item xs={2}>
                   <CardMedia
                     component="img"
                     alt="Food"
