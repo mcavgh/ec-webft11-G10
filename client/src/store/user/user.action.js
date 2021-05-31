@@ -22,10 +22,10 @@ export const getUserWishList = (userId) =>(dispatch)=> {
 }
 
 
-export const postUser = (displayName, email) => {
+export const postUser = (displayName, email, photoURL) => {
     return (dispatch, getState) => {
         const nameArray = displayName.split(" ")
-        axios.post(`/users/register`, { name: nameArray[0], surname: nameArray[1],email:email}).then((res) => {
+        axios.post(`/users/register`, { name: nameArray[0], surname: nameArray[1],email:email, photoURL: photoURL}).then((res) => {
             dispatch({ type: GET_ID_BYEMAIL, payload: res.data });
         })
     }
