@@ -36,7 +36,7 @@ export default function ImgMediaCard({ product }) {
                     ${product.price}&nbsp;
 
                         <Typography component="h4" display="inline" color="primary">
-                        &nbsp;{product.discount > 0 && product.discount}%OFF
+                        &nbsp;{product.discount > 0 && product.discount&&<span>%OFF</span>}
                         </Typography>
 
                     <IconButton onClick={() => dispatch(addToCart(product))}
