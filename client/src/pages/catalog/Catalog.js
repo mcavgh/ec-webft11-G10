@@ -24,18 +24,20 @@ const Catalog = () => {
 
     return (
         <>
-            {matches ? "" : <CatalogComponent />}
+           {matches?"":<CatalogComponent/>} 
             <div className="catalog--main-row">
-                {matches && <div className="catalog--main-col-menu-box">
+                {matches &&<Grid className="catalog--main-col-menu-box">
                     <Typography
-                    m="7rem"
-                        gutterBottom variant="h5" component="h3">
+                        gutterBottom variant="h5" component="h2">
                         Categorias
                                </Typography>
                     <FilterGeneres />
-                </div>}
-
-                <div className="grid-container">
+                </Grid>}
+               
+                <Grid    container
+                  direction="row"
+                  justify="center"
+                  alignItems="center"className="grid-container">
                     {products && products.length >= 1 ? (
                         products.map((product, index) => {
                             return (
@@ -55,7 +57,7 @@ const Catalog = () => {
                     ) : (
                         <p>NO PRODUCTS IN DB</p>
                     )}
-                </div>
+                </Grid>
 
             </div>
 

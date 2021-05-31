@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@material-ui/core';
+import { Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
 import { useStyles } from './styles'
 import defaultImg from './default.png'
 import { useDispatch } from "react-redux";
@@ -8,7 +8,7 @@ import { addToCart, addToWishList } from '../../../store/cart/cart.actions';
 import IconButton from '@material-ui/core/IconButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-// import Tilt from 'react-vanilla-tilt'
+
 
 
 export default function ProductCard({ stock, id, img, name, description, price }) {
@@ -18,8 +18,7 @@ export default function ProductCard({ stock, id, img, name, description, price }
   const product = { stock, id, img, name, description, price }
 
   return (
-    // <Tilt >
-      <Card className={classes.root}>
+      <Grid className={classes.root}>
         <CardActionArea onClick={() => history.push(`/product/${id}`)} className={classes.action}>
           <CardMedia
             component="img"
@@ -50,7 +49,6 @@ export default function ProductCard({ stock, id, img, name, description, price }
             </IconButton>
           </Typography>
         </CardActions>
-      </Card>
-    // </Tilt>
+      </Grid>
   );
 }
