@@ -51,7 +51,7 @@ function PageDiscountProduct() {
                 <Form
                     onSubmit={onSubmit}
                     initialValues={{
-                        discount: 0,
+                        discount:"0",
                         day: "todos",
 
                     }}
