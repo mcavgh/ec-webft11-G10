@@ -39,7 +39,7 @@ const Catalog = () => {
                     {products && products.length >= 1 ? (
                         products.map((product, index) => {
                             return (
-                                <Tilt item xs={12} sm={4} md={3} lg={2} xl={2} className="grid">
+                                <Tilt key={index} item xs={12} sm={4} md={3} lg={2} xl={2} className="grid">
                                     <ProductCard
                                         key={index}
                                         id={product.id}

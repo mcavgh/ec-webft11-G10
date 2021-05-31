@@ -11,6 +11,27 @@ export const SEARCH_PRODUCT_SUCCESS = "SEARCH_PRODUCT_SUCCESS";
 export const SEARCH_PRODUCT_FAILURE = "SEARCH_PRODUCT_FAILURE";
 export const DELETE_PRODUCT_BY_ID = "DELETE_PRODUCT_BY_ID";
 export const PUT_PRODUCT_BY_ID = "PUT_PRODUCT_BY_ID";
+export const GET_DISCOUNT_PRODUCTS = "GET_DISCOUNT_PRODUCTS";
+
+//GET DISCOUNT PRODUCTS
+export const getDiscountProducts = () => {
+  return (dispatch) => {
+    return axios
+      .get(`/products/`)
+      .then((products) => {
+        console.log(products.data)
+        const discountProducts=products.data.filter(prod=>{
+          return prod.discount>0
+        })
+        console.log(discountProducts)
+        dispatch({
+          type: GET_DISCOUNT_PRODUCTS,
+          payload:discountProducts,
+        });
+      })
+      .catch((err) => console.log({ message: err.message }));
+  };
+};
 
 //EDIT PRODUCT BY ID
 

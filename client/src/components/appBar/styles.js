@@ -103,7 +103,6 @@ export const useStyles = makeStyles((theme) => ({
         border: '3.8px solid #f27121',
         borderRadius: '30px',
         padding: '2.8px',
-        width: '500px',
     },
     inputInput: {
         padding: theme.spacing(1, 1, 1, 0),
