@@ -19,7 +19,6 @@ const Login = () => {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(({ user }) => {
-
           const { displayName, email } = user
           axios.get(`/users/email/${email}`).then((user) => {
             if (user.data === "el usuario no existe") {
@@ -42,10 +41,10 @@ const Login = () => {
       .auth()
       .signInWithPopup(googleAuthProvider)
       .then(({ user }) => {
-        const { displayName, email} = user
+        const { displayName, email, photoURL} = user
         axios.get(`/users/email/${email}`).then((user) => {
           if (user.data === "el usuario no existe") {
-            dispatch(postUser(displayName, email))
+            dispatch(postUser(displayName, email, photoURL))
           } else {
             dispatch({ type: "GET_ID_BYEMAIL", payload: user.data });
             dispatch(getProductsInCart(user.data.id))
