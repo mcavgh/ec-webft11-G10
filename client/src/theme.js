@@ -1,9 +1,16 @@
 import { createMuiTheme,responsiveFontSizes } from "@material-ui/core/styles";
+import { useSelector } from "react-redux";
+
+
+const darckMode = useSelector(state => state.DarckModeReducer.darckModeState)
 
 let theme = createMuiTheme({
+  palette: {
+    type: darkMode ? "dark" : "light"
+  },
   typography: {
     fontFamily: [
-      'Open Sans',
+      'Open Sans',  
       'Comfortaa',
     ].join(','),
   },

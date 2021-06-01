@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import clsx from 'clsx';
 import axios from "axios";
 import { useTheme } from '@material-ui/core/styles';
-import { Menu, Avatar, MenuItem, Drawer, CssBaseline, AppBar, Toolbar, Badge, List, Button, Divider, IconButton, ListItem, ListItemText, } from '@material-ui/core';
+import { Menu, Avatar, MenuItem, Drawer, CssBaseline, AppBar, Toolbar, Badge, List, Button, Divider, IconButton, ListItem, ListItemText, FormControlLabel, } from '@material-ui/core';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
@@ -12,13 +12,14 @@ import ChevronLeftRoundedIcon from '@material-ui/icons/ChevronLeftRounded';
 import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
 import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import { useStyles } from './styles'
-import { Link, useHistory } from 'react-router-dom';
+import { Link, Switch, useHistory } from 'react-router-dom';
 import { SearchBar } from './searchBar/SearchBar';
 import { useSelector } from "react-redux";
 import { searchProductSuccess } from '../../store/product/product.actions';
 import { getQuantity } from '../../store/cart/cart.actions';
 import { AuthContext } from '../AuthContext';
 import { getUsersByEmailId, getUserWishList } from '../../store/user/user.action';
+import { switchDark } from "../../store/darckMode/darckMode.action";
 
 export default function PersistentDrawerLeft() {
     const history = useHistory()
@@ -32,11 +33,18 @@ export default function PersistentDrawerLeft() {
     const dispatch = useDispatch()
 
     const { currentUser } = useContext(AuthContext)
-   
+
+    const [ darkMode, setDarkMode ] = useState();
+
+
+    const handlerSwitch = () => {
+        dispatch(switchDark(darkMode))
+    };
+
     useEffect(() => {
         dispatch(getQuantity())
         currentUser?.email && dispatch(getUsersByEmailId(currentUser.email))
-    }, [dispatch,currentUser])
+    }, [dispatch, currentUser])
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -73,20 +81,31 @@ export default function PersistentDrawerLeft() {
                 })}
             >
                 <Toolbar >
-                    {true&&<IconButton
-                    // userAccess==="Admin"&&
+                    {true && <IconButton
+                        // userAccess==="Admin"&&
                         color="inherit"
                         aria-label="open drawer"
                         onClick={handleDrawerOpen}
                         edge="start"
                         className={clsx(classes.menuButton, open && classes.hide)}
                     >
-                        <MenuRoundedIcon fontSize="large"/>
+                        <MenuRoundedIcon fontSize="large" />
                     </IconButton>
                     }
                     <Button onClick={refreshSearch} variant="h6" color='inherit' to="/" component={Link}>
                         eatx
                     </Button>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={darkMode}
+                                onChange={() => setDarkMode(!darkMode)}
+                                color="primary"
+                                onClick={handlerSwitch}
+                            />
+                        }
+                        label="Dark Mode"
+                    />
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchRoundedIcon />
@@ -99,7 +118,7 @@ export default function PersistentDrawerLeft() {
                             aria-label="" color="inherit">
 
                             <Badge badgeContent={cartQuantity} color="secondary">
-                                <ShoppingCartRoundedIcon fontSize="large" className={classes.icons}/>
+                                <ShoppingCartRoundedIcon fontSize="large" className={classes.icons} />
                             </Badge>
 
                         </IconButton>
@@ -155,7 +174,7 @@ export default function PersistentDrawerLeft() {
             >
                 <div className={classes.drawerHeader}>
                     <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftRoundedIcon fontSize="large" className={classes.icons}/> : <ChevronRightRoundedIcon fontSize="large" className={classes.icons}/>}
+                        {theme.direction === 'ltr' ? <ChevronLeftRoundedIcon fontSize="large" className={classes.icons} /> : <ChevronRightRoundedIcon fontSize="large" className={classes.icons} />}
                     </IconButton>
 
                 </div>

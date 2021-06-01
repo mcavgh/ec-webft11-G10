@@ -10,7 +10,11 @@ export const Home = (props) => {
         <div>
             <AppBar />
             <Banner />
-            <Catalog />
+            <ThemeProvider theme={pepe}>
+                <Paper>
+                    <Catalog />
+                </Paper>
+            </ThemeProvider>
             <Footer />
         </div>
     )
