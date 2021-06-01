@@ -72,6 +72,7 @@ const {
   User,
   Order,
   Review,
+  Newsletter
 } = sequelize.models;
 
 // PRODUCTS Category
@@ -110,6 +111,8 @@ User.belongsToMany(Product, { through: 'WishList'});
 User.hasMany(Order);
 Order.belongsTo(User);
 
+User.hasOne(Newsletter, { foreignKey: "userId" });
+Newsletter.belongsTo(User);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

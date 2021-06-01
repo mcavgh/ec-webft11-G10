@@ -85,17 +85,7 @@ server.get("/:id", (req, res) => {
     .catch((err) => res.send(err));
 
 });
-// server.get("/:id", (req, res) => {
-//   const { id } = req.params;
-//   Order.findByPk(id)
-//     .then((order) =>
-//       res.send(
-//         order? order: "la orden no existe" 
-//       )
-//     )
-//     .catch((err) => res.send(err));
 
-// });
 
 // TRAE ORDENES POR UserID |
 //----------------------------
@@ -113,34 +103,7 @@ server.get('/user/:id', (req, res) => {
     .catch(err => res.send(err))
 })
 
-// MODIFICA UNA ORDEN POR ID |
-//----------------------------
-// server.put("/:id/modifica", (req, res) => {
 
-//   const { id } = req.params;
-//   const { price, quantity, state, address } = req.body;
-
-//   Order.update(
-//     {
-//       price: price,
-//       quantity: quantity,
-//       state: state,
-//       address: address
-//     },
-//     {
-//       where: { id: id },
-//     }
-//   )
-//     .then((update) =>
-//       res.send(
-//         update[0] ? update[0] : "la orden no existe"
-//       )
-//     )
-//     .catch((err) => console.log(err)
-
-
-//     );
-// });
 
 
 server.put('/:id/modifica', (req, res) => {
