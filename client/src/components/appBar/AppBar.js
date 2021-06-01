@@ -1,10 +1,10 @@
 import app from "../../firebase";
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { useDispatch } from 'react-redux'
 import clsx from 'clsx';
 import axios from "axios";
 import { useTheme } from '@material-ui/core/styles';
-import { Menu, Avatar, MenuItem, Drawer, CssBaseline, AppBar, Toolbar, Badge, List, Button, Divider, IconButton, ListItem, ListItemText, FormControlLabel, } from '@material-ui/core';
+import { Menu, Avatar, MenuItem, Drawer, CssBaseline, AppBar, Toolbar, Badge, List, Button, Divider, IconButton, ListItem, ListItemText, FormControlLabel, Switch } from '@material-ui/core';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
@@ -12,7 +12,7 @@ import ChevronLeftRoundedIcon from '@material-ui/icons/ChevronLeftRounded';
 import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
 import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import { useStyles } from './styles'
-import { Link, Switch, useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { SearchBar } from './searchBar/SearchBar';
 import { useSelector } from "react-redux";
 import { searchProductSuccess } from '../../store/product/product.actions';
@@ -34,12 +34,12 @@ export default function PersistentDrawerLeft() {
 
     const { currentUser } = useContext(AuthContext)
 
-    const [ darkMode, setDarkMode ] = useState();
+    const [ darkMode, setDarkMode ] = useState("true");
 
 
-    const handlerSwitch = () => {
-        dispatch(switchDark(darkMode))
-    };
+    // const handlerSwitch = () => {
+    //     dispatch(switchDark(darkMode))
+    // };
 
     useEffect(() => {
         dispatch(getQuantity())
@@ -95,17 +95,7 @@ export default function PersistentDrawerLeft() {
                     <Button onClick={refreshSearch} variant="h6" color='inherit' to="/" component={Link}>
                         eatx
                     </Button>
-                    <FormControlLabel
-                        control={
-                            <Switch
-                                checked={darkMode}
-                                onChange={() => setDarkMode(!darkMode)}
-                                color="primary"
-                                onClick={handlerSwitch}
-                            />
-                        }
-                        label="Dark Mode"
-                    />
+                   
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchRoundedIcon />
@@ -113,6 +103,17 @@ export default function PersistentDrawerLeft() {
                         <SearchBar />
                     </div>
                     <div className={classes.grow} />
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={darkMode}
+                                onChange={() => setDarkMode(!darkMode)}
+                                color="primary"
+                                onClick={()=>dispatch(switchDark(darkMode))}
+                            />
+                        }
+                        label="Dark Mode"
+                    />
                     <div >
                         <IconButton to="/cart" component={Link}
                             aria-label="" color="inherit">
@@ -137,6 +138,7 @@ export default function PersistentDrawerLeft() {
                                 className={classes.icons}
                             />)}
                         </IconButton>
+                        
                         <Menu
                             id="menu-appbar"
                             anchorEl={anchorEl}

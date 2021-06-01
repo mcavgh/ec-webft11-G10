@@ -1,20 +1,46 @@
+// import { DARCK_MODE } from "./darckMode.action";
+
+// var initialState = {
+//     darckModeState: ""
+// };
+
+// const DarckModeReducer = (state = initialState, action) => {
+
+//     switch (action.type) {
+//         case DARCK_MODE:
+//             return {
+//                 darckModeState:action.payload,
+//             }
+//          default:
+//          return state.darckModeState;
+
+//     }
+// }
+
+// export default DarckModeReducer;
+
 import {
-    DARCK_MODE
-} from "./darckMode.action";
-
-var initialState = {
-    darckModeState: ""
-};
-
-const DarckModeReducer = (state = initialState, action) => {
+    GET_DARCK_MODE
+  } from "./darckMode.action";
+  
+  var initialState = {
+  
+    darckModeState:""
+  };
+  
+  const darckModeReducer = (state = initialState, action) => {
     switch (action.type) {
-        case DARCK_MODE:
-            return {
-                ...state,
-                darckModeState,
-            }
+      case GET_DARCK_MODE:
 
+      console.log("===============================eeeeeeee=>",action.payload);
+        return {
+          ...state,
+          darckModeState:action.payload
+        };
+      default:
+        return state;
     }
-}
-
-export default DarckModeReducer;
+  };
+  
+  export default darckModeReducer;
+  

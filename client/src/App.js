@@ -7,7 +7,7 @@ import {PageAdminProduct} from './pages/adminProduct/PageAdminProduct';
 import PageDiscountProduct from './pages/adminProduct/PageDiscountProduct.js';
 import PageEditProduct from './pages/adminProduct/PageEditProduct';
 import PageAddCategory from './pages/adminCategory/PageAddCategory';
-import { ThemeProvider } from '@material-ui/core/styles'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import theme from './theme'
 import PageCheckoutOrders from './pages/ordersCheck/PageCheckoutOrders'
 import ViewOrder from './components/admin/adminOrders/ViewOrder'
@@ -25,17 +25,31 @@ import PageSignUp from './pages/landingPage/SignUp';
 import { Advertencia } from './components/localizacion/Advertencia';
 import { LandingPage } from './pages/LandingPage';
 import Profile from './pages/profile/Profile'
+import { useSelector } from "react-redux";
 
 
 dotenv.config()
 axios.defaults.baseURL=process.env.REACT_APP_API || "http://localhost:3001"
 
 function App() {
+
+  const darkMode = useSelector(state => state.darckModeReducer.darckModeState)
+
+    console.log("=JJHHHH===============>",darkMode)
+
+    
+
+    const pepe = createMuiTheme({
+        palette: {
+          type: darkMode ? "dark" : "light"
+        }
+      })
+
   return (
     <React.Fragment>
       <AuthProvider>
 
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={pepe}>
         <Switch>
           <Route exact path='/cart' component={CartProducts} />
           <Route exact path='/logIn' component={PageLogIn} />

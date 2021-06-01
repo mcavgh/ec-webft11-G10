@@ -44,9 +44,10 @@ export const getProductsInCart = (userId) => (dispatch, getState) => {
 
 export const getQuantity = () => {
   return function (dispatch, getState) {
-    let cartItems = getState().cart.cartItems.slice()
-    if (cartItems[0]) {
-      let quantity = cartItems.reduce((a, b) => ({ count: a.count + b.count }));
+    let cartItems=[]
+    if(getState().cart.cartItems.length>0){cartItems = getState().cart?.cartItems.slice()}
+     else if (cartItems[0]) {
+      let quantity = cartItems.reduce((a, b) => ({ count: a.count + b.count }))
       dispatch({
         type: GET_QUANTITY,
         payload: quantity.count
