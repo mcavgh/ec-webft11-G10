@@ -28,9 +28,7 @@ module.exports = {
                 extName: ".handlebars"
             }
         ));
-        //AXIOS busco todos los usuarios que tienen el producto en la wishlist
-        //verifico si los usuarios estan suscritos a las newsletter los incluyo en el array
-        //
+ 
 
         // Step 3
         let mailOptions = {

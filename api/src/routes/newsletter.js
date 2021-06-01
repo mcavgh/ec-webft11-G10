@@ -13,7 +13,12 @@ server.post("/user/:userId", (req, res) => {
             res.status(200).json(product);
         })
         .catch((error) => {
-            res.status(400).json(error);
+            if(error.errors[0].message==="userId must be unique"){
+                res.send("is in db")
+            }else{
+
+                res.status(400).json(error);
+            }
         })
 })
 module.exports = server;
