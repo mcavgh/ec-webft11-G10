@@ -1,6 +1,7 @@
+const { sendEmail } = require('../controllers/newsletter');
 const { addProductToUser } = require('../controllers/user');
 const server = require("express").Router();
-const { Order, Product, User } = require("../db");
+const { Order, Product, User, Newsletter } = require("../db");
 
 // TRAE UN USUARIO POR ID |
 //------------------------
@@ -64,15 +65,42 @@ server.get("/:idUser/wishList", async (req, res) => {
   const { idUser } = req.params;
   User.findOne({
     where: {
-      id:idUser
+      id: idUser
     },
     include: [{ model: Product }]
   })
 
-  .then((user) => {
-    res.send(user.products);
+    .then((user) => {
+      res.send(user.products);
+    })
+    .catch((err) => res.status(400).send(err));
+})
+//TRAE TODOS LOS USUARIOS QUE TENGAN EL PRODUCTO EN SU WISHLIST y ESTAN SUSCRIPTOS
+server.get("/product/:idProduct/wishList", async (req, res) => {
+  const { idProduct } = req.params;
+  User.findAll({
+    //raw:true,
+    include: {
+      model: Product,
+      where: { id: parseInt(idProduct) },
+    },
+    include: {
+      model: Newsletter,
+      required: true,
+    },
   })
-  .catch((err) => res.status(400).send(err));
+    .then((users) => {
+      const userMails = users.map(user => user.email)
+      console.log(userMails)
+      Product.findOne({ 
+        raw:true,
+        where: { id: idProduct } })
+        .then((product) => {
+          sendEmail(product,userMails)
+          res.send("se envio el mail")
+        })
+    })
+    .catch((err) => res.status(400).send(err));
 })
 
 server.put('/:id/usuario/admin', (req, res, next) => {
