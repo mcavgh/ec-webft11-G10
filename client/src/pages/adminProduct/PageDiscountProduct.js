@@ -9,6 +9,7 @@ import { getOneProduct, putProduct } from '../../store/product/product.actions';
 import { useParams } from 'react-router-dom'
 import AppBar from '../../components/appBar/AppBar'
 import axios from "axios"
+import Swal from 'sweetalert2';
 
 const validate = values => {
     const errors = {};
@@ -26,7 +27,6 @@ const validate = values => {
 function PageDiscountProduct() {
     const { id } = useParams();
     const dispatch = useDispatch()
-    const categories = useSelector(state => state.categoryReducer.category)
     const oneProduct = useSelector(state => state.productReducer.oneProduct)
     let productImg = useSelector(state => state.productReducer.productImg)
 
@@ -40,7 +40,11 @@ function PageDiscountProduct() {
     const onSubmit = async values => {
         console.log(values)
         axios.put(`/products/${oneProduct.id}/discount/${values.discount}`)
-        .then(modifies=>console.log(modifies))
+            .then(modifies => {
+                axios.get(`/users/product/${modifies.data.id}/wishlist`)
+                    .then(Swal.fire('Exito!', `se hizo el descuento y se envio el email a los usuarios suscriptos`, 'success'))
+
+            })
     };
     return (
         <div>
@@ -51,7 +55,7 @@ function PageDiscountProduct() {
                 <Form
                     onSubmit={onSubmit}
                     initialValues={{
-                        discount:"0",
+                        discount: "0",
                         day: "todos",
 
                     }}
