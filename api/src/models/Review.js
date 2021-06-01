@@ -4,7 +4,7 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define("review", {
     reviewText: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1000),
       allowNull: true,
     },
     rating: {

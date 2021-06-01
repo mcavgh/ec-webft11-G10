@@ -24,6 +24,7 @@ import FormAdmin from './components/login/FormAdmin';
 import PageSignUp from './pages/landingPage/SignUp';
 import { Advertencia } from './components/localizacion/Advertencia';
 import { LandingPage } from './pages/LandingPage';
+import Profile from './pages/profile/Profile'
 
 
 dotenv.config()
@@ -55,6 +56,7 @@ function App() {
           <PrivateRoute path='/ViewOrder/:id' component={ViewOrder} />
           <Route path='/FormAdmin' component={FormAdmin} />
           <Route path='/product/:id' component={Product} />
+          <Route path="/me/:id" component={Profile} />
           <Route path="*" component={() => "404 NOT FOUND"} />
           </Switch>
         </ThemeProvider>

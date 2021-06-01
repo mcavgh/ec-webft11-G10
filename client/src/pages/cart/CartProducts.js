@@ -26,9 +26,11 @@ export default function Cart() {
   }, [dispatch]);
 
   const handlerClick = () => {
-    if(localizacion > 50 ){history.push("/advertencia")}
-     else if (!userId){alert("debe registrarse")}else {
-        try {dispatch(findOrCreateOrders(userId))}
+    if (!userId){alert("debe registrarse");
+    return history.push("/LogIn")}
+  
+     else   if(localizacion > 50 ){ return history.push("/advertencia")} else {
+        try {dispatch(findOrCreateOrders(userId)) ; return history.push("/PageCheckout")}
     catch (error) {Swal.fire({ icon: 'error', title: 'Oops...', text:'Something went wrong!', })}
   }}
 
@@ -124,8 +126,6 @@ export default function Cart() {
               style={{ marginTop: 16 }}
               color="primary"
               variant="contained"
-              to={userId && localizacion < 50 ?("/PageCheckout"):("/advertencia")}
-              component={Link}
             >
               Checkout
             </Button>
