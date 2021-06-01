@@ -24,6 +24,7 @@ export default function PersistentDrawerLeft() {
     const history = useHistory()
     const cartQuantity = useSelector(state => state.cart.cartQuantity)
     const userAccess = useSelector(state => state.userReducer.userId.access)
+    const userId = useSelector(state => state.userReducer.userId)
 
     const classes = useStyles();
     const theme = useTheme();
@@ -36,6 +37,7 @@ export default function PersistentDrawerLeft() {
         dispatch(getQuantity())
         currentUser?.email && dispatch(getUsersByEmailId(currentUser.email))
     }, [dispatch,currentUser])
+
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -132,7 +134,7 @@ export default function PersistentDrawerLeft() {
                             onClose={handleClose}
                         >
                             <div>
-                                <MenuItem onClick={handleClose}>Perfil</MenuItem>
+                                <MenuItem onClick={() => history.push(`/me/${userId.id}`)}>Perfil</MenuItem>
                                 <MenuItem onClick={() => app.auth().signOut()
                                     .then(res => dispatch({ type: "DELETE_USER" }), handleClose())
 
