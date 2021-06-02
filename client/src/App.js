@@ -26,6 +26,7 @@ import { Advertencia } from './components/localizacion/Advertencia';
 import { LandingPage } from './pages/LandingPage';
 import Profile from './pages/profile/Profile'
 import { useSelector } from "react-redux";
+import grey from '@material-ui/core/colors/grey';
 
 
 dotenv.config()
@@ -35,21 +36,65 @@ function App() {
 
   const darkMode = useSelector(state => state.darckModeReducer.darckModeState)
 
-    console.log("=JJHHHH===============>",darkMode)
-
-    
-
-    const pepe = createMuiTheme({
+      const themeLight = createMuiTheme({
+        typography: {
+          fontFamily: [
+            'Open Sans',  
+            'Comfortaa',
+          ].join(','),
+         },
         palette: {
-          type: darkMode ? "dark" : "light"
-        }
-      })
+          primary:{
+            main: '#f27121',
+            light:'#76ff03',
+            dark:'#ff6f00',
+          },
+          secondary: {
+            main: '#14141A'
+          },
+          background: {
+            default: "#cfd8dc",
+            level1: "#cfd8dc",
+            level2: "#cfd8dc",
+            paper: "#fafafa"
+          },
+        },
+      });
+      
+      const themeDark = createMuiTheme({
+        typography: {
+          fontFamily: [
+            'Open Sans',  
+            'Comfortaa',
+          ].join(','),
+         },
+        palette: {
+          primary:{
+            main: '#fffdfc',
+            light:'#76ff03',
+            dark:'#ff6f00',
+            text: {
+                  primary: "#ffffff"
+                }
+          },
+          secondary: {
+            main: '#14141A'
+          },
+          background: {
+            default: "#222222",
+            level1: "#cfd8dc",
+            level2: "#cfd8dc",
+            paper: grey[600],
+          },
+        
+        },
+      });
 
   return (
     <React.Fragment>
       <AuthProvider>
 
-        <ThemeProvider theme={pepe}>
+        <ThemeProvider theme={darkMode ? themeLight : themeDark}>
         <Switch>
           <Route exact path='/cart' component={CartProducts} />
           <Route exact path='/logIn' component={PageLogIn} />
