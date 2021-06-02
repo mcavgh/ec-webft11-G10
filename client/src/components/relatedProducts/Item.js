@@ -2,11 +2,13 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, IconButton, CardActionArea, CardContent, CardMedia, Typography } from '@material-ui/core';
 import { useHistory } from "react-router-dom"
-import { addToCart, addToWishList } from '../../store/cart/cart.actions';
+import { addToCart } from '../../store/cart/cart.actions';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { useDispatch } from "react-redux"
+import { addToWishList } from '../../store/user/user.action';
+
 const useStyles = makeStyles({
     root: {
         maxWidth: 345,

@@ -4,11 +4,11 @@ import { Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Typogr
 import { useStyles } from './styles'
 import defaultImg from './default.png'
 import { useDispatch } from "react-redux";
-import { addToCart, addToWishList } from '../../../store/cart/cart.actions';
+import { addToCart } from '../../../store/cart/cart.actions';
+import { addToWishList } from '../../../store/user/user.action';
 import IconButton from '@material-ui/core/IconButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-
 
 
 export default function ProductCard({ stock, id, img, name, description, price,discount }) {

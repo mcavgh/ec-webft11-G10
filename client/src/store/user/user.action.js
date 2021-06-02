@@ -12,6 +12,7 @@ export const GET_ID_BYEMAIL = "GET_ID_BYEMAIL";
 export const POST_ADMIN = "POST_ADMIN";
 export const POST_USER_ACCESS = "POST_USER_ACCESS";
 export const GET_USER_WISHLIST = "GET_USER_WISHLIST";
+export const GET_PRODUCTS_IN_WISHLIST = "GET_PRODUCTS_IN_WISHLIST"
 
 export const getUserWishList = (userId) =>(dispatch)=> {
   console.log(userId)
@@ -21,6 +22,15 @@ export const getUserWishList = (userId) =>(dispatch)=> {
 })
 }
 
+export const addToWishList = (product) => (dispatch, getState) => {
+  const userId = getState().userReducer.userId.id;
+console.log(userId,product.id)
+  return axios.post(`users/${userId}/Product/${product.id}`).then(product => {
+    dispatch({
+      type: GET_PRODUCTS_IN_WISHLIST,
+    })
+  })
+}
 
 export const postUser = (displayName, email, photoURL) => {
     return (dispatch, getState) => {

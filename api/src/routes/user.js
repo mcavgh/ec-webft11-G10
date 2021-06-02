@@ -60,6 +60,20 @@ server.post("/:idUser/Product/:idProduct", async (req, res) => {
   });
 });
 
+//ELIMINAR PRODUCTS A LA WISHLIST DE USER
+server.delete("/:idUser/product/:idProduct",  (req, res) => {
+  let { idUser, idProduct } = req.params;
+   Product.findByPk(idProduct).then( (oneProduct) => {
+    User.findByPk(idUser)
+      .then((oneUser) => {
+        oneUser.removeProduct(oneProduct);
+       res.send("eliminado")
+      });
+   })
+  .catch(error => {
+    return res.status(400).send({ data: error });
+  });
+});
 //TRAER PRODUCTOS DE LA WISHLIST DEL USER
 server.get("/:idUser/wishList", async (req, res) => {
   const { idUser } = req.params;
