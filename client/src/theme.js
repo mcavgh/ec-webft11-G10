@@ -11,23 +11,23 @@ let theme = createMuiTheme({
       'Open Sans',  
       'Comfortaa',
     ].join(','),
-  },
-  palette: {
-    primary:{
-      main: '#f27121',
-      light:'#76ff03',
-      dark:'#ff6f00',
-    },
-    secondary: {
-      main: '#14141A'
-    },
-    background: {
-      default: "#cfd8dc",
-      level1: "#cfd8dc",
-      level2: "#cfd8dc",
-      paper: "#fafafa"
-    },
-  },
+   },
+  // palette: {
+  //   primary:{
+  //     main: '#f27121',
+  //     light:'#76ff03',
+  //     dark:'#ff6f00',
+  //   },
+  //   secondary: {
+  //     main: '#14141A'
+  //   },
+  //   background: {
+  //     default: "#cfd8dc",
+  //     level1: "#cfd8dc",
+  //     level2: "#cfd8dc",
+  //     paper: "#fafafa"
+  //   },
+  // },
 });
 
 theme = responsiveFontSizes(theme);
