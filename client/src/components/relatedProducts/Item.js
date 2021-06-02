@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom"
 import { addToCart, addToWishList } from '../../store/cart/cart.actions';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { useDispatch } from "react-redux"
 const useStyles = makeStyles({
     root: {
@@ -31,13 +32,16 @@ export default function ImgMediaCard({ product }) {
                     image={product.img}
                 />
             </CardActionArea>
-            <CardContent>
+            <CardContent>{
+            product.discount && product.discount >0?<strike>${ product.price}</strike>:""
+                }
                 <Typography gutterBottom variant="h5" component="h2">
-                    ${product.price}&nbsp;
+                    ${Math.round(product.price-product.price*(product.discount/100))}&nbsp;
 
                         <Typography component="h4" display="inline" color="primary">
-                        &nbsp;{product.discount&&product.discount > 0 ?(<span>{product.discount}%OFF</span>):("")}
-                        </Typography>
+
+                        &nbsp;{product.discount && product.discount > 0 ? (<span>{product.discount}%OFF</span>) : ("")}
+                    </Typography>
 
                     <IconButton onClick={() => dispatch(addToCart(product))}
                         color="primary" aria-label="add to shopping cart">

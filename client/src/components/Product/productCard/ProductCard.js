@@ -11,11 +11,12 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 
 
-export default function ProductCard({ stock, id, img, name, description, price }) {
+export default function ProductCard({ stock, id, img, name, description, price,discount }) {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch()
-  const product = { stock, id, img, name, description, price }
+  const product = { stock, id, img, name, description, price,discount }
+console.log(discount)
 
   return (
       <Grid className={classes.root}>
@@ -38,7 +39,7 @@ export default function ProductCard({ stock, id, img, name, description, price }
         </CardActionArea>
         <CardActions>
           <Typography variant='h5'>
-            ${!price ? 150 : price}
+            ${price}
             <IconButton onClick={() => dispatch(addToCart(product))}
               color="primary" aria-label="add to shopping cart">
               <AddShoppingCartIcon fontSize="large" className={classes.buy} />

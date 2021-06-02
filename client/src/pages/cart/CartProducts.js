@@ -96,7 +96,7 @@ export default function Cart() {
                 </Grid>
                 <Grid xs={2} style={{ marginTop: 16 }}>
                   <Typography component="h4" variant="h4">
-                    ${product.price}{" "}
+                    ${Math.round(product.price-product.price*(product.discount/100))}{" "}
                   </Typography>
                 </Grid>
               </Card>

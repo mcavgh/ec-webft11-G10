@@ -22,7 +22,7 @@ export default function Catalog() {
                 {((searchResults.length === 0) ?
                     (<h1>no hay resultados</h1>) : (searchResults.map(food => {
                         return <Grid item xs={12} sm={4} md={3}>
-                            <ProductCard stock={food.stock} id={food.id} img={food.img} name={food.name} description={food.description} price={food.price}
+                            <ProductCard discount={food.discount} stock={food.stock} id={food.id} img={food.img} name={food.name} description={food.description} price={food.price}
                             /> </Grid>
                     }))
                 )}
