@@ -1,9 +1,14 @@
 import { createMuiTheme,responsiveFontSizes } from "@material-ui/core/styles";
 
+
+
+
+
 let theme = createMuiTheme({
+ 
   typography: {
     fontFamily: [
-      'Open Sans',
+      'Open Sans',  
       'Comfortaa',
     ].join(','),
   },
