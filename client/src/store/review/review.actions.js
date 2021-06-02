@@ -21,11 +21,12 @@ export const getProductReviews = (productId) => {
   };
 };
 
-export const createProductReviews = (review) => {
+export const createProductReviews = (review, productId) => {
   return (dispatch) => {
     return axios
       .post(`/review`, review)
       .then((result) => {
+        dispatch(getProductReviews(productId))
         dispatch({
           type: CREATE_PRODUCT_REVIEWS,
           payload: {
