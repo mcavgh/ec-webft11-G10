@@ -149,6 +149,22 @@ server.put('/:id/usuario/user', (req, res, next) => {
     .catch(next);
 })
 
+// UPDATE USER PHOTO
+server.put('/:id/avatar', (req, res, next) => {
+  const { id } = req.params;
+
+  User.update(
+    {
+      photoURL: req.body.photoURL,
+    },
+    {
+      where: { id },
+    }
+  )
+    .then(r => res.send(r))
+    .catch(next);
+})
+
 //////////////// DELETE USER ////////////////
 server.delete('/:id', (req, res) => {
   const id = req.params.id
