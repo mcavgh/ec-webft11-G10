@@ -92,7 +92,7 @@ export default function LogIn({ faceAuth, auth }) {
         e.preventDefault();
         const { email, password } = input;
         auth(email, password)
-    }
+    };
     const classes = useStyles();
 
     return (
