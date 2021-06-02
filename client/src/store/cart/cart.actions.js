@@ -29,9 +29,8 @@ export const getProductsInCart = (userId) => (dispatch, getState) => {
 
 export const getQuantity = () => {
   return function (dispatch, getState) {
-    let cartItems=[]
-    if (getState().cart.cartItems.length>0){getState().cart.cartItems.slice()}
-    else if (cartItems[0]) {
+    let cartItems = getState().cart.cartItems.slice()
+    if (cartItems[0]) {
       let quantity = cartItems.reduce((a, b) => ({ count: a.count + b.count }));
       dispatch({
         type: GET_QUANTITY,
@@ -64,8 +63,7 @@ export const getTotal = () => {
   }
 }
 export const addToCart = (product) => (dispatch, getState) => {
-  let cartItems=[]
-  if ( getState().cart.cartItems.length>0){getState().cart.cartItems.slice()}
+  const cartItems = getState().cart.cartItems.slice();
   let alreadyExists = false;
   cartItems.forEach((x) => {
     if (x.name === product.name) {
