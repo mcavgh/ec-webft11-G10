@@ -1,7 +1,7 @@
 import {blue, red } from '@material-ui/core/colors'
 import { makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme) => ({
     root: {
       margin:"10px",
       maxWidth: 345,
@@ -11,6 +11,12 @@ export const useStyles = makeStyles({
     },
     container:{
       background:red,
+    },
+    buy:{
+      color: theme.palette.primary.main,
+    },
+    paper:{
+      backgroundpaper:theme.palette.background.paper,
     }
    
-})
+}))

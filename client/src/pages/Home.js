@@ -16,9 +16,7 @@ export const Home = (props) => {
         <div>
             <AppBar />
             <Banner />
-                <Paper>
-                    <Catalog />
-                </Paper>
+            <Catalog />
             <Footer />
         </div>
     )
