@@ -63,8 +63,7 @@ export const getTotal = () => {
   }
 }
 export const addToCart = (product) => (dispatch, getState) => {
-  let cartItems=[]
-  if ( getState().cart.cartItems.length>0){getState().cart.cartItems.slice()}
+  const cartItems = getState().cart.cartItems.slice();
   let alreadyExists = false;
   cartItems.forEach((x) => {
     if (x.name === product.name) {

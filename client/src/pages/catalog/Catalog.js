@@ -50,6 +50,7 @@ const Catalog = () => {
                                         img={product.img}
                                         price={product.price}
                                         stock={product.stock}
+                                        discount={product.discount}
                                     />
                                 </Tilt>
                             );
