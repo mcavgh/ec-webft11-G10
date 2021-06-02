@@ -15,7 +15,7 @@ const ReviewForm = ({ productId, loggedUserId, updateReviewList, dispatchUpdater
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch(createProductReviews(postReview));
+    dispatch(createProductReviews(postReview, productId));
     setPostReview({ ...postReview, rating: 0 });
     event.target.reset();
     await cancelForm();

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getUserReviews } from "../review/review.actions"
 
 export const GET_CART = "GET_CART";
 export const GET_USER_BYID = "GET_USER_BYID";
@@ -13,6 +14,7 @@ export const POST_ADMIN = "POST_ADMIN";
 export const POST_USER_ACCESS = "POST_USER_ACCESS";
 export const GET_USER_WISHLIST = "GET_USER_WISHLIST";
 export const GET_PRODUCTS_IN_WISHLIST = "GET_PRODUCTS_IN_WISHLIST"
+export const EDIT_AVATAR = "EDIT_AVATAR"
 
 export const getUserWishList = (userId) =>(dispatch)=> {
   console.log(userId)
@@ -90,5 +92,21 @@ export const getUsers = () => {
     axios.get(`/users/users`).then((payload) => {
       dispatch({ type: GET_USERS, payload: payload.data });
     });
+  };
+};
+
+export const editAvatar = (id, photoURL) => {
+  return (dispatch) => {
+    axios
+      .put(`/users/${id}/avatar`, { photoURL: photoURL })
+      .then((review) => {
+        dispatch(getUserReviews(id));
+        dispatch({
+          type: EDIT_AVATAR,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 };

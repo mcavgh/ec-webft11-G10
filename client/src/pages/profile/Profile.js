@@ -9,6 +9,7 @@ import ReviewEditForm from "../../components/reviewEditForm/ReviewEditForm";
 import { getUserReviews } from "../../store/review/review.actions";
 import { deleteReview } from "../../store/review/review.actions";
 import Swal from "sweetalert2";
+import UserPersonalData from "../../components/userPersonalData/UserPersonalData";
 
 const Profile = () => {
   const [editForm, setEditForm] = useState(null);
@@ -46,64 +47,69 @@ const Profile = () => {
   return (
     <div>
       <Appbar />
-      <Paper style={{ padding: "40px 20px", margin: "15px" }}></Paper>
       <Paper style={{ padding: "40px 20px", margin: "15px" }}>
-        {userReviews.reviews
-          ? userReviews.reviews.map((review, index) => {
-              return (
-                <>
-                  <Grid container wrap="nowrap" spacing={2}>
-                    <Grid item>
-                      <Avatar alt="Remy Sharp" src={userReviews.photoURL} />
-                    </Grid>
-                    <Grid justifyContent="left" item xs zeroMinWidth>
-                      <h3 style={{ margin: 0, textAlign: "left" }}>
-                        {`${userReviews.name} ${userReviews.surname}`}
-                      </h3>
-                      <Grid
-                        container
-                        direction="row"
-                        alignItems="center"
-                        justify="space-between"
-                      >
-                        <Rating
-                          name="read-only"
-                          value={review.rating}
-                          readOnly
-                        />
-                      </Grid>
-                      <p style={{ textAlign: "left" }}>{review.reviewText}</p>
-                    </Grid>
-                    <Grid item justifyContent="right">
-                      <IconButton
-                        aria-label="delete"
-                        onClick={() => handleDelete(review.id, userReviews.id)}
-                      >
-                        <Delete />
-                      </IconButton>
-                      <IconButton
-                        aria-label="edit"
-                        onClick={() => handleEdit(review.id)}
-                      >
-                        <Edit />
-                      </IconButton>
-                    </Grid>
-                  </Grid>
-                  {index === userReviews.reviews.length - 1 ? null : (
-                    <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
-                  )}
-                  {editForm === review.id ? (
-                    <ReviewEditForm
-                      loggedUserId={id}
-                      reviewId={review.id}
-                      closeEditForm={closeEditForm}
-                    />
-                  ) : null}
-                </>
-              );
-            })
-          : null}
+        <UserPersonalData userData={userReviews}/>
       </Paper>
+      { userReviews.reviews && userReviews.reviews.length > 0 ?
+        <Paper style={{ padding: "40px 20px", margin: "15px" }}>
+          <h2>Tus Opiniones:</h2>
+          {userReviews.reviews
+            ? userReviews.reviews.map((review, index) => {
+                return (
+                  <>
+                    <Grid container wrap="nowrap" spacing={2}>
+                      <Grid item>
+                        <Avatar alt="Remy Sharp" src={userReviews.photoURL} />
+                      </Grid>
+                      <Grid justifyContent="left" item xs zeroMinWidth>
+                        <h3 style={{ margin: 0, textAlign: "left" }}>
+                          {`${userReviews.name} ${userReviews.surname}`}
+                        </h3>
+                        <Grid
+                          container
+                          direction="row"
+                          alignItems="center"
+                          justify="space-between"
+                        >
+                          <Rating
+                            name="read-only"
+                            value={review.rating}
+                            readOnly
+                          />
+                        </Grid>
+                        <p style={{ textAlign: "left" }}>{review.reviewText}</p>
+                      </Grid>
+                      <Grid item justifyContent="right">
+                        <IconButton
+                          aria-label="delete"
+                          onClick={() => handleDelete(review.id, userReviews.id)}
+                        >
+                          <Delete />
+                        </IconButton>
+                        <IconButton
+                          aria-label="edit"
+                          onClick={() => handleEdit(review.id)}
+                        >
+                          <Edit />
+                        </IconButton>
+                      </Grid>
+                    </Grid>
+                    {index === userReviews.reviews.length - 1 ? null : (
+                      <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
+                    )}
+                    {editForm === review.id ? (
+                      <ReviewEditForm
+                        loggedUserId={id}
+                        reviewId={review.id}
+                        closeEditForm={closeEditForm}
+                      />
+                    ) : null}
+                  </>
+                );
+              })
+            : null}
+        </Paper>
+      : null }
     </div>
   );
 };

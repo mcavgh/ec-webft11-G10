@@ -132,7 +132,7 @@ export default function PersistentDrawerLeft() {
                             onClick={handleMenu}
                             color="inherit"
                         >
-                            {currentUser ? (<Avatar alt="Usuario" src={currentUser.photoURL} />
+                            {currentUser && userId ? (<Avatar alt="Usuario" src={userId.photoURL} />
                             ) : (<AccountCircleRoundedIcon
                                 fontSize="large"
                                 className={classes.icons}
