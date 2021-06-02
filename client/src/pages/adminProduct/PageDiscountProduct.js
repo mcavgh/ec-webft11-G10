@@ -63,10 +63,9 @@ function PageDiscountProduct() {
                     render={({ handleSubmit, submitting, pristine, values }) => (
                         <form onSubmit={handleSubmit} noValidate>
                             <Paper style={{ padding: 16 }}>
-                                <Grid container alignItems="flex-start" spacing={2}>
                                     <Typography variant="h5" >Descuento de {oneProduct.name}</Typography>
                                     <Grid item>
-                                        <Field
+                                        {/* <Field
                                             value="all"
                                             name="day"
                                             component={Select}
@@ -79,10 +78,8 @@ function PageDiscountProduct() {
                                             <MenuItem value={"lunes"}>{"lunes"}</MenuItem>
                                             <MenuItem value={"martes"}>{"martes"}</MenuItem>
 
-                                        </Field>
-                                        <Grid>
-                                        </Grid>
-
+                                        </Field> */}
+                
                                         <Field
                                             startAdornment={<InputAdornment position="start">"%"</InputAdornment>}
                                             name="discount"
@@ -107,7 +104,6 @@ function PageDiscountProduct() {
                                             Submit
                                         </Button>
                                     </Grid>
-                                </Grid>
                             </Paper>
                         </form>
                     )}

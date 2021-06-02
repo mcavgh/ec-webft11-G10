@@ -65,7 +65,8 @@ export const getTotal = () => {
     if (cartItems) {
       let total = 0
       cartItems.forEach(prod => {
-        let price = parseInt(prod.price)
+
+        let price = Math.round(prod.price-prod.price*(prod.discount/100))
         total += price * prod.count
       });
       dispatch({
@@ -130,7 +131,6 @@ console.log(userId,product.id)
   return axios.post(`users/${userId}/Product/${product.id}`).then(product => {
     dispatch({
       type: GET_PRODUCTS_IN_WISHLIST,
-      payload: product.data
     })
   })
 }

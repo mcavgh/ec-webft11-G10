@@ -5,7 +5,6 @@ import {
 export const cartReducer = (
   state = {
     cartItems: JSON.parse(localStorage.getItem("cartItems") || "[]"),
-    wishlist:[]
   },
   action
 ) => {
@@ -38,11 +37,7 @@ export const cartReducer = (
         ...state,
         total: action.payload
       }
-    case GET_PRODUCTS_IN_WISHLIST:
-      return {
-        ...state,
-        wishlist: [...state.wishlist, action.payload]
-      }
+  
     default:
       return state;
   }

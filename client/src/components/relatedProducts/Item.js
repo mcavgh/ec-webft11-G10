@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom"
 import { addToCart, addToWishList } from '../../store/cart/cart.actions';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { useDispatch } from "react-redux"
 const useStyles = makeStyles({
     root: {
