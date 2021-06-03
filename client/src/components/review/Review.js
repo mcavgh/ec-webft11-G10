@@ -74,8 +74,9 @@ const Review = ({ productId, loggedUser, productReviews, dispatchUpdater, curren
           cancelForm={cancelForm}
         />
       ) : null}
-      <h1>Opiniones</h1>
+      { productReviews.reviews && productReviews.reviews.length > 0 ?
       <Paper style={{ padding: "40px 20px" }}>
+        <h1>Opiniones</h1>
         {reviewList
           ? reviewList.map((review, index) => {
               return (
@@ -111,6 +112,7 @@ const Review = ({ productId, loggedUser, productReviews, dispatchUpdater, curren
             })
           : null}
       </Paper>
+        : null }
       {productReviews.reviews &&
       reviewsPerPage >= productReviews.reviews.length ? null : (
         <Button

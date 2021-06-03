@@ -38,7 +38,6 @@ function PageDiscountProduct() {
     }, [dispatch, id]);
 
     const onSubmit = async values => {
-        console.log(values)
         axios.put(`/products/${oneProduct.id}/discount/${values.discount}`)
             .then(modifies => {
                 axios.get(`/users/product/${modifies.data.id}/wishlist`)

@@ -31,8 +31,6 @@ import {
   const darckModeReducer = (state = initialState, action) => {
     switch (action.type) {
       case GET_DARCK_MODE:
-
-      console.log("===============================eeeeeeee=>",action.payload);
         return {
           ...state,
           darckModeState:action.payload

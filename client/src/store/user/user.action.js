@@ -17,7 +17,6 @@ export const GET_PRODUCTS_IN_WISHLIST = "GET_PRODUCTS_IN_WISHLIST"
 export const EDIT_AVATAR = "EDIT_AVATAR"
 
 export const getUserWishList = (userId) =>(dispatch)=> {
-  console.log(userId)
   axios.get(`/users/${userId}/wishList`).then((res) => {
     dispatch({ type: GET_USER_WISHLIST, payload: res.data });
     
@@ -91,7 +90,6 @@ export const getUsersByEmailId = (email) => {
 export const getUsersById = (id) => {
   return function (dispatch) {
     axios.get(`/users/${id}`).then((payload) => {
-      console.log("esto es el user de id de action", payload);
       dispatch({ type: GET_USER_BYID, payload: payload.data });
     });
   };

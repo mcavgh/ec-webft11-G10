@@ -22,7 +22,9 @@ const getAllReviews = (req, res, next) => {
 };
 
 const getUserReviews = (req, res, next) => {
-  User.findByPk(req.params.userId, { include: Review })
+  User.findByPk(req.params.userId, {
+    include: [{ model: Review, include: [{ model: Product }] }],
+   })
     .then((userReviews) => {
       res.send(userReviews);
     })
