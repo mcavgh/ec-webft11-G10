@@ -37,7 +37,9 @@ export const WishListProducts = () => {
                     wishList && wishList[0] ? (
 
                         wishList.map(p => {
-                            return <Item product={p} />
+                            return <
+                                
+                            Item key={p.id} product={p} wishlist={true} />
 
                         })) : (<h1>no hay productos</h1>)
                 }

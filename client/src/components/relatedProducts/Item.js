@@ -23,7 +23,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function ImgMediaCard({ product }) {
+export default function ImgMediaCard({ product,wishlist }) {
     const history = useHistory()
     const classes = useStyles();
     const dispatch = useDispatch()
@@ -32,7 +32,7 @@ export default function ImgMediaCard({ product }) {
     return (
 
         <Card className={classes.root}>
-            {userId && <IconButton className={classes.cross} onClick={() => dispatch(deleteFromWishList(product))}
+            {wishlist && <IconButton className={classes.cross} onClick={() => dispatch(deleteFromWishList(product))}
                 color="primary" aria-label="add to shopping cart">
                 X
                     </IconButton>}
