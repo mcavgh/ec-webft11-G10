@@ -53,8 +53,8 @@ server.get("/userid/:id", (req, res) => {
     .then((items) => {
       let newItemsArray=[]
       items.forEach(item => {
-        const{id,name,description,price,stock,img,createdAt}=item
-        newItemsArray.push({id,name,description,price,stock,img,createdAt,count:item["orders.order_line.quantity"]})
+        const{id,name,description,price,stock,img,createdAt,discount}=item
+        newItemsArray.push({id,name,description,price,stock,img,createdAt,count:item["orders.order_line.quantity"],discount})
       });
       res.send(newItemsArray);
     })

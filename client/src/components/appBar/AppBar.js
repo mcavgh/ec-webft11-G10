@@ -34,7 +34,7 @@ export default function PersistentDrawerLeft() {
 
     const { currentUser } = useContext(AuthContext)
 
-    const [ darkMode, setDarkMode ] = useState("true");
+    const [darkMode, setDarkMode] = useState("true");
 
 
     // const handlerSwitch = () => {
@@ -42,7 +42,7 @@ export default function PersistentDrawerLeft() {
     // };
 
     useEffect(() => {
-        dispatch(getQuantity())
+        //dispatch(getQuantity())
         currentUser?.email && dispatch(getUsersByEmailId(currentUser.email))
     }, [dispatch, currentUser])
 
@@ -95,7 +95,7 @@ export default function PersistentDrawerLeft() {
                     <Button onClick={refreshSearch} variant="h6" color='inherit' to="/" component={Link}>
                         eatx
                     </Button>
-                   
+
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchRoundedIcon />
@@ -109,7 +109,7 @@ export default function PersistentDrawerLeft() {
                                 checked={darkMode}
                                 onChange={() => setDarkMode(!darkMode)}
                                 color="primary"
-                                onClick={()=>dispatch(switchDark(darkMode))}
+                                onClick={() => dispatch(switchDark(darkMode))}
                             />
                         }
                         label="Dark Mode"
@@ -138,7 +138,7 @@ export default function PersistentDrawerLeft() {
                                 className={classes.icons}
                             />)}
                         </IconButton>
-                        
+
                         <Menu
                             id="menu-appbar"
                             anchorEl={anchorEl}
@@ -157,7 +157,13 @@ export default function PersistentDrawerLeft() {
                             <div>
                                 <MenuItem onClick={() => history.push(`/me/${userId.id}`)}>Perfil</MenuItem>
                                 <MenuItem onClick={() => app.auth().signOut()
-                                    .then(res => dispatch({ type: "DELETE_USER" }), handleClose())
+                                    .then(res => {
+                                        handleClose()
+                                        localStorage.clear()
+                                        dispatch({type: "GET_QUANTITY",payload: 0})
+                                        dispatch({ type: "REMOVE_FROM_CART", payload: { cartItems:[] } })
+                                        dispatch({ type: "DELETE_USER" })
+                                    })
 
                                 }>Cerrar sesión</MenuItem>
                             </div>
