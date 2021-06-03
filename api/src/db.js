@@ -80,16 +80,18 @@ const {
 Product.belongsToMany(Category, { through: 'Products_Categories' });
 Category.belongsToMany(Product, { through: 'Products_Categories' });
 
-
-
 // PRODUCTS REVIEWS
 
-Product.hasMany(Review);
+Product.hasMany(Review, {
+  onDelete: 'CASCADE',
+});
 Review.belongsTo(Product);
 
 // USERS REVIEWS
 
-User.hasMany(Review);
+User.hasMany(Review, {
+  onDelete: 'CASCADE',
+});
 Review.belongsTo(User);
 
 // PRODUCTS ORDERS
@@ -108,7 +110,9 @@ Order.belongsToMany(Product, { through: Order_line });
 Product.belongsToMany(User, { through: 'WishList'});
 User.belongsToMany(Product, { through: 'WishList'});
 
-User.hasMany(Order);
+User.hasMany(Order, {
+  onDelete: 'CASCADE',
+});
 Order.belongsTo(User);
 
 User.hasOne(Newsletter, { foreignKey: "userId" });

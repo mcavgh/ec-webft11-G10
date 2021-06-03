@@ -1,5 +1,4 @@
 import axios from "axios";
-import Swal from "sweetalert2";
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const GET_ORDER_BY_ID = "GET_ORDER_BY_ID";
 export const PUT_ORDER_BY_ID = "PUT_ORDER_BY_ID";
@@ -15,7 +14,6 @@ export const POST_ORDER_BY_ID = "POST_ORDER_BY_ID";
 
 
 export const findOrCreateOrders = (userId) => {
-  console.log(userId)
   return (dispatch) => {
     axios.post(`/orders/cart/${userId}`).then((res) => {
       dispatch(updateOrder(res.data.id))
@@ -39,7 +37,6 @@ export const updateOrder = (orderId) => {
           ).then((res) => {});
         });
       }).then((resp) => {
-        console.log(resp)
       }).catch((err) => console.log(err));
   };
 };

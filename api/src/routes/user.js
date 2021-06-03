@@ -105,7 +105,6 @@ server.get("/product/:idProduct/wishList", async (req, res) => {
   })
     .then((users) => {
       const userMails = users.map(user => user.email)
-      console.log(userMails)
       Product.findOne({ 
         raw:true,
         where: { id: idProduct } })
