@@ -61,7 +61,7 @@ const Profile = () => {
                       <Grid item>
                         <Avatar alt="Remy Sharp" src={userReviews.photoURL} />
                       </Grid>
-                      <Grid justifyContent="left" item xs zeroMinWidth>
+                      <Grid justifyContent="left" item  zeroMinWidth>
                         <h3 style={{ margin: 0, textAlign: "left" }}>
                           {`${userReviews.name} ${userReviews.surname}`}
                         </h3>
