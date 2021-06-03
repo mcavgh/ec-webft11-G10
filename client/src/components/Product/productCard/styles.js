@@ -17,6 +17,9 @@ export const useStyles = makeStyles((theme) => ({
     },
     paper:{
       backgroundpaper:theme.palette.background.paper,
-    }
+    },
+    noPadding: {
+      padding: '0',
+    },
    
 }))

@@ -14,6 +14,9 @@ const useStyles = makeStyles({
     root: {
         maxWidth: 345,
     },
+    noPadding: {
+        padding: '0',
+    },
 });
 
 export default function ImgMediaCard({ product }) {
@@ -25,9 +28,9 @@ export default function ImgMediaCard({ product }) {
     return (
 
         <Card className={classes.root}>
-            {userId&&<IconButton onClick={() => dispatch(deleteFromWishList(product))}
-                        color="primary" aria-label="add to shopping cart">
-                            X
+            {userId && <IconButton className={classes.noPadding} onClick={() => dispatch(deleteFromWishList(product))}
+                color="primary" aria-label="add to shopping cart">
+                X
                     </IconButton>}
             <CardActionArea
                 onClick={(e) => history.push("/product/" + product.id)}
@@ -39,27 +42,29 @@ export default function ImgMediaCard({ product }) {
 
                     image={product.img}
                 />
-                                </CardActionArea>
-            <CardContent>{
-            product.discount && product.discount >0?<strike>${ product.price}</strike>:""
-                }
-                <Typography gutterBottom variant="h5" component="h2">
-                    ${Math.round(product.price-product.price*(product.discount/100))}&nbsp;
-
-                        <Typography component="h4" display="inline" color="primary">
+            </CardActionArea>
+            <CardContent>
+                <div>
+                    {product.discount && product.discount > 0 ? <strike>${product.price}</strike> : ""
+                    }
+                </div>
+                <div>
+                    <Typography display="inline" gutterBottom variant="h5" component="h2">
+                        ${Math.round(product.price - product.price * (product.discount / 100))}&nbsp;
+                    </Typography>
+                    <Typography component="h4" display="inline" color="primary">
 
                         &nbsp;{product.discount && product.discount > 0 ? (<span>{product.discount}%OFF</span>) : ("")}
                     </Typography>
-
                     <IconButton onClick={() => dispatch(addToCart(product))}
                         color="primary" aria-label="add to shopping cart">
                         <AddShoppingCartIcon fontSize="large" className={classes.buy} />
                     </IconButton>
-                   {userId&& <IconButton onClick={() => dispatch(addToWishList(product))}
+                    {userId && <IconButton className={classes.noPadding} onClick={() => dispatch(addToWishList(product))}
                         color="primary" aria-label="add to shopping cart">
                         <FavoriteBorderIcon fontSize="large" className={classes.buy} />
                     </IconButton>}
-                </Typography>
+                </div>
 
             </CardContent>
         </Card>

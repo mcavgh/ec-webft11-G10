@@ -35,7 +35,7 @@ export const DiscountProducts = () => {
                     discountProducts && discountProducts[0] ? (
 
                         discountProducts.map(p => {
-                            return <Item product={p} />
+                            return <Item key={p} product={p} />
 
                         })) : (<h1>no hay productos</h1>)
                 }

@@ -34,12 +34,8 @@ export default function PersistentDrawerLeft() {
 
     const { currentUser } = useContext(AuthContext)
 
-    const [darkMode, setDarkMode] = useState("true");
+    const [darkMode, setDarkMode] = useState(true);
 
-
-    // const handlerSwitch = () => {
-    //     dispatch(switchDark(darkMode))
-    // };
 
     useEffect(() => {
         //dispatch(getQuantity())
@@ -92,7 +88,7 @@ export default function PersistentDrawerLeft() {
                         <MenuRoundedIcon fontSize="large" />
                     </IconButton>
                     }
-                    <Button onClick={refreshSearch} variant="h6" color='inherit' to="/" component={Link}>
+                    <Button onClick={refreshSearch}  color='inherit' to="/" component={Link}>
                         eatx
                     </Button>
 
