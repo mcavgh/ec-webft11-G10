@@ -26,7 +26,7 @@ export const findOrCreateOrders = (userId) => {
 export const updateOrder = (orderId) => {
   return (dispatch, getState) => {
     const cartQuantity = getState().cart.cartQuantity;
-    const total = getState().cart.total;
+    const total = parseFloat(getState().cart.total);
     const cartItems = getState().cart.cartItems.slice();
     const newOrder = {
       price: total,

@@ -59,7 +59,7 @@ function AddProduct() {
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
     await sleep(300);
     const{productName,description,price,stock,category}=values
-    let priceInt= parseInt(price)
+    let priceInt= parseFloat(price)
     let stockInt= parseInt(stock)
     let productData={productName,description,productImg, priceInt,stockInt,category}  
      dispatch(postProducts(productData,category))    
