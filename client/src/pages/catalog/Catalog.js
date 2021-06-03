@@ -47,7 +47,7 @@ const Catalog = () => {
                                         name={product.name}
                                         description={product.description}
                                         img={product.img}
-                                        price={product.price}
+                                        price={parseFloat(product.price)}
                                         stock={product.stock}
                                         discount={product.discount}
                                     />

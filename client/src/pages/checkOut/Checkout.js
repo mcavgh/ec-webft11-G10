@@ -55,7 +55,12 @@ export function Checkout() {
     if (orderId.products) {
       orderId.products.forEach((product) => {
         let  stock ={stockInt: product.stock - product.order_line.quantity};
+        if(stock<0){stock={stockInt:0}
         dispatch(putProduct( stock, product.id))
+       }else{
+        dispatch(putProduct( stock, product.id))
+       }
+        
       })
     }
 
