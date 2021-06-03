@@ -50,7 +50,7 @@ server.post("/register", (req, res) => {
 });
 
 // AGREGAR PRODUCTS A LA WISHLIST DEL USER
-server.post("/:idUser/Product/:idProduct", async (req, res) => {
+server.post("/:idUser/product/:idProduct", async (req, res) => {
   let { idUser, idProduct } = req.params;
 
   return addProductToUser(idUser, idProduct).then((data) => {

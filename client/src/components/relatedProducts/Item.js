@@ -7,7 +7,7 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { useDispatch } from "react-redux"
-import { addToWishList } from '../../store/user/user.action';
+import { addToWishList, deleteFromWishList } from '../../store/user/user.action';
 
 const useStyles = makeStyles({
     root: {
@@ -23,6 +23,10 @@ export default function ImgMediaCard({ product }) {
     return (
 
         <Card className={classes.root}>
+            <IconButton onClick={() => dispatch(deleteFromWishList(product))}
+                        color="primary" aria-label="add to shopping cart">
+                            X
+                    </IconButton>
             <CardActionArea
                 onClick={(e) => history.push("/product/" + product.id)}
             >
@@ -33,7 +37,7 @@ export default function ImgMediaCard({ product }) {
 
                     image={product.img}
                 />
-            </CardActionArea>
+                                </CardActionArea>
             <CardContent>{
             product.discount && product.discount >0?<strike>${ product.price}</strike>:""
                 }

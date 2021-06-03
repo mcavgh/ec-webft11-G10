@@ -20,7 +20,7 @@ export const WishListProducts = () => {
     useEffect(() => {
         if (userId) dispatch(getUserWishList(userId))
 
-    }, [userId])
+    }, [])
 
     return (
         <>

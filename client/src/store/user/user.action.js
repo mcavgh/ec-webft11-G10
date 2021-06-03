@@ -26,14 +26,24 @@ export const getUserWishList = (userId) =>(dispatch)=> {
 
 export const addToWishList = (product) => (dispatch, getState) => {
   const userId = getState().userReducer.userId.id;
-console.log(userId,product.id)
-  return axios.post(`users/${userId}/Product/${product.id}`).then(product => {
+  return axios.post(`users/${userId}/product/${product.id}`).then(product => {
     dispatch({
       type: GET_PRODUCTS_IN_WISHLIST,
     })
+    dispatch(getUserWishList(userId))
+
   })
 }
+export const deleteFromWishList = (product) => (dispatch, getState) => {
+  const userId = getState().userReducer.userId.id;
+  return axios.delete(`users/${userId}/product/${product.id}`).then(product => {
+    dispatch({
+      type: "DELETE_PRODUCTS_FROM_WISHLIST",
+    })
+     dispatch(getUserWishList(userId))
 
+  })
+}
 export const postUser = (displayName, email, photoURL) => {
     return (dispatch, getState) => {
         const nameArray = displayName.split(" ")
