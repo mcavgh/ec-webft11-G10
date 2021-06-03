@@ -19,11 +19,9 @@ export const getDiscountProducts = () => {
     return axios
       .get(`/products/`)
       .then((products) => {
-        console.log(products.data)
         const discountProducts=products.data.filter(prod=>{
           return prod.discount>0
         })
-        console.log(discountProducts)
         dispatch({
           type: GET_DISCOUNT_PRODUCTS,
           payload:discountProducts,
@@ -36,8 +34,6 @@ export const getDiscountProducts = () => {
 //EDIT PRODUCT BY ID
 
 export const putProduct = (product, idProduct) => {
-  console.log(product,"eeeeeeeeeeeeeeeeeeeeeproductproductproduct")
-  console.log(idProduct,"eeeeeeeeeeeeeeeeeididiididididididididiide")
   return (dispatch) => {
     const options = {
       method: "PUT",
