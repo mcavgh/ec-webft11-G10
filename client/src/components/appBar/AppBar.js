@@ -108,7 +108,6 @@ export default function PersistentDrawerLeft() {
                                 onClick={() => dispatch(switchDark(darkMode))}
                             />
                         }
-                        label="Dark Mode"
                     />
                     <div >
                         <IconButton to="/cart" component={Link}
