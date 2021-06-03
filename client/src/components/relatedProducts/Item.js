@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, IconButton, CardActionArea, CardContent, CardMedia, Typography } from '@material-ui/core';
+import { Card, IconButton,Button, CardActionArea, CardContent, CardMedia, Typography } from '@material-ui/core';
 import { useHistory } from "react-router-dom"
 import { addToCart } from '../../store/cart/cart.actions';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
@@ -14,8 +14,12 @@ const useStyles = makeStyles({
     root: {
         maxWidth: 345,
     },
+    cross: {
+        color: "red"
+    },
     noPadding: {
         padding: '0',
+
     },
 });
 
@@ -28,14 +32,14 @@ export default function ImgMediaCard({ product }) {
     return (
 
         <Card className={classes.root}>
-            {userId && <IconButton className={classes.noPadding} onClick={() => dispatch(deleteFromWishList(product))}
+            {userId && <IconButton className={classes.cross} onClick={() => dispatch(deleteFromWishList(product))}
                 color="primary" aria-label="add to shopping cart">
                 X
                     </IconButton>}
             <CardActionArea
-                onClick={(e) => history.push("/product/" + product.id)}
             >
                 <CardMedia
+                onClick={(e) => history.push("/product/" + product.id)}
                     component="img"
                     alt=""
                     height="200"

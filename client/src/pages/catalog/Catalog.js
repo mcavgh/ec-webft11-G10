@@ -15,7 +15,6 @@ const Catalog = () => {
 
     const dispatch = useDispatch()
     let products = useSelector(state => state.productReducer.searchResults)
-
     useEffect(() => {
         axios.get(`/products/`).then(result => {
             dispatch(searchProductSuccess(result.data))

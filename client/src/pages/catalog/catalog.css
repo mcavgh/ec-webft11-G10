@@ -52,6 +52,13 @@
     margin-bottom: 1px;
 
 }
+.button-filter-active{
+    text-align: left;
+     cursor: pointer;
+     color: orangered;
+     margin-bottom: 1px;
+ 
+ }
 .button-filter:hover{
     /* border: 3px solid rgb(234, 50, 111); */
     border-radius: 0.2em;
