@@ -12,7 +12,7 @@ const Newsletter = () => {
   
 
     const suscribeUser = (userId) => {
-        axios.post(`http://localhost:3001/newsletter/user/${userId.id}`)
+        axios.post(`/newsletter/user/${userId.id}`)
             .then( (msg)=> {
                 if (msg.data === "is in db") {
                     Swal.fire({ icon: 'success', title: 'Exito', text: 'Ya esta suscripto!' })
