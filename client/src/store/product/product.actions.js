@@ -36,6 +36,8 @@ export const getDiscountProducts = () => {
 //EDIT PRODUCT BY ID
 
 export const putProduct = (product, idProduct) => {
+  console.log(product,"eeeeeeeeeeeeeeeeeeeeeproductproductproduct")
+  console.log(idProduct,"eeeeeeeeeeeeeeeeeididiididididididididiide")
   return (dispatch) => {
     const options = {
       method: "PUT",
@@ -53,9 +55,7 @@ export const putProduct = (product, idProduct) => {
           "You updated the product succesfully!",
           "success"
         );
-        dispatch({
-          type: PUT_PRODUCT_BY_ID,
-        });
+        dispatch({type: PUT_PRODUCT_BY_ID,});
       })
       .catch((error) => {
         console.error(error);
