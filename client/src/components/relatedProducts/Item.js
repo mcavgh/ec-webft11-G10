@@ -8,6 +8,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { useDispatch } from "react-redux"
 import { addToWishList, deleteFromWishList } from '../../store/user/user.action';
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
     root: {
@@ -19,14 +20,15 @@ export default function ImgMediaCard({ product }) {
     const history = useHistory()
     const classes = useStyles();
     const dispatch = useDispatch()
+    const userId = useSelector(state => state.userReducer.userId.id)
 
     return (
 
         <Card className={classes.root}>
-            <IconButton onClick={() => dispatch(deleteFromWishList(product))}
+            {userId&&<IconButton onClick={() => dispatch(deleteFromWishList(product))}
                         color="primary" aria-label="add to shopping cart">
                             X
-                    </IconButton>
+                    </IconButton>}
             <CardActionArea
                 onClick={(e) => history.push("/product/" + product.id)}
             >
@@ -53,10 +55,10 @@ export default function ImgMediaCard({ product }) {
                         color="primary" aria-label="add to shopping cart">
                         <AddShoppingCartIcon fontSize="large" className={classes.buy} />
                     </IconButton>
-                    <IconButton onClick={() => dispatch(addToWishList(product))}
+                   {userId&& <IconButton onClick={() => dispatch(addToWishList(product))}
                         color="primary" aria-label="add to shopping cart">
                         <FavoriteBorderIcon fontSize="large" className={classes.buy} />
-                    </IconButton>
+                    </IconButton>}
                 </Typography>
 
             </CardContent>
