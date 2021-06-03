@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Divider, Avatar, Grid, Paper, IconButton } from "@material-ui/core";
+import { Divider, Avatar, Grid, Paper, IconButton, Typography } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import { Edit, Delete } from "@material-ui/icons";
 import Appbar from "../../components/appBar/AppBar";
@@ -70,12 +70,18 @@ const Profile = () => {
                           direction="row"
                           alignItems="center"
                           justify="space-between"
+                          spacing={2}
                         >
-                          <Rating
-                            name="read-only"
-                            value={review.rating}
-                            readOnly
-                          />
+                          <Grid item>
+                            <Typography variant="subtitle1">{review.product.name}</Typography>
+                          </Grid>
+                          <Grid item>
+                            <Rating
+                              name="read-only"
+                              value={review.rating}
+                              readOnly
+                            />
+                          </Grid>
                         </Grid>
                         <p style={{ textAlign: "left" }}>{review.reviewText}</p>
                       </Grid>

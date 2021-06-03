@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useStyles } from './stylesCheckout'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -12,10 +12,11 @@ import Typography from '@material-ui/core/Typography';
 import AddressForm from '../../components/checkOut/AddressForm';
 import Review from '../../components/checkOut/Review';
 import { useDispatch, useSelector } from "react-redux"
-import { Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { orderToMp } from '../../store/order/order.action'
 import { putDataAddress } from '../../store/order/order.action'
 import emailjs from 'emailjs-com';
+import { putProduct } from '../../store/product/product.actions';
 
 export function Checkout() {
   const dispatch = useDispatch()
@@ -27,8 +28,9 @@ export function Checkout() {
   const email = useSelector(state => state.userReducer.userId.email)
   const userId = useSelector(state => state.userReducer.userId.id)
   const steps = ['Completa tus datos de envio', 'Controla tu orden'];
-  const orderId = useSelector((state) => state.orderReducer?.orderId);
+  const orderId = useSelector((state) => state.orderReducer.orderId);
   const data = { address: formValidate, state: 'procesando' }
+
 
   function getStepContent(step) {
     switch (step) {
@@ -44,10 +46,21 @@ export function Checkout() {
   const handleNext = () => {
     if (formValidate !== '') {
       setActiveStep(activeStep + 1)
-      dispatch(putDataAddress(data, orderId))
+      dispatch(putDataAddress(data, orderId.id))
     }
     else { alert('Debe completar los campos') }
   };
+
+  useEffect(() => {
+    if (orderId.products) {
+      orderId.products.forEach((product) => {
+        let  stock ={stockInt: product.stock - product.order_line.quantity};
+        dispatch(putProduct( stock, product.id))
+      })
+    }
+
+  }, [dispatch, handleNext])
+
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
@@ -57,8 +70,9 @@ export function Checkout() {
     dispatch(orderToMp(cart, userId))
     let products = cart.map(prod => prod.name).join(", ");
     console.log(products, total, email)
-    emailjs.send('service_wh6ybz2', 'template_adk9g6f', {products: products, total: total, email: email }, 'user_TgPSia94H5R5iet7h197p')
-      .then((result) => { console.log(result.text);
+    emailjs.send('service_wh6ybz2', 'template_adk9g6f', { products: products, total: total, email: email }, 'user_TgPSia94H5R5iet7h197p')
+      .then((result) => {
+        console.log(result.text);
       }, (error) => { console.log(error.text); })
   }
 

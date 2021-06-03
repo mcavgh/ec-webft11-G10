@@ -26,7 +26,7 @@ export default function ViewOrder() {
   const onSave = function () {
     const data = {
       state: input.state === "" ? orderId.state : input.state,
-      address: input.address,
+      address: input.address === "" ? orderId.address : input.address,
     };
     dispatch(putOrderById(parseInt(orderId.id), data));
     setEdit(false)
@@ -109,6 +109,7 @@ export default function ViewOrder() {
             <tr>
               <th>Nombre</th>
               <th>Stock</th>
+              <th>Cantidad</th>
               <th>Precio Unit.</th>
             </tr>
           </thead>
@@ -116,10 +117,10 @@ export default function ViewOrder() {
             {orderId.products && orderId.products.map(function (product) {
               return (
                 <tr id={product.id}>
-                  <td>{product.name}</td>
-                  <td>{product.stock}</td>
-                  <td>{product.price}</td>
-                  <td>{product.order_line.quantity}</td>
+                  <td align="center">{product.name}</td>
+                  <td align="center">{product.stock}</td>
+                  <td align="center">{product.order_line.quantity}</td>
+                  <td align="center" >{product.price}</td>
                 </tr>
               );
             })}

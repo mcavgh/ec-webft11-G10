@@ -1,5 +1,4 @@
 import axios from "axios";
-import Swal from "sweetalert2";
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const GET_ORDER_BY_ID = "GET_ORDER_BY_ID";
 export const PUT_ORDER_BY_ID = "PUT_ORDER_BY_ID";
@@ -10,13 +9,15 @@ export const GET_PRODUCTS_OF_USER = "GET_PRODUCTS_OF_USER";
 export const DELETE_CART = "DELETE_CART";
 export const POST_ORDERS = "POST_ORDERS";
 export const GET_FILTER_ORDERS = "GET_FILTER_ORDERS";
+export const POST_ORDER_BY_ID = "POST_ORDER_BY_ID";
+
+
 
 export const findOrCreateOrders = (userId) => {
-  console.log(userId)
   return (dispatch) => {
     axios.post(`/orders/cart/${userId}`).then((res) => {
       dispatch(updateOrder(res.data.id))
-      dispatch({type: "POST_ORDER_BY_ID", payload:res.data.id})
+      dispatch({type: POST_ORDER_BY_ID, payload:res.data})
     });
   };
 };
@@ -36,7 +37,6 @@ export const updateOrder = (orderId) => {
           ).then((res) => {});
         });
       }).then((resp) => {
-        console.log(resp)
       }).catch((err) => console.log(err));
   };
 };
@@ -115,9 +115,12 @@ export const cleanCart = (id) => {
 };
 
 export const putDataAddress = (data, id) => {
-  return function(disptch) {
+  return function(dispatch) {
     axios.put(`orders/${id}/modifica`, data)
-      .then((res) => {})
+    .then((payload) => {
+      dispatch({ type: PUT_ORDER_BY_ID, payload: payload.data });
+      dispatch(getOrderById(id));
+    })
       .catch((err) => {console.log(err)});
   };
 };

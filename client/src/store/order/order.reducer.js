@@ -7,12 +7,13 @@ import {
   GET_ORDER_BY_ID,
   PUT_ORDER_BY_ID,
   GET_ORDER_BY_USER_ID,
+  POST_ORDER_BY_ID,
 } from "./order.action";
 
 var initialState = {
   orders: [],
   ordersUser: [],
-  orderId:'',
+  orderId:[],
   filterorders: [],
 };
 
@@ -39,6 +40,7 @@ const orderReducer = (state = initialState, action) => {
         ...state,
         orders: action.payload,
       };
+    case POST_ORDER_BY_ID:
     case GET_PRODUCTS_OF_USER:
     case GET_ORDER_BY_ID:
       return {

@@ -66,7 +66,6 @@ export const postAddCategory = (category) => dispatch => {
     axios.post(URL, category, { headers: { 'Content-Type': 'application/json' } })
         .then(res => {
             dispatch({ type: 'POST_ADD_CATEGORY', payload: res })
-            console.log(res)
             Swal.fire('Good job!', 'You updated the product succesfully!', 'success')
         }).catch(err => {
             dispatch({ type: 'POST_ADD_CATEGORY', payload: err })
@@ -97,7 +96,6 @@ export const searchProducts = (name) => {
         dispatch(searchProductRequest())
         axios.get(`/category/productsbycategories/${name}`)
             .then(products => {
-                console.log(products.data[0].products)
                 dispatch(searchProductSuccess(products.data[0].products))
             })
             .catch(error => {
