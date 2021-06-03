@@ -12,10 +12,11 @@ export const POST_ORDERS = "POST_ORDERS";
 export const GET_FILTER_ORDERS = "GET_FILTER_ORDERS";
 
 export const findOrCreateOrders = (userId) => {
+  console.log(userId)
   return (dispatch) => {
     axios.post(`/orders/cart/${userId}`).then((res) => {
       dispatch(updateOrder(res.data.id))
-      dispatch({type: GET_ORDER_BY_ID, payload:res.data.id})
+      dispatch({type: "POST_ORDER_BY_ID", payload:res.data.id})
     });
   };
 };
@@ -35,11 +36,7 @@ export const updateOrder = (orderId) => {
           ).then((res) => {});
         });
       }).then((resp) => {
-        Swal.fire(
-          "Muy bien!",
-          "Completa los datos para terminar la compra",
-          "success"
-        );
+        console.log(resp)
       }).catch((err) => console.log(err));
   };
 };

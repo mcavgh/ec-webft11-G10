@@ -1,5 +1,5 @@
 import axios from "axios"
-
+import { findOrCreateOrders } from '../order/order.action';
 export const ADD_TO_CART = "ADD_TO_CART"
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART"
 export const GET_TOTAL = "GET_TOTAL"
@@ -64,6 +64,7 @@ export const getTotal = () => {
 }
 export const addToCart = (product) => (dispatch, getState) => {
   const cartItems = getState().cart.cartItems.slice();
+  const userId = getState().userReducer.userId.id
   let alreadyExists = false;
   cartItems.forEach((x) => {
     if (x.name === product.name) {
@@ -80,8 +81,10 @@ export const addToCart = (product) => (dispatch, getState) => {
   });
   dispatch(getTotal())
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  if(userId)dispatch(findOrCreateOrders(userId))
 };
 export const restToCart = (product) => (dispatch, getState) => {
+  const userId = getState().userReducer.userId.id
   const cartItems = getState().cart.cartItems.slice();
   let modify = false;
   cartItems.forEach((x) => {
@@ -97,15 +100,19 @@ export const restToCart = (product) => (dispatch, getState) => {
     });
     dispatch(getTotal())
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    if(userId)dispatch(findOrCreateOrders(userId))
 
   }
 };
 
 export const removeFromCart = (product) => (dispatch, getState) => {
+  const userId = getState().userReducer.userId.id
   const cartItems = getState()
     .cart.cartItems.slice()
     .filter((x) => x.name !== product.name);
   dispatch({ type: REMOVE_FROM_CART, payload: { cartItems } });
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
   dispatch(getTotal())
+  if(userId)dispatch(findOrCreateOrders(userId))
+
 };
