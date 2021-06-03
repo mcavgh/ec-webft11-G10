@@ -62,7 +62,7 @@ function PageEditProduct() {
     const onSubmit = async values => {
 
         const { productName, description, price, stock, category } = values
-        let priceInt = parseInt(price)
+        let priceInt = parseFloat(price)
         let stockInt = parseInt(stock)
         let productData = { productName, description, productImg, priceInt, stockInt, category }
         dispatch(putProduct(productData, id))
