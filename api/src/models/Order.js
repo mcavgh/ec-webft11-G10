@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
     },
     state: {
       type: DataTypes.ENUM,
-      values: ["carrito", "creada", "procesando", "cancelada", "completa"],
+      values: ["carrito", "procesando", "cancelada", "completa"],
       defaultValue: "carrito",
     },
     address: {

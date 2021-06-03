@@ -127,7 +127,7 @@ export default function ViewOrder() {
             <tr className={s.total}>
               <td></td>
               <td>Total:</td>
-              <td>{orderId.price}</td>
+              <td>${parseFloat(orderId.price)}</td>
             </tr>
           </tbody>
         </table>
@@ -149,7 +149,7 @@ export default function ViewOrder() {
             </button>
           </div>
           <div>
-            {orderId.state === "carrito" && orderId.products.length > 0 && (
+            {orderId.state && orderId.state === "carrito" && orderId.products.length > 0 && (
               <button onClick={onClean} className={[s.btn].join(" ")}>
                 Vaciar orden
               </button>
