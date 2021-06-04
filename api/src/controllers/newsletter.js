@@ -38,6 +38,7 @@ module.exports = {
             text: 'Wooohooo it works!!',
             template: 'index',
             context: {
+                price:Math.round(product.price - product.price * (product.discount / 100)),
                 discount:product.discount,
                 name: product.name,
                 image:product.img,
