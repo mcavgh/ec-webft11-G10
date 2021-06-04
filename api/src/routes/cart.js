@@ -13,6 +13,22 @@ server.post("/:idProducto/order/:idOrder/quantity/:quantity", async (req, res) =
     return res.status(400).send({ data: error });
   });
 });
+
+// DESASOCIAR  PRODUCTOS A ORDENES |
+
+server.delete("/:idProduct/order/:idOrder",  (req, res) => {
+  let { idOrder, idProduct } = req.params;
+   Product.findByPk(idProduct).then( (oneProduct) => {
+    Order.findByPk(idOrder)
+      .then((oneOrder) => {
+        oneOrder.removeProduct(oneProduct);
+       res.send("eliminado")
+      });
+   })
+  .catch(error => {
+    return res.status(400).send({ data: error });
+  });
+});
 // DEVUELVE UN PRODUCTO SEGUN USERID |
 //--------------------------------
 server.get('/:id', (req, res, next) => {
@@ -30,20 +46,6 @@ server.get('/:id', (req, res, next) => {
     .catch(error => res.send(error))
 })
 
-
-// ELIMINAR PRODUCTOS AL CARRITO |
-//--------------------------------
-// server.delete("/:id/cart/", (req, res, next) => {
-//   var id = req.params.id;
-//   Order.findOne({
-//     where: { userId: id, state: "carrito" },
-//   })
-//     .then((order) => {
-//       order.setProducts([]);
-//       res.send({ message: "Se limpio el carrito" });
-//     })
-//     .catch((error) => next(error));
-// });
 
 
 

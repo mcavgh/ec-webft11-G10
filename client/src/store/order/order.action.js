@@ -17,7 +17,7 @@ export const findOrCreateOrders = (userId) => {
   return (dispatch) => {
     axios.post(`/orders/cart/${userId}`).then((res) => {
       dispatch(updateOrder(res.data.id))
-      dispatch({type: POST_ORDER_BY_ID, payload:res.data})
+      dispatch({ type: POST_ORDER_BY_ID, payload: res.data })
     });
   };
 };
@@ -34,18 +34,43 @@ export const updateOrder = (orderId) => {
       .then(async (resp) => {
         await cartItems.forEach((product) => {
           axios.post(`/cart/${product.id}/order/${resp.data.data.id}/quantity/${product.count}`
-          ).then((res) => {});
+          ).then((res) => { });
         });
       }).then((resp) => {
       }).catch((err) => console.log(err));
   };
 };
+export const deleteFromOrders = (userId,product) => {
+  return (dispatch) => {//busca la orden..
+    axios.post(`/orders/cart/${userId}`).then((res) => {
+      dispatch(deleteItem(res.data.id,product))
+      dispatch({ type: POST_ORDER_BY_ID, payload: res.data })
+    });
+  };
+};
+export const deleteItem = (orderId,product) => {
+  return (dispatch, getState) => {
+    const cartQuantity = getState().cart.cartQuantity;
+    const total = parseFloat(getState().cart.total);
+    const cartItems = getState().cart.cartItems.slice();
+    const newOrder = {
+      price: total,
+      quantity: cartQuantity,
+    };//modificamos el precio y cantidad de la orden
+    axios.put(`/orders/${orderId}/modifica`, newOrder)
+      .then(async (resp) => {//eliminamos la relacion entre order y producto
+        axios.delete(`/cart/${product.id}/order/${resp.data.data.id}`
+        ).then((res) => { });
 
+      }).then((resp) => {
+      }).catch((err) => console.log(err));
+  };
+};
 export const addProducttoOrder = (orderId, productId) => {
   return (dispatch, getState) => {
     axios
       .post(`/cart/${productId}/order/${orderId}`)
-      .then((res) => {})
+      .then((res) => { })
       .catch((err) => {
         console.log(err);
       });
@@ -115,13 +140,13 @@ export const cleanCart = (id) => {
 };
 
 export const putDataAddress = (data, id) => {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.put(`orders/${id}/modifica`, data)
-    .then((payload) => {
-      dispatch({ type: PUT_ORDER_BY_ID, payload: payload.data });
-      dispatch(getOrderById(id));
-    })
-      .catch((err) => {console.log(err)});
+      .then((payload) => {
+        dispatch({ type: PUT_ORDER_BY_ID, payload: payload.data });
+        dispatch(getOrderById(id));
+      })
+      .catch((err) => { console.log(err) });
   };
 };
 export const orderToMp = (products, id) => {

@@ -18,7 +18,7 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textPrimary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://ec-webft11-g10.vercel.app/">
+            <Link color="inherit" to="https://ec-webft11-g10.vercel.app/">
                 EATX
       </Link>{' '}
             {new Date().getFullYear()}
@@ -153,7 +153,7 @@ export default function LogIn({ faceAuth, auth }) {
                     </GoogleButton>
                     <Grid container>
                         <Grid item xs>
-                            <Link to='/' onClick={forgotPassword} variant="body2">Olvidé mi constraseña</Link>                                
+                            <Link onClick={forgotPassword} variant="body2">Olvidé mi constraseña</Link>                                
                         </Grid>
                         <Grid item>
                             <Typography to="/signup" component={Link} variant="body2">

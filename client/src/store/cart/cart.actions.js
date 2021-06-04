@@ -1,5 +1,5 @@
 import axios from "axios"
-import { findOrCreateOrders } from '../order/order.action';
+import { findOrCreateOrders,deleteFromOrders } from '../order/order.action';
 export const ADD_TO_CART = "ADD_TO_CART"
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART"
 export const GET_TOTAL = "GET_TOTAL"
@@ -113,6 +113,6 @@ export const removeFromCart = (product) => (dispatch, getState) => {
   dispatch({ type: REMOVE_FROM_CART, payload: { cartItems } });
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
   dispatch(getTotal())
-  if(userId)dispatch(findOrCreateOrders(userId))
+  if(userId)dispatch(deleteFromOrders(userId,product))
 
 };

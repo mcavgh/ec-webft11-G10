@@ -116,7 +116,7 @@ export default function ViewOrder() {
           <tbody>
             {orderId.products && orderId.products.map(function (product) {
               return (
-                <tr id={product.id}>
+                <tr key={product.id} id={product.id}>
                   <td align="center">{product.name}</td>
                   <td align="center">{product.stock}</td>
                   <td align="center">{product.order_line.quantity}</td>
@@ -149,7 +149,7 @@ export default function ViewOrder() {
             </button>
           </div>
           <div>
-            {orderId.state && orderId.state === "carrito" && orderId.products.length > 0 && (
+            {orderId.state && orderId.state === "carrito" && orderId.products?.length > 0 && (
               <button onClick={onClean} className={[s.btn].join(" ")}>
                 Vaciar orden
               </button>

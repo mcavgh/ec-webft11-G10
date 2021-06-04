@@ -42,7 +42,7 @@ export default function Cart() {
       {cart && cart.length > 0
         ? cart.map((product) => {
             return (
-              <Card className={classes.root}>
+              <Card key={product.id} className={classes.root}>
                 <Grid item xs={1} />
                 <Grid item xs={2}>
                   <CardMedia

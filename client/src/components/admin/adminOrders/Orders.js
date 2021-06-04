@@ -26,7 +26,7 @@ export default function Orders() {
             (orders.map((row) => (
               <TableRow key={row.id}>
                 <TableCell>{row.id}</TableCell>
-                <TableCell>{row.user.name} {row.user.surname} </TableCell>
+                <TableCell>{row.user?.name} {row.user?.surname} </TableCell>
                 <TableCell>{row.state}</TableCell>
                 <TableCell>{row.updatedAt}</TableCell>
                 <TableCell>{row.address}</TableCell>
