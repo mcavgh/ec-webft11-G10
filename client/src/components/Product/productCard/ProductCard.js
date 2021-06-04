@@ -39,7 +39,7 @@ export default function ProductCard({ stock, id, img, name, description, price, 
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardContent>
+      <CardContent className={classes.cardContent}>
         <div>
           {discount && discount > 0 ? <strike>${price}</strike> : ""
           }

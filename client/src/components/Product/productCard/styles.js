@@ -21,5 +21,9 @@ export const useStyles = makeStyles((theme) => ({
     noPadding: {
       padding: '0',
     },
+    cardContent:{
+      minHeight: 114
+
+    }
    
 }))
