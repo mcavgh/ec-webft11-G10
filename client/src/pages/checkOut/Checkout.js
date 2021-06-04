@@ -74,10 +74,8 @@ export function Checkout() {
   const terminarCompra = () => {
     dispatch(orderToMp(cart, userId))
     let products = cart.map(prod => prod.name).join(", ");
-    console.log(products, total, email)
     emailjs.send('service_wh6ybz2', 'template_adk9g6f', { products: products, total: total, email: email }, 'user_TgPSia94H5R5iet7h197p')
       .then((result) => {
-        console.log(result.text);
       }, (error) => { console.log(error.text); })
   }
 

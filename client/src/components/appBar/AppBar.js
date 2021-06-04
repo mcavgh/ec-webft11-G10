@@ -111,7 +111,9 @@ export default function PersistentDrawerLeft() {
                     />
                     <div >
                         <IconButton to="/cart" component={Link}
-                            aria-label="" color="inherit">
+                            aria-label="" color="inherit"
+                            className={classes.icons}
+                            >
 
                             <Badge badgeContent={cartQuantity} color="secondary">
                                 <ShoppingCartRoundedIcon fontSize="large" className={classes.icons} />

@@ -51,12 +51,10 @@ server.get('/:id', (req, res, next) => {
 
 
 server.delete('/:id/cart/', (req, res) => {
-  // console.log(req.params.id);
   const { id } = req.params;
 
   Order.findOne({ where: { id } })
     .then((order) => {
-      // console.log('THEN DEL DELETE ORDER');
       order.destroy();
       return res.status(200).json({
         message: 'Orden eliminada!!',

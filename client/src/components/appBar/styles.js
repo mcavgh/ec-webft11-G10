@@ -25,8 +25,9 @@ export const useStyles = makeStyles((theme) => ({
         }),
     },
     menuButton: {
-        marginRight: theme.spacing(2),
+        //marginRight: theme.spacing(2),
         color: theme.palette.primary.main,
+        padding:"0"
     },
     hide: {
         display: 'none',
@@ -51,6 +52,8 @@ export const useStyles = makeStyles((theme) => ({
         justifyContent: 'flex-end',
     },
     icons: {
+        margin:"0",
+        padding:"0",
         color: theme.palette.primary.main,
     },
     content: {
@@ -83,6 +86,7 @@ export const useStyles = makeStyles((theme) => ({
             marginLeft: theme.spacing(3),
             width: 'auto',
         },
+        minWidth:"100px"
     },
     searchIcon: {
         padding: theme.spacing(0, 2.5),

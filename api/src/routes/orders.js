@@ -107,8 +107,7 @@ server.get('/user/:id', (req, res) => {
 
 
 server.put('/:id/modifica', (req, res) => {
-  //  console.log(req.params.id)
-  //  console.log(req.body)
+ 
   const { id } = req.params;
   const { price, quantity, state, address } = req.body;
   return Order.findOne({ where: { id: id }, include: { model: Product } })
