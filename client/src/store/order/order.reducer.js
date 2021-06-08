@@ -19,11 +19,11 @@ var initialState = {
 
 const orderReducer = (state = initialState, action) => {
   switch (action.type) {
-    case POST_ORDERS:
-      return {
-        ...state,
-        orders: [],
-      };
+    // case POST_ORDERS:
+    //   return {
+    //     ...state,
+    //     orders: [],
+    //   };
     case DELETE_CART:
       return {
         ...state,
@@ -34,6 +34,7 @@ const orderReducer = (state = initialState, action) => {
     //     ...state,
     //     filterorders: action.payload,
     //   };
+    case POST_ORDERS:
     case GET_ALL_ORDERS:
     case GET_FILTER_ORDERS:
       return {
