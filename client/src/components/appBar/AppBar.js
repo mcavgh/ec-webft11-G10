@@ -34,7 +34,7 @@ export default function PersistentDrawerLeft() {
 
     const { currentUser } = useContext(AuthContext)
 
-    const [darkMode, setDarkMode] = useState(true);
+    const [darkMode, setDarkMode] = useState(false);
 
 
     useEffect(() => {
