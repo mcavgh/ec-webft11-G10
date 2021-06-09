@@ -15,15 +15,17 @@ export default function Deposits({amounts}) {
   const dispatch = useDispatch();
 
   useEffect(() => {   
-     dispatch(getAllOrders())    
-  }, [dispatch])
+    dispatch(getAllOrders())    
+ }, [])
    
   const amount = useSelector(state => state.orderReducer?.orders)
   const amount2 = amount.length>0&&amount.filter(e=>e.state!=="cancelada")
-  const deposits= amount2.length>0&&amount.reduce( (ac,e)=>ac+e.price,0)
+  const deposits= amount2.length>0&&amount2.reduce( (ac,e)=>ac+e.price,0)
   const event = new Date().toLocaleDateString();
   const date = event.toString()
   const classes = useStyles();
+  
+
 
   return (    
     <React.Fragment>
