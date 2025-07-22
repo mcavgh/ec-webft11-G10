@@ -43,26 +43,7 @@ export default function Footer (){
                             Martín Cavanagh                            
                             </Link>
                         </Box>
-                        <Box>
-                            <Link href="https://www.linkedin.com/in/lucianoojeda/" color="inherit" >
-                            Luciano Ojeda                            
-                            </Link>
-                        </Box>
-                        <Box>
-                            <Link href="https://www.linkedin.com/in/luciano-nu%C3%B1ez/" color="inherit" >
-                            Luciano Nuñez                         
-                            </Link>
-                        </Box>
-                        <Box>
-                            <Link href="https://www.linkedin.com/in/esteban-cespedes-/" color="inherit" >
-                            Esteban Cespedes                            
-                            </Link>
-                        </Box>
-                        <Box>
-                            <Link href="https://www.linkedin.com/in/braiaguilar/" color="inherit" >
-                            Brian Aguilar                            
-                            </Link>
-                        </Box>
+                       
                     </Grid>
 
                 </Grid>
