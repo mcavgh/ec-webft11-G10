@@ -2,7 +2,7 @@ Api/package-lock.json
 Client/package-lock.json
 Client/yarn.lock
 .env
-# Logs
+# Logss
 logs
 *.log
 npm-debug.log*
